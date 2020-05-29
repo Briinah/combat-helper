@@ -17,13 +17,15 @@ namespace CombatHelper.Pages
         private ObservableCollection<PlayerCharacter> observablePCList;
         public CampaignEditPage()
         {
+            NavigationPage.SetHasBackButton(this, false);
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
             var campaign = (Campaign)BindingContext;
+            campaign = await App.Database.Campaigns.GetWithChildren(campaign.ID);
             if (campaign.Players == null)
                 campaign.Players = new List<PlayerCharacter>();
             observablePCList = new ObservableCollection<PlayerCharacter>(campaign.Players);
@@ -45,10 +47,12 @@ namespace CombatHelper.Pages
             // update campaign with players
             await App.Database.Campaigns.UpdateWithChildren(campaign);
 
-            await Navigation.PushAsync(new CampaignDetailPage(true)
+            Navigation.InsertPageBefore(new CampaignDetailPage()
             {
                 BindingContext = campaign
-            });
+            }, this);
+
+            await Navigation.PopAsync();
         }
 
         private async void SavePlayers(Campaign campaign)
@@ -76,6 +80,7 @@ namespace CombatHelper.Pages
         private async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
             var campaign = (Campaign)BindingContext;
+            campaign = await App.Database.Campaigns.GetWithChildren(campaign.ID);
 
             if (await OnAlertYesNoClicked(campaign.Name))
             {
@@ -107,6 +112,17 @@ namespace CombatHelper.Pages
                 observablePCList.Add(new PlayerCharacter() { Name = newPlayer.Text });
                 newPlayer.Text = "";
             }
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            Navigation.InsertPageBefore(new CampaignDetailPage()
+            {
+                BindingContext = this.BindingContext
+            }, this);
+
+            Navigation.PopAsync();
+            return true;
         }
     }
 }

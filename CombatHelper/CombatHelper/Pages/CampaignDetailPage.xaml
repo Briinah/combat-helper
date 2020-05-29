@@ -5,9 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="CombatHelper.Pages.CampaignDetailPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{Binding Name}" />
+        <ToolbarItem Text="Edit" 
+                     Clicked="OnEditClicked" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Margin="20">
-            <Label Text="{Binding Name}" />
+            <Label Text="Players" />
             <ListView x:Name="playerList">
                 <ListView.ItemTemplate>
                     <DataTemplate>

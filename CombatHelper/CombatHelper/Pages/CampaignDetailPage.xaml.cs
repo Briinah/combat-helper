@@ -26,5 +26,15 @@ namespace CombatHelper.Pages
             campaign = await App.Database.Campaigns.GetWithChildren(campaign.ID);
             playerList.ItemsSource = campaign.Players;
         }
+
+        private async void OnEditClicked(object sender, EventArgs e)
+        {
+            Navigation.InsertPageBefore(new CampaignEditPage
+            {
+                BindingContext = this.BindingContext
+            }, this);
+
+            await Navigation.PopAsync();
+        }
     }
 }
