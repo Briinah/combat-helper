@@ -25,7 +25,13 @@ namespace CombatHelper.Pages
         {
             base.OnAppearing();
             var campaign = (Campaign)BindingContext;
-            campaign = await App.Database.Campaigns.GetWithChildren(campaign.ID);
+            Title = "New Campaign";
+            if (campaign.ID != 0)
+            {
+                campaign = await App.Database.Campaigns.GetWithChildren(campaign.ID);
+                Title = $"Edit: {campaign.Name}";
+            }
+
             if (campaign.Players == null)
                 campaign.Players = new List<PlayerCharacter>();
             observablePCList = new ObservableCollection<PlayerCharacter>(campaign.Players);
@@ -70,7 +76,7 @@ namespace CombatHelper.Pages
 
         private async void RemovePlayers(Campaign campaign)
         {
-            foreach(var pc in campaign.Players)
+            foreach (var pc in campaign.Players)
             {
                 if (pc.ID != 0)
                     await App.Database.Players.Delete(pc);
@@ -80,13 +86,13 @@ namespace CombatHelper.Pages
         private async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
             var campaign = (Campaign)BindingContext;
-            campaign = await App.Database.Campaigns.GetWithChildren(campaign.ID);
+            if (campaign.ID != 0) campaign = await App.Database.Campaigns.GetWithChildren(campaign.ID);
 
             if (await OnAlertYesNoClicked(campaign.Name))
             {
                 RemovePlayers(campaign);
 
-                if(campaign.ID != 0)
+                if (campaign.ID != 0)
                     await App.Database.Campaigns.Delete(campaign);
 
                 await Navigation.PopAsync();
@@ -116,10 +122,14 @@ namespace CombatHelper.Pages
 
         protected override bool OnBackButtonPressed()
         {
-            Navigation.InsertPageBefore(new CampaignDetailPage()
+            var campaign = (Campaign)BindingContext;
+            if (campaign.ID != 0)
             {
-                BindingContext = this.BindingContext
-            }, this);
+                Navigation.InsertPageBefore(new CampaignDetailPage()
+                {
+                    BindingContext = this.BindingContext
+                }, this);
+            }
 
             Navigation.PopAsync();
             return true;
