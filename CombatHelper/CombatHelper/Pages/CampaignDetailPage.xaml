@@ -4,9 +4,9 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="CombatHelper.Pages.CampaignDetailPage">
+             x:Class="CombatHelper.Pages.CampaignDetailPage"
+             Title="{Binding Name}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{Binding Name}" />
         <ToolbarItem Text="Edit" 
                      Clicked="OnEditClicked" />
     </ContentPage.ToolbarItems>
