@@ -4,11 +4,9 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="CombatHelper.Pages.CampaignList">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add Campaign" 
-                     Clicked="OnAddClicked" />
-    </ContentPage.ToolbarItems>
+             x:Class="CombatHelper.Pages.CampaignList"
+             Title="Campaigns">
+    <AbsoluteLayout>
     <ListView x:Name="listView"
               Margin="20"
               ItemSelected="OnListViewItemSelected">
@@ -18,4 +16,28 @@
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
+        <ImageButton AbsoluteLayout.LayoutBounds="0.95, 0.95,80,80"
+                     AbsoluteLayout.LayoutFlags="PositionProportional"
+                     BackgroundColor="DeepPink"
+                     CornerRadius="40"
+                     HeightRequest="80"
+                     Source="ic_add.png"
+                     WidthRequest="80"
+                     Clicked="OnAddClicked">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup Name="CommonStates">
+                    <VisualState Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="Scale" Value="1"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Scale" Value="0.9" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </ImageButton>
+    </AbsoluteLayout>
 </ContentPage>
