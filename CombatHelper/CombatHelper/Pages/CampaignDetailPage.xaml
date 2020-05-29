@@ -8,8 +8,7 @@
     <ContentPage.Content>
         <StackLayout Margin="20">
             <Label Text="{Binding Name}" />
-            <ListView x:Name="playerList"
-                      ItemsSource="{Binding Players}">
+            <ListView x:Name="playerList">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding Name}" />

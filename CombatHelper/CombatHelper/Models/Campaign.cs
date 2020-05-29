@@ -6,16 +6,15 @@ using System.Text;
 
 namespace CombatHelper.Models
 {
+    [Table("Campaigns")]
     public class Campaign
     {
         [AutoIncrement, PrimaryKey]
         public int ID { get; set; }
         public string Name { get; set; }
-        [TextBlob("playersBlob")]
+        [OneToMany]
         public List<PlayerCharacter> Players { get; set; }
-        public string playersBlob { get; set; }
-        [TextBlob("encountersBlob")]
-        public List<Encounter> Encounters { get; set; }
-        public string encountersBlob { get; set; }
+        //[OneToMany]
+        //public List<Encounter> Encounters { get; set; }
     }
 }

@@ -34,29 +34,62 @@ namespace CombatHelper.Pages
         {
             var campaign = (Campaign)BindingContext;
             campaign.Players = observablePCList.ToList();
-            // TODO: look at how players are saved with repository pattern
-            await App.Database.Campaigns.Insert(campaign);
-            await Navigation.PushAsync(new CampaignDetailPage
+
+            if (campaign.ID == 0)
+            {
+                // get id of campaign from db
+                await App.Database.Campaigns.Insert(campaign);
+            }
+
+            SavePlayers(campaign);
+            // update campaign with players
+            await App.Database.Campaigns.UpdateWithChildren(campaign);
+
+            await Navigation.PushAsync(new CampaignDetailPage(true)
             {
                 BindingContext = campaign
-            }) ;
+            });
+        }
+
+        private async void SavePlayers(Campaign campaign)
+        {
+            foreach (var pc in campaign.Players)
+            {
+                pc.CampaignID = campaign.ID;
+
+                if (pc.ID == 0)
+                    await App.Database.Players.Insert(pc);
+                else
+                    await App.Database.Players.Update(pc);
+            }
+        }
+
+        private async void RemovePlayers(Campaign campaign)
+        {
+            foreach(var pc in campaign.Players)
+            {
+                if (pc.ID != 0)
+                    await App.Database.Players.Delete(pc);
+            }
         }
 
         private async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
-
             var campaign = (Campaign)BindingContext;
 
             if (await OnAlertYesNoClicked(campaign.Name))
             {
-                await App.Database.Campaigns.Delete(campaign);
+                RemovePlayers(campaign);
+
+                if(campaign.ID != 0)
+                    await App.Database.Campaigns.Delete(campaign);
+
                 await Navigation.PopAsync();
             }
         }
 
         private async Task<bool> OnAlertYesNoClicked(string campaignName)
         {
-
             bool answer = await (DisplayAlert("Delete Campaign", $"Are you sure you want to delete {campaignName}?", "Yes", "No"));
 
             return answer;
@@ -69,9 +102,9 @@ namespace CombatHelper.Pages
 
         private void OnPlayerAdded(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(newPlayer.Text))
+            if (!string.IsNullOrEmpty(newPlayer.Text))
             {
-                observablePCList.Add(new PlayerCharacter() { Name = newPlayer.Text }) ;
+                observablePCList.Add(new PlayerCharacter() { Name = newPlayer.Text });
                 newPlayer.Text = "";
             }
         }
