@@ -11,8 +11,13 @@
                      Clicked="OnEditClicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout Margin="20">
-            <Label Text="Players" />
+        <StackLayout>
+            <Label Text="Players" 
+                   Padding="15, 15, 5, 15"
+                   FontSize="Large"/>
+            <BoxView HeightRequest="1" 
+                     Color="LightGray" 
+                     HorizontalOptions="FillAndExpand" />
             <ListView x:Name="playerList">
                 <ListView.ItemTemplate>
                     <DataTemplate>

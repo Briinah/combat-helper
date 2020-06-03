@@ -3,44 +3,84 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:CombatHelper.Controls"
              mc:Ignorable="d"
              x:Class="CombatHelper.Pages.CampaignEditPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cancel" 
+                     Clicked="OnCancel" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout Margin="20">
-                <Label Text="Name"/>
-                <Editor Placeholder="Enter campaign name"
-                        Text="{Binding Name}"/>
-                <Label Text="Players" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="7*" />
-                        <ColumnDefinition Width="3*" />
-                    </Grid.ColumnDefinitions>
-                    <Editor Placeholder="Player Name" 
-                            x:Name="newPlayer"/>
-                    <Button Grid.Column="1"
+        <StackLayout>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="8*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Name"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start"
+                       Padding="10"
+                       TextColor="Accent"/>
+                <local:XEditor Placeholder="Enter campaign name"
+                               Grid.Column="1"
+                           Text="{Binding Name}"
+                           />
+            </Grid>
+            <Label Text="Players" 
+                   Padding="10"
+                   VerticalOptions="Center"
+                   TextColor="Accent"/>
+
+            <ListView x:Name="playerList"
+                      HeightRequest="300">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Label Text="{Binding Name}"
+                                       VerticalTextAlignment="Center"
+                                       Padding="10"
+                                       FontSize="Body"/>
+                                <ImageButton Grid.Column ="1" 
+                                             HorizontalOptions="End"
+                                             VerticalOptions="Center"
+                                             BackgroundColor="DeepPink"
+                                             CornerRadius="40"
+                                             Aspect="AspectFill"
+                                             Source="ic_delete.png"
+                                             Clicked="RemovePlayer"
+                                             Margin="0, 0, 10, 0"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Grid Margin="0"
+                  Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <local:XEditor Placeholder="Player Name" 
+                               x:Name="newPlayer"
+                               VerticalOptions="Center"/>
+                <Button Grid.Column="1"
                         Text="Add"
-                        Clicked="OnPlayerAdded"/>
-                </Grid>
-                <ListView x:Name="playerList"
-                          HeightRequest="300">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextCell Text="{Binding Name}" />
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Button Text="Save"
+                        Clicked="OnPlayerAdded"
+                        HeightRequest="40"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Text="Save"
                         Clicked="OnSaveButtonClicked" />
-                    <Button Grid.Column="1"
+                <Button Grid.Column="1"
                         Text="Delete"
                         Clicked="OnDeleteButtonClicked"/>
-                </Grid>
-            </StackLayout>
+            </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

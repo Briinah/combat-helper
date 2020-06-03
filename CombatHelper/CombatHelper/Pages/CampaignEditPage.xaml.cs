@@ -106,11 +106,6 @@ namespace CombatHelper.Pages
             return answer;
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
         private void OnPlayerAdded(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(newPlayer.Text))
@@ -133,6 +128,17 @@ namespace CombatHelper.Pages
 
             Navigation.PopAsync();
             return true;
+        }
+
+        private void OnCancel(object sender, EventArgs e)
+        {
+            OnBackButtonPressed();
+        }
+
+        private void RemovePlayer(object sender, EventArgs e)
+        {
+            PlayerCharacter pc = (PlayerCharacter)((ImageButton)sender).BindingContext;
+            observablePCList.Remove(pc);
         }
     }
 }

@@ -8,7 +8,6 @@
              Title="Campaigns">
     <AbsoluteLayout>
     <ListView x:Name="listView"
-              Margin="20"
               ItemSelected="OnListViewItemSelected">
         <ListView.ItemTemplate>
             <DataTemplate>
