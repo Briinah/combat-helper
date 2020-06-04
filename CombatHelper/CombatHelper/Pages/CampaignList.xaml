@@ -15,13 +15,13 @@
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
-        <ImageButton AbsoluteLayout.LayoutBounds="0.95, 0.95,80,80"
+        <ImageButton AbsoluteLayout.LayoutBounds="0.9, 0.95,60,60"
                      AbsoluteLayout.LayoutFlags="PositionProportional"
                      BackgroundColor="DeepPink"
+                     HeightRequest="60"
+                     WidthRequest="60"
                      CornerRadius="40"
-                     HeightRequest="80"
                      Source="ic_add.png"
-                     WidthRequest="80"
                      Clicked="OnAddClicked">
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup Name="CommonStates">

@@ -13,8 +13,9 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Players" 
-                   Padding="15, 15, 5, 15"
-                   FontSize="Large"/>
+                   HorizontalTextAlignment="Center"
+                   Padding="10"
+                   FontSize="Medium"/>
             <BoxView HeightRequest="1" 
                      Color="LightGray" 
                      HorizontalOptions="FillAndExpand" />
@@ -25,6 +26,9 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button Text="Manage Encounters"
+                    Clicked="ManageEncounters"
+                    />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

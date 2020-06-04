@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CombatHelper.Pages.EncounterList">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout>
+                <Label Text="Encounters"
+                   HorizontalTextAlignment="Center"
+                   Padding="10"
+                   FontSize="Medium"/>
+            <BoxView HeightRequest="1" 
+                     Color="LightGray" 
+                     HorizontalOptions="FillAndExpand" />
+            <ListView x:Name="encounterList"
+                      ItemSelected="OnListViewItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            </StackLayout>
+            <ImageButton AbsoluteLayout.LayoutBounds="0.9, 0.95,60,60"
+                     AbsoluteLayout.LayoutFlags="PositionProportional"
+                     BackgroundColor="DeepPink"
+                     HeightRequest="60"
+                     WidthRequest="60"
+                     CornerRadius="40"
+                     Source="ic_add.png"
+                     Clicked="NewEncounter">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup Name="CommonStates">
+                        <VisualState Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="Scale" Value="1"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="Scale" Value="0.9" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </ImageButton>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

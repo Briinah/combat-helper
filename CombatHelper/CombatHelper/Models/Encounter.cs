@@ -6,11 +6,12 @@ using System.Text;
 
 namespace CombatHelper.Models
 {
-    [Table("Encounter")]
     public class Encounter
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
+        public string Name { get; set; }
+        [OneToMany]
         public List<Creature> Creatures { get; set; }
         [ForeignKey(typeof(Campaign))]
         public int CampaignID { get; set; }

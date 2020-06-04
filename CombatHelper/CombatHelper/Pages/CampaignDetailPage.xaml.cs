@@ -29,12 +29,20 @@ namespace CombatHelper.Pages
 
         private async void OnEditClicked(object sender, EventArgs e)
         {
-            Navigation.InsertPageBefore(new CampaignEditPage
+            Navigation.InsertPageBefore(new CampaignEditPage()
             {
                 BindingContext = this.BindingContext
             }, this);
 
             await Navigation.PopAsync();
+        }
+
+        private async void ManageEncounters(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new EncounterList()
+            {
+                BindingContext = this.BindingContext
+            });
         }
     }
 }

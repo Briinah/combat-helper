@@ -14,7 +14,7 @@ namespace CombatHelper.Models
         public string Name { get; set; }
         [OneToMany]
         public List<PlayerCharacter> Players { get; set; }
-        //[OneToMany]
-        //public List<Encounter> Encounters { get; set; }
+        [OneToMany]
+        public List<Encounter> Encounters { get; set; }
     }
 }
