@@ -1,4 +1,5 @@
 ﻿using CombatHelper.Models;
+using CombatHelper.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +9,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace CombatHelper.Pages
+namespace CombatHelper.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EncounterDetailPage : ContentPage
     {
-        Encounter encounter;
+        EncounterViewModel encounter;
 
         public EncounterDetailPage()
         {
@@ -23,8 +24,8 @@ namespace CombatHelper.Pages
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            encounter = (Encounter)BindingContext;
-            encounter = await App.Database.Encounters.GetWithChildren(encounter.ID);
+            encounter = BindingContext as EncounterViewModel;
+            await encounter.LoadData();
             creatureList.ItemsSource = encounter.Creatures;
             Title = encounter.Name;
         }
@@ -38,9 +39,12 @@ namespace CombatHelper.Pages
             await Navigation.PopAsync();
         }
 
-        private void StartEncounter(object sender, EventArgs e)
+        private async void StartEncounter(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new EncounterRunPage()
+            {
+                BindingContext = encounter
+            });
         }
     }
 }

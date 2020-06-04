@@ -1,5 +1,5 @@
 ﻿using CombatHelper.Data;
-using CombatHelper.Pages;
+using CombatHelper.Views;
 using System;
 using System.IO;
 using Xamarin.Forms;

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CombatHelper.Views.EncounterRunPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="creatureList"
+                      HeightRequest="300"
+                      RowHeight="60">
+                <ListView.ItemTemplate >
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.5*" />
+                                    <ColumnDefinition Width="8*" />
+                                </Grid.ColumnDefinitions>
+                                <Button HorizontalOptions="Start"
+                                        VerticalOptions="Center"
+                                        BackgroundColor="HotPink"
+                                        WidthRequest="40"
+                                        CornerRadius="40"
+                                        Text="{Binding Initiative}"
+                                        Clicked="SetInitiative"/>
+                                <StackLayout Grid.Column ="1" >
+                                    <Label Text="{Binding Name}"
+                                       VerticalTextAlignment="Center"
+                                       FontSize="Body"/>
+                                    <Label x:Name="hpLabel"
+                                           Text="{Binding HP, StringFormat='HP: {0}'}"
+                                           FontSize="Micro"
+                                           Grid.Row="1"/>
+                                </StackLayout>
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

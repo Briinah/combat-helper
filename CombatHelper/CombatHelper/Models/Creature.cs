@@ -11,7 +11,6 @@ namespace CombatHelper.Models
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         public string Name { get; set; }
-        public int Initiative { get; set; }
         public int HP { get; set; }
         [ForeignKey(typeof(Encounter))]
         public int EncounterID { get; set; }
