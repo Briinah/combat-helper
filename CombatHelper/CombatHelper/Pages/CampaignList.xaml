@@ -17,7 +17,7 @@
     </ListView>
         <ImageButton AbsoluteLayout.LayoutBounds="0.9, 0.95,60,60"
                      AbsoluteLayout.LayoutFlags="PositionProportional"
-                     BackgroundColor="DeepPink"
+                     BackgroundColor="Accent"
                      HeightRequest="60"
                      WidthRequest="60"
                      CornerRadius="40"

@@ -26,6 +26,43 @@
                                Text="{Binding Name}"
                            />
             </Grid>
+            <Label Text="Creatures" 
+                   Padding="10"
+                   VerticalOptions="Center"
+                   TextColor="Accent"/>
+
+            <ListView x:Name="creatureList"
+                      HeightRequest="300"
+                      RowHeight="60">
+                <ListView.ItemTemplate >
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <StackLayout Margin="10">
+                                    <Label Text="{Binding Name}"
+                                       VerticalTextAlignment="Center"
+                                       FontSize="Body"/>
+                                    <Label x:Name="hpLabel"
+                                           Text="{Binding HP, StringFormat='HP: {0}'}"
+                                           FontSize="Micro"
+                                           Grid.Row="1"/>
+                                </StackLayout>
+                                <ImageButton Grid.Column ="1" 
+                                             HorizontalOptions="End"
+                                             VerticalOptions="Center"
+                                             BackgroundColor="DeepPink"
+                                             CornerRadius="40"
+                                             Aspect="AspectFill"
+                                             Source="ic_delete.png"
+                                             Clicked="RemoveCreature"
+                                             Margin="0, 0, 10, 0"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Add Creature"
+                    Clicked="AddCreature"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />

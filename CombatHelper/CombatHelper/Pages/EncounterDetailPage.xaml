@@ -10,10 +10,50 @@
                      Clicked="OnEditClicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{Binding Name}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <AbsoluteLayout>
+            <StackLayout>
+                <ListView x:Name="creatureList"
+                      HeightRequest="300"
+                      RowHeight="60">
+                    <ListView.ItemTemplate >
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Margin="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.5*" />
+                                        <ColumnDefinition Width="8*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button HorizontalOptions="Start"
+                                        VerticalOptions="Center"
+                                        BackgroundColor="HotPink"
+                                        WidthRequest="40"
+                                        CornerRadius="40"
+                                        />
+                                    <StackLayout Grid.Column ="1" >
+                                        <Label Text="{Binding Name}"
+                                       VerticalTextAlignment="Center"
+                                       FontSize="Body"/>
+                                        <Label x:Name="hpLabel"
+                                           Text="{Binding HP, StringFormat='HP: {0}'}"
+                                           FontSize="Micro"
+                                           Grid.Row="1"/>
+                                    </StackLayout>
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </StackLayout>
+            <ImageButton AbsoluteLayout.LayoutBounds="0.9, 0.95,60,60"
+                         AbsoluteLayout.LayoutFlags="PositionProportional"
+                         BackgroundColor="Accent"
+                         HeightRequest="60"
+                         WidthRequest="60"
+                         CornerRadius="40"
+                         Source="ic_play_arrow.png"
+                         Clicked="StartEncounter"/>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

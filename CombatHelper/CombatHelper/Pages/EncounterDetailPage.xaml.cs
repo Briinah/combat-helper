@@ -20,10 +20,12 @@ namespace CombatHelper.Pages
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
             encounter = (Encounter)BindingContext;
+            encounter = await App.Database.Encounters.GetWithChildren(encounter.ID);
+            creatureList.ItemsSource = encounter.Creatures;
             Title = encounter.Name;
         }
         private async void OnEditClicked(object sender, EventArgs e)
@@ -34,6 +36,11 @@ namespace CombatHelper.Pages
             }, this);
 
             await Navigation.PopAsync();
+        }
+
+        private void StartEncounter(object sender, EventArgs e)
+        {
+
         }
     }
 }

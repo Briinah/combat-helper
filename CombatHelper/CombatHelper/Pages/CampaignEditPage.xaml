@@ -31,7 +31,6 @@
                    Padding="10"
                    VerticalOptions="Center"
                    TextColor="Accent"/>
-
             <ListView x:Name="playerList"
                       HeightRequest="300">
                 <ListView.ItemTemplate>
@@ -42,6 +41,7 @@
                                        VerticalTextAlignment="Center"
                                        Padding="10"
                                        FontSize="Body"/>
+
                                 <ImageButton Grid.Column ="1" 
                                              HorizontalOptions="End"
                                              VerticalOptions="Center"
