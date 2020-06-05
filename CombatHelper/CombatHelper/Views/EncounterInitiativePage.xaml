@@ -5,12 +5,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:controls="clr-namespace:CombatHelper.Controls"
              mc:Ignorable="d"
-             x:Class="CombatHelper.Views.EncounterRunPage"
-             Title="{Binding Name Round, StringFormat='{0}: Round {1}'}">
+             x:Class="CombatHelper.Views.EncounterInitiativePage"
+             Title="Roll Initiative!">
     <ContentPage.Content>
-        <StackLayout>
+        <AbsoluteLayout>
+        <StackLayout VerticalOptions="FillAndExpand">
             <controls:XListView x:Name="creatureList"
-                      HeightRequest="300"
                       RowHeight="60">
                 <ListView.ItemTemplate >
                     <DataTemplate>
@@ -26,7 +26,7 @@
                                         WidthRequest="40"
                                         CornerRadius="40"
                                         Text="{Binding Initiative}"
-                                        />
+                                        Clicked="SetInitiative"/>
                                 <StackLayout Grid.Column ="1" >
                                     <Label Text="{Binding Name}"
                                        VerticalTextAlignment="Center"
@@ -43,5 +43,14 @@
                 </ListView.ItemTemplate>
             </controls:XListView>
         </StackLayout>
+            <ImageButton AbsoluteLayout.LayoutBounds="0.9, 0.95,60,60"
+                         AbsoluteLayout.LayoutFlags="PositionProportional"
+                         BackgroundColor="Accent"
+                         HeightRequest="60"
+                         WidthRequest="60"
+                         CornerRadius="40"
+                         Source="ic_play_arrow.png"
+                         Clicked="StartEncounter"/>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

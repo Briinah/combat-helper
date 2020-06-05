@@ -25,7 +25,7 @@ namespace CombatHelper.Views
         {
             base.OnAppearing();
             encounter = BindingContext as EncounterViewModel;
-            await encounter.LoadData();
+            await encounter.ReloadData();
             creatureList.ItemsSource = encounter.Creatures;
             Title = encounter.Name;
         }
@@ -39,9 +39,9 @@ namespace CombatHelper.Views
             await Navigation.PopAsync();
         }
 
-        private async void StartEncounter(object sender, EventArgs e)
+        private async void RollInitiative(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new EncounterRunPage()
+            await Navigation.PushAsync(new EncounterInitiativePage()
             {
                 BindingContext = encounter
             });

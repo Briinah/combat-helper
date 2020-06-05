@@ -31,7 +31,7 @@
                    VerticalOptions="Center"
                    TextColor="Accent"/>
 
-            <ListView x:Name="creatureList"
+            <local:XListView x:Name="creatureList"
                       HeightRequest="300"
                       RowHeight="60">
                 <ListView.ItemTemplate >
@@ -60,7 +60,7 @@
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </local:XListView>
             <Button Text="Add Creature"
                     Clicked="AddCreature"/>
             <Grid>

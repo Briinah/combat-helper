@@ -24,6 +24,9 @@
     <Compile Update="Views\CampaignEditPage.xaml.cs">
       <DependentUpon>CampaignEditPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\EncounterInitiativePage.xaml.cs">
+      <DependentUpon>EncounterInitiativePage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +49,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\EncounterList.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\EncounterInitiativePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\EncounterRunPage.xaml">

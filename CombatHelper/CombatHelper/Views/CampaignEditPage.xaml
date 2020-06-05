@@ -31,7 +31,7 @@
                    Padding="10"
                    VerticalOptions="Center"
                    TextColor="Accent"/>
-            <ListView x:Name="playerList"
+            <local:XListView x:Name="playerList"
                       HeightRequest="300">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -55,7 +55,7 @@
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </local:XListView>
             <Grid Margin="0"
                   Padding="10">
                 <Grid.ColumnDefinitions>
