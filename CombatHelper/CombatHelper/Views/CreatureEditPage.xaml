@@ -34,7 +34,8 @@
                 <local:XEditor Placeholder="Enter HP"
                                Grid.Column="1"
                                Grid.Row="1"
-                               Text="{Binding HP}"/>
+                               Text="{Binding HP}"
+                               Keyboard="Numeric"/>
             </Grid>
             <Button Text="Save"
                     Clicked="OnSaveButtonClicked" 
