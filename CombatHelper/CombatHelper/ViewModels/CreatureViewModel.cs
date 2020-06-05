@@ -23,6 +23,13 @@ namespace CombatHelper.ViewModels
             Initiative = 0;
             IsPC = false;
             HasTurn = false;
+            Strength = creature.Strength;
+            Dexterity = creature.Dexterity;
+            Constitution = creature.Constitution;
+            Intelligence = creature.Intelligence;
+            Wisdom = creature.Wisdom;
+            Charisma = creature.Charisma;
+            Info = creature.Info;
         }
 
         public CreatureViewModel(PlayerCharacter pc)
@@ -41,7 +48,14 @@ namespace CombatHelper.ViewModels
                 ID = this.Id,
                 EncounterID = this.EncounterId,
                 HP = this.HP,
-                Name = this.Name
+                Name = this.Name,
+                Strength = this.Strength,
+                Dexterity = this.Dexterity,
+                Constitution = this.Constitution,
+                Intelligence = this.Intelligence,
+                Wisdom = this.Wisdom,
+                Charisma = this.Charisma,
+                Info = this.Info
             };
 
             return c;
@@ -73,6 +87,50 @@ namespace CombatHelper.ViewModels
             set { SetValue(ref initiative, value); }
         }
 
+        private int strength;
+        public int Strength
+        {
+            get { return strength; }
+            set { SetValue(ref strength, value); }
+        }
+        private int dexterity;
+        public int Dexterity
+        {
+            get { return dexterity; }
+            set { SetValue(ref dexterity, value); }
+        }
+        private int constitution;
+        public int Constitution
+        {
+            get { return constitution; }
+            set { SetValue(ref constitution, value); }
+        }
+        private int intelligence;
+        public int Intelligence
+        {
+            get { return intelligence; }
+            set { SetValue(ref intelligence, value); }
+        }
+        private int wisdom;
+        public int Wisdom
+        {
+            get { return wisdom; }
+            set { SetValue(ref wisdom, value); }
+        }
+        private int charisma;
+        public int Charisma
+        {
+            get { return charisma; }
+            set { SetValue(ref charisma, value); }
+        }
+
+        private string info;
+        public string Info
+        {
+            get { return info; }
+            set { SetValue(ref info, value); }
+        }
+
         public bool IsDead
         {
             get { return HP == 0; }
@@ -82,7 +140,16 @@ namespace CombatHelper.ViewModels
         public bool HasTurn
         {
             get { return hasTurn; }
-            set { SetValue(ref hasTurn, value); }
+            set
+            {
+                SetValue(ref hasTurn, value);
+                OnPropertyChanged("ShowInfo");
+            }
+        }
+
+        public bool ShowInfo
+        {
+            get { return HasTurn && !IsPC; }
         }
 
         public Color ButtonColor

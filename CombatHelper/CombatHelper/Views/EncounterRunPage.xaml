@@ -59,9 +59,70 @@
                                                          Grid.Column="1"/>
                                         </Grid>
                                         <Grid Grid.Row="2"
-                                             IsVisible="{Binding HasTurn}">
-                                            <Button Text="Edit"></Button>
+                                             IsVisible="{Binding ShowInfo}">
+                                            <Label Text="Str"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   TextColor="Accent"/>
+                                            <Label Grid.Column="1" 
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   Text="{Binding Strength}"/>
+                                            <Label Text="Dex"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   TextColor="Accent"
+                                                   Grid.Column="2"/>
+                                            <Label VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   Grid.Column="3"
+                                                   Text="{Binding Dexterity}"/>
+                                            <Label Text="Con"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   TextColor="Accent"
+                                                   Grid.Column="4"/>
+                                            <Label VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   Grid.Column="5"
+                                                   Text="{Binding Constitution}"/>
+                                            <Label Text="Int"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   TextColor="Accent"
+                                                   Grid.Column="0"
+                                                   Grid.Row="1"/>
+                                            <Label VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   Grid.Column="1"
+                                                   Grid.Row="1"
+                                                   Text="{Binding Intelligence}"/>
+                                            <Label Text="Wis"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   TextColor="Accent"
+                                                   Grid.Column="2"
+                                                   Grid.Row="1"/>
+                                            <Label VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   Grid.Column="3"
+                                                   Grid.Row="1"
+                                                   Text="{Binding Wisdom}"/>
+                                            <Label Text="Cha"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   TextColor="Accent"
+                                                   Grid.Column="4"
+                                                   Grid.Row="1"/>
+                                            <Label VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   Grid.Column="5"
+                                                   Grid.Row="1"
+                                                   Text="{Binding Charisma}"/>
+
                                         </Grid>
+                                        <Label Grid.Row="3" IsVisible="{Binding ShowInfo}"
+                                               Text="{Binding Info}"/>
                                     </StackLayout>
                                 </Grid>
                                 <BoxView HeightRequest="3" Color="Gold" 
