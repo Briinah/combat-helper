@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace CombatHelper.ViewModels
 {
@@ -21,13 +22,16 @@ namespace CombatHelper.ViewModels
             HP = creature.HP;
             Initiative = 0;
             IsPC = false;
+            HasTurn = false;
         }
 
         public CreatureViewModel(PlayerCharacter pc)
         {
             Name = pc.Name;
             Initiative = 0;
+            HP = 1;
             IsPC = true;
+            HasTurn = false;
         }
 
         public Creature ToModel()
@@ -44,24 +48,54 @@ namespace CombatHelper.ViewModels
         }
 
         private string name;
-        public string Name 
+        public string Name
         {
             get { return name; }
             set { SetValue(ref name, value); }
         }
 
         private int hp;
-        public int HP 
-        { 
+        public int HP
+        {
             get { return hp; }
-            set { SetValue(ref hp, value); }
+            set
+            {
+                SetValue(ref hp, value);
+                OnPropertyChanged("IsDead");
+                OnPropertyChanged("ButtonColor");
+            }
         }
 
         private int initiative;
-        public int Initiative 
-        { 
+        public int Initiative
+        {
             get { return initiative; }
             set { SetValue(ref initiative, value); }
+        }
+
+        public bool IsDead
+        {
+            get { return HP == 0; }
+        }
+
+        private bool hasTurn = false;
+        public bool HasTurn
+        {
+            get { return hasTurn; }
+            set { SetValue(ref hasTurn, value); }
+        }
+
+        public Color ButtonColor
+        {
+            get
+            {
+                if (IsDead)
+                    return Color.Gray;
+                else if (IsPC)
+                    return Color.LightGreen;
+                else
+                    return Color.HotPink;
+            }
         }
 
         public async void Save()

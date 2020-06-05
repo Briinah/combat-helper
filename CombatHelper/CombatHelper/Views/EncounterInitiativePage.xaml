@@ -22,7 +22,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Button HorizontalOptions="Start"
                                         VerticalOptions="Center"
-                                        BackgroundColor="HotPink"
+                                        BackgroundColor="{Binding ButtonColor}"
                                         WidthRequest="40"
                                         CornerRadius="40"
                                         Text="{Binding Initiative}"

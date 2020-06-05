@@ -12,9 +12,8 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout>
-            <StackLayout>
+            <StackLayout VerticalOptions="FillAndExpand">
                 <controls:XListView x:Name="creatureList"
-                      HeightRequest="300"
                       RowHeight="60">
                     <ListView.ItemTemplate >
                         <DataTemplate>
