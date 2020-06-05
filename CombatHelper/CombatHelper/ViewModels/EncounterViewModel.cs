@@ -24,7 +24,12 @@ namespace CombatHelper.ViewModels
         public ObservableCollection<CreatureViewModel> Creatures { get; private set; }
         public int CampaignId { get; set; }
 
-        public int Round { get; set; } = 1;
+        private int round = 1;
+        public int Round
+        {
+            get { return round; }
+            set { SetValue(ref round, value); }
+        }
 
         private bool dataLoaded;
         private bool pcsAdded;
