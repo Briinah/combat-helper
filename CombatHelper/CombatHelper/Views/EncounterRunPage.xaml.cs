@@ -37,6 +37,14 @@ namespace CombatHelper.Views
             {
                 creature.Initiative = int.Parse(response);
             }
+
+            // sort list on initiative
+            encounter.Creatures.Sort(CompareInitiative);
+        }
+
+        private int CompareInitiative(CreatureViewModel a, CreatureViewModel b)
+        {
+            return b.Initiative.CompareTo(a.Initiative);
         }
     }
 }
