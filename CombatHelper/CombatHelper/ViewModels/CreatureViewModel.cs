@@ -9,6 +9,7 @@ namespace CombatHelper.ViewModels
     {
         public int Id { get; set; }
         public int EncounterId { get; set; }
+        public bool IsPC { get; private set; }
 
         public CreatureViewModel() { }
 
@@ -19,6 +20,14 @@ namespace CombatHelper.ViewModels
             Name = creature.Name;
             HP = creature.HP;
             Initiative = 0;
+            IsPC = false;
+        }
+
+        public CreatureViewModel(PlayerCharacter pc)
+        {
+            Name = pc.Name;
+            Initiative = 0;
+            IsPC = true;
         }
 
         public Creature ToModel()

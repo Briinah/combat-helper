@@ -25,22 +25,8 @@ namespace CombatHelper.Views
         {
             base.OnAppearing();
             encounter = BindingContext as EncounterViewModel;
-            AddPlayers();
+            encounter.AddPlayers();
             creatureList.ItemsSource = encounter.Creatures;
-        }
-
-        private async void AddPlayers()
-        {
-            //// add players to encounter if they are not added yet
-            //List<PlayerCharacter> players = await App.Database.Players.Get<bool>((pc) => pc.CampaignID == encounter.CampaignID, null);
-            //foreach (var pc in players)
-            //{
-                
-            //    creatures.Add(new Creature
-            //    {
-            //        Name = pc.Name
-            //    });
-            //}
         }
 
         private async void SetInitiative(object sender, EventArgs e)
@@ -49,8 +35,6 @@ namespace CombatHelper.Views
             string response = await DisplayPromptAsync(creature.Name, "Set initiative: ", maxLength: 2, keyboard: Keyboard.Numeric);
             if (!string.IsNullOrEmpty(response))
             {
-                //var c = encounter.Creatures.IndexOf(creature);
-                //creatures[c].Initiative = int.Parse(response);
                 creature.Initiative = int.Parse(response);
             }
         }

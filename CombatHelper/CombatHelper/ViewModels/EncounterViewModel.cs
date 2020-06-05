@@ -25,6 +25,7 @@ namespace CombatHelper.ViewModels
         public int CampaignId { get; set; }
 
         private bool dataLoaded;
+        private bool pcsAdded;
 
         public EncounterViewModel() { }
 
@@ -53,7 +54,23 @@ namespace CombatHelper.ViewModels
         {
             Creatures.Clear();
             dataLoaded = false;
+            pcsAdded = false;
             await LoadData();
+        }
+
+        public async void AddPlayers()
+        {
+            if (!pcsAdded)
+            {
+                // add players to encounter if they are not added yet
+                List<PlayerCharacter> players = await App.Database.Players.Get<bool>((pc) => pc.CampaignID == this.CampaignId, null);
+                foreach (var pc in players)
+                {
+                    Creatures.Add(new CreatureViewModel(pc));
+                }
+
+                pcsAdded = true;
+            }
         }
 
         public Encounter ToModel()
