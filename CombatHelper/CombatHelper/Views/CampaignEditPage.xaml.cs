@@ -1,9 +1,5 @@
-﻿using CombatHelper.Models;
+﻿using CombatHelper.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -14,7 +10,8 @@ namespace CombatHelper.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CampaignEditPage : ContentPage
     {
-        private ObservableCollection<PlayerCharacter> observablePCList;
+        private CampaignViewModel campaign;
+
         public CampaignEditPage()
         {
             NavigationPage.SetHasBackButton(this, false);
@@ -24,35 +21,21 @@ namespace CombatHelper.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            var campaign = (Campaign)BindingContext;
+            campaign = BindingContext as CampaignViewModel;
+
             Title = "New Campaign";
-            if (campaign.ID != 0)
+            if (campaign.Id != 0)
             {
-                campaign = await App.Database.Campaigns.GetWithChildren(campaign.ID);
+                await campaign.LoadData();
                 Title = $"Edit: {campaign.Name}";
             }
 
-            if (campaign.Players == null)
-                campaign.Players = new List<PlayerCharacter>();
-            observablePCList = new ObservableCollection<PlayerCharacter>(campaign.Players);
-            playerList.ItemsSource = observablePCList;
+            playerList.ItemsSource = campaign.Players;
         }
 
         private async void OnSaveButtonClicked(object sender, EventArgs e)
         {
-            var campaign = (Campaign)BindingContext;
-            campaign.Players = observablePCList.ToList();
-
-            if (campaign.ID == 0)
-            {
-                // get id of campaign from db
-                await App.Database.Campaigns.Insert(campaign);
-            }
-
-            SavePlayers(campaign);
-            // update campaign with players
-            await App.Database.Campaigns.UpdateWithChildren(campaign);
-
+            campaign.Save();
             Navigation.InsertPageBefore(new CampaignDetailPage()
             {
                 BindingContext = campaign
@@ -61,39 +44,13 @@ namespace CombatHelper.Views
             await Navigation.PopAsync();
         }
 
-        private async void SavePlayers(Campaign campaign)
-        {
-            foreach (var pc in campaign.Players)
-            {
-                pc.CampaignID = campaign.ID;
 
-                if (pc.ID == 0)
-                    await App.Database.Players.Insert(pc);
-                else
-                    await App.Database.Players.Update(pc);
-            }
-        }
-
-        private async void RemovePlayers(Campaign campaign)
-        {
-            foreach (var pc in campaign.Players)
-            {
-                if (pc.ID != 0)
-                    await App.Database.Players.Delete(pc);
-            }
-        }
 
         private async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
-            var campaign = (Campaign)BindingContext;
-            if (campaign.ID != 0) campaign = await App.Database.Campaigns.GetWithChildren(campaign.ID);
-
             if (await OnAlertYesNoClicked(campaign.Name))
             {
-                RemovePlayers(campaign);
-
-                if (campaign.ID != 0)
-                    await App.Database.Campaigns.Delete(campaign);
+                campaign.Delete();
 
                 await Navigation.PopAsync();
             }
@@ -110,15 +67,14 @@ namespace CombatHelper.Views
         {
             if (!string.IsNullOrEmpty(newPlayer.Text))
             {
-                observablePCList.Add(new PlayerCharacter() { Name = newPlayer.Text });
+                campaign.Players.Add(new PlayerCharacterViewModel() { Name = newPlayer.Text });
                 newPlayer.Text = "";
             }
         }
 
         protected override bool OnBackButtonPressed()
         {
-            var campaign = (Campaign)BindingContext;
-            if (campaign.ID != 0)
+            if (campaign.Id != 0)
             {
                 Navigation.InsertPageBefore(new CampaignDetailPage()
                 {
@@ -137,8 +93,8 @@ namespace CombatHelper.Views
 
         private void RemovePlayer(object sender, EventArgs e)
         {
-            PlayerCharacter pc = (PlayerCharacter)((ImageButton)sender).BindingContext;
-            observablePCList.Remove(pc);
+            PlayerCharacterViewModel pc = ((ImageButton)sender).BindingContext as PlayerCharacterViewModel;
+            campaign.Players.Remove(pc);
         }
     }
 }

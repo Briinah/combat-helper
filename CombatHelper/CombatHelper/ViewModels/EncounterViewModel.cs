@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CombatHelper.ViewModels
 {
-    class EncounterViewModel : BaseViewModel
+    public class EncounterViewModel : BaseViewModel
     {
         public int Id { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using CombatHelper.Models;
+using CombatHelper.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace CombatHelper.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CampaignDetailPage : ContentPage
     {
+        CampaignViewModel campaign;
+
         public CampaignDetailPage(bool removePreviousPage = false)
         {
             InitializeComponent();
@@ -22,8 +25,8 @@ namespace CombatHelper.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            var campaign = (Campaign)BindingContext;
-            campaign = await App.Database.Campaigns.GetWithChildren(campaign.ID);
+            campaign = BindingContext as CampaignViewModel;
+            await campaign.LoadData();
             playerList.ItemsSource = campaign.Players;
         }
 

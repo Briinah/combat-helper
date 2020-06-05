@@ -15,8 +15,7 @@ namespace CombatHelper.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EncounterList : ContentPage
     {
-        private ObservableCollection<Encounter> observableEncounterList;
-        private Campaign campaign;
+        private CampaignViewModel campaign;
 
         public EncounterList()
         {
@@ -25,21 +24,18 @@ namespace CombatHelper.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            campaign = (Campaign)BindingContext;
-            campaign = await App.Database.Campaigns.GetWithChildren(campaign.ID);
+            campaign = BindingContext as CampaignViewModel;
+            await campaign.LoadData();
             Title = campaign.Name;
 
-            if (campaign.Encounters == null)
-                campaign.Encounters = new List<Encounter>();
-            observableEncounterList = new ObservableCollection<Encounter>(campaign.Encounters);
-            encounterList.ItemsSource = observableEncounterList;
+            encounterList.ItemsSource = campaign.Encounters;
         }
 
         private async void NewEncounter(object sender, EventArgs e)
         {
-            var encounter = new Encounter()
+            var encounter = new EncounterViewModel()
             {
-                CampaignID = campaign.ID
+                CampaignId = campaign.Id
             };
 
             await Navigation.PushAsync(new EncounterEditPage()
@@ -54,7 +50,7 @@ namespace CombatHelper.Views
             {
                 await Navigation.PushAsync(new EncounterDetailPage
                 {
-                    BindingContext = new EncounterViewModel(e.SelectedItem as Encounter)
+                    BindingContext = e.SelectedItem as EncounterViewModel
                 });
             }
         }
