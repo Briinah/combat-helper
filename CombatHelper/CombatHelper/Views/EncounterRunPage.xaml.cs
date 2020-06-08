@@ -47,9 +47,15 @@ namespace CombatHelper.Views
             encounter.Creatures[turnIndex].HasTurn = true;
         }
 
-        private void EditHealth(object sender, EventArgs e)
+        private async void EditHealth(object sender, EventArgs e)
         {
+            var creature = ((ImageButton)sender).BindingContext as CreatureViewModel;
+            string result = await DisplayPromptAsync($"Change HP of {creature.Name}", "Add to HP:", keyboard: Keyboard.Numeric);
 
+            if (!string.IsNullOrEmpty(result))
+            {
+                creature.HP += int.Parse(result);
+            }
         }
     }
 }
