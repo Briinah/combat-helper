@@ -102,5 +102,15 @@ namespace CombatHelper.Views
                 BindingContext = creature
             });
         }
+
+        private async void EditCreature(object sender, ItemTappedEventArgs e)
+        {
+            var creature = e.Item as CreatureViewModel;
+
+            await Navigation.PushAsync(new CreatureEditPage()
+            {
+                BindingContext = creature
+            });
+        }
     }
 }

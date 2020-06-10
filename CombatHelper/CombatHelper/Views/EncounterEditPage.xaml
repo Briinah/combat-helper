@@ -33,7 +33,8 @@
 
             <local:XListView x:Name="creatureList"
                       HeightRequest="300"
-                      RowHeight="60">
+                      RowHeight="60"
+                      ItemTapped="EditCreature">
                 <ListView.ItemTemplate >
                     <DataTemplate>
                         <ViewCell>
@@ -50,7 +51,7 @@
                                 <ImageButton Grid.Column ="1" 
                                              HorizontalOptions="End"
                                              VerticalOptions="Center"
-                                             BackgroundColor="DeepPink"
+                                             BackgroundColor="Accent"
                                              CornerRadius="40"
                                              Aspect="AspectFill"
                                              Source="ic_delete.png"
