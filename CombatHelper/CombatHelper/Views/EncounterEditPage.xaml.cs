@@ -93,8 +93,8 @@ namespace CombatHelper.Views
         private async void AddCreature(object sender, EventArgs e)
         {
             var creature = new CreatureViewModel()
-            { 
-                EncounterId = encounter.Id 
+            {
+                EncounterId = encounter.Id
             };
 
             await Navigation.PushAsync(new CreatureEditPage()
@@ -105,12 +105,51 @@ namespace CombatHelper.Views
 
         private async void EditCreature(object sender, ItemTappedEventArgs e)
         {
+            if (await encounter.HasUnsavedChanges())
+            {
+                if (await SaveChangesDialog())
+                {
+                    encounter.Save();
+                    return;
+                }
+                else
+                    return;
+            }
+
             var creature = e.Item as CreatureViewModel;
 
             await Navigation.PushAsync(new CreatureEditPage()
             {
                 BindingContext = creature
             });
+        }
+
+        private async Task<bool> SaveChangesDialog()
+        {
+            bool answer = await (DisplayAlert("Unsaved changes", "Do you want to save changes?", "Yes", "No"));
+
+            return answer;
+        }
+
+        private void CopyCreature(object sender, EventArgs e)
+        {
+            var creature = ((ImageButton)sender).BindingContext as CreatureViewModel;
+
+            var copy = new CreatureViewModel()
+            {
+                Name = creature.Name + "(copy)",
+                HP = creature.HP,
+                EncounterId = creature.EncounterId,
+                Strength = creature.Strength,
+                Dexterity = creature.Dexterity,
+                Constitution = creature.Constitution,
+                Intelligence = creature.Intelligence,
+                Wisdom = creature.Wisdom,
+                Charisma = creature.Charisma,
+                Info = creature.Info
+            };
+
+            encounter.Creatures.Add(copy);
         }
     }
 }

@@ -45,7 +45,7 @@
                                 <ImageButton Grid.Column ="1" 
                                              HorizontalOptions="End"
                                              VerticalOptions="Center"
-                                             BackgroundColor="DeepPink"
+                                             BackgroundColor="Accent"
                                              CornerRadius="40"
                                              Aspect="AspectFill"
                                              Source="ic_delete.png"
@@ -75,11 +75,11 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Text="Save"
-                        Clicked="OnSaveButtonClicked" />
-                <Button Grid.Column="1"
-                        Text="Delete"
+                <Button Text="Delete"
                         Clicked="OnDeleteButtonClicked"/>
+                <Button Grid.Column="1"
+                        Text="Save"
+                        Clicked="OnSaveButtonClicked" />
             </Grid>
         </StackLayout>
     </ContentPage.Content>

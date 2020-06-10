@@ -39,6 +39,11 @@
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="6*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="2*" />
+                                </Grid.ColumnDefinitions>
                                 <StackLayout Margin="10">
                                     <Label Text="{Binding Name}"
                                        VerticalTextAlignment="Center"
@@ -49,6 +54,15 @@
                                            Grid.Row="1"/>
                                 </StackLayout>
                                 <ImageButton Grid.Column ="1" 
+                                             HorizontalOptions="End"
+                                             VerticalOptions="Center"
+                                             BackgroundColor="Accent"
+                                             CornerRadius="40"
+                                             Aspect="AspectFill"
+                                             Source="ic_content_copy.png"
+                                             Clicked="CopyCreature"
+                                             Margin="0, 0, 10, 0"/>
+                                <ImageButton Grid.Column ="2" 
                                              HorizontalOptions="End"
                                              VerticalOptions="Center"
                                              BackgroundColor="Accent"
@@ -69,11 +83,10 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Text="Save"
-                        Clicked="OnSaveButtonClicked" />
-                <Button Grid.Column="1"
-                        Text="Delete"
+                <Button Text="Delete"
                         Clicked="OnDeleteButtonClicked"/>
+                <Button Grid.Column="1" Text="Save"
+                        Clicked="OnSaveButtonClicked" />
             </Grid>
         </StackLayout>
     </ContentPage.Content>

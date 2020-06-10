@@ -44,7 +44,7 @@ namespace CombatHelper.Droid.Renderers
                 gd.SetColor(global::Android.Graphics.Color.Transparent);
                 gd.SetCornerRadius(10);
                 Control.SetBackground(gd);
-                Control.SetRawInputType(InputTypes.TextFlagNoSuggestions);
+                //Control.SetRawInputType(InputTypes.TextFlagNoSuggestions);
             }
         }
     }

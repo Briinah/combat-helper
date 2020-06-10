@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace CombatHelper.ViewModels
 {
-    public class CreatureViewModel : BaseViewModel
+    public class CreatureViewModel : BaseViewModel, IEquatable<CreatureViewModel>
     {
         public int Id { get; set; }
         public int EncounterId { get; set; }
@@ -159,9 +160,9 @@ namespace CombatHelper.ViewModels
                 if (IsDead)
                     return Color.Gray;
                 else if (IsPC)
-                    return Color.LightGreen;
+                    return ColorConverters.FromHex("#64d9c6");
                 else
-                    return Color.HotPink;
+                    return ColorConverters.FromHex("#d96464"); 
             }
         }
 
@@ -175,6 +176,29 @@ namespace CombatHelper.ViewModels
             }
 
             await App.Database.Creatures.Update(creature);
+        }
+
+        public bool Equals(CreatureViewModel other)
+        {
+            if (other == null)
+                return false;
+
+            if (!string.Equals(Name, other.Name))
+                return false;
+
+            if (HP != other.HP)
+                return false;
+
+            if (!string.Equals(Info, other.Info))
+                return false;
+
+            return Strength == other.Strength &&
+                Dexterity == other.Dexterity &&
+                Constitution == other.Constitution &&
+                Intelligence == other.Intelligence &&
+                Wisdom == other.Wisdom &&
+                Charisma == other.Charisma;
+
         }
     }
 }

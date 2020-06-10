@@ -50,7 +50,7 @@ namespace CombatHelper.Views
         private async void EditHealth(object sender, EventArgs e)
         {
             var creature = ((ImageButton)sender).BindingContext as CreatureViewModel;
-            string result = await DisplayPromptAsync($"Change HP of {creature.Name}", "Add to HP:", keyboard: Keyboard.Numeric);
+            string result = await DisplayPromptAsync($"Change HP of {creature.Name}", $"{creature.HP} + _", keyboard: Keyboard.Numeric);
 
             if (!string.IsNullOrEmpty(result))
             {

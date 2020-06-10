@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CombatHelper.ViewModels
 {
-    public class EncounterViewModel : BaseViewModel
+    public class EncounterViewModel : BaseViewModel, IEquatable<EncounterViewModel>
     {
         public int Id { get; set; }
 
@@ -141,6 +141,38 @@ namespace CombatHelper.ViewModels
                 if (creature.ID != 0)
                     await App.Database.Creatures.Delete(creature);
             }
+        }
+
+        public async Task<bool> HasUnsavedChanges()
+        {
+            var data = await App.Database.Encounters.GetWithChildren(Id);
+
+            var dataVM = new EncounterViewModel(data);
+            await dataVM.LoadData();
+
+            return !this.Equals(dataVM);
+        }
+
+        public bool Equals(EncounterViewModel other)
+        {
+            if (other == null)
+                return false;
+
+            if (!string.Equals(Name, other.Name))
+                return false;
+
+            if (Creatures.Count != other.Creatures.Count)
+                return false;
+
+            for(int i = 0; i < Creatures.Count; i++)
+            {
+                if(!Creatures[i].Equals(other.Creatures[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
