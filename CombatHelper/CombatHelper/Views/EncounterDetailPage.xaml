@@ -11,7 +11,7 @@
                      Clicked="OnEditClicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <AbsoluteLayout>
+        <Grid>
             <StackLayout VerticalOptions="FillAndExpand">
                 <controls:XListView x:Name="creatureList"
                       RowHeight="60">
@@ -46,14 +46,15 @@
                 </controls:XListView>
 
             </StackLayout>
-            <ImageButton AbsoluteLayout.LayoutBounds="0.9, 0.95,60,60"
-                         AbsoluteLayout.LayoutFlags="PositionProportional"
+            <ImageButton HorizontalOptions="EndAndExpand"
+                         VerticalOptions="EndAndExpand"
+                         Margin="30"
                          BackgroundColor="Accent"
                          HeightRequest="60"
                          WidthRequest="60"
                          CornerRadius="40"
                          Source="ic_d20.png"
                          Clicked="RollInitiative"/>
-        </AbsoluteLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

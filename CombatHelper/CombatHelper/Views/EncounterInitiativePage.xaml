@@ -8,11 +8,11 @@
              x:Class="CombatHelper.Views.EncounterInitiativePage"
              Title="Roll Initiative!">
     <ContentPage.Content>
-        <AbsoluteLayout>
-        <StackLayout VerticalOptions="FillAndExpand">
+        <Grid>
             <controls:XListView x:Name="creatureList"
-                      RowHeight="60">
-                <ListView.ItemTemplate >
+                                RowHeight="60"
+                                VerticalOptions="FillAndExpand">
+                <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid Margin="10">
@@ -42,15 +42,15 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </controls:XListView>
-        </StackLayout>
-            <ImageButton AbsoluteLayout.LayoutBounds="0.9, 0.95,60,60"
-                         AbsoluteLayout.LayoutFlags="PositionProportional"
+            <ImageButton HorizontalOptions="EndAndExpand"
+                         VerticalOptions="EndAndExpand"
+                         Margin="30"
                          BackgroundColor="Accent"
                          HeightRequest="60"
                          WidthRequest="60"
                          CornerRadius="40"
                          Source="ic_play_arrow.png"
                          Clicked="StartEncounter"/>
-        </AbsoluteLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
