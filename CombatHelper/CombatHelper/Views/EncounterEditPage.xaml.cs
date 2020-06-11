@@ -135,19 +135,7 @@ namespace CombatHelper.Views
         {
             var creature = ((ImageButton)sender).BindingContext as CreatureViewModel;
 
-            var copy = new CreatureViewModel()
-            {
-                Name = creature.Name + "(copy)",
-                HP = creature.HP,
-                EncounterId = creature.EncounterId,
-                Strength = creature.Strength,
-                Dexterity = creature.Dexterity,
-                Constitution = creature.Constitution,
-                Intelligence = creature.Intelligence,
-                Wisdom = creature.Wisdom,
-                Charisma = creature.Charisma,
-                Info = creature.Info
-            };
+            var copy = CreatureViewModel.Copy(creature);
 
             encounter.Creatures.Add(copy);
         }

@@ -39,13 +39,10 @@ namespace CombatHelper.Views
             }
 
             // sort list on initiative
-            encounter.Creatures.Sort(CompareInitiative);
+            encounter.Creatures.Sort(CreatureViewModel.CompareInitiative);
         }
 
-        private int CompareInitiative(CreatureViewModel a, CreatureViewModel b)
-        {
-            return b.Initiative.CompareTo(a.Initiative);
-        }
+        
 
         private async void StartEncounter(object sender, EventArgs e)
         {

@@ -57,5 +57,13 @@ namespace CombatHelper.Views
                 creature.HP += int.Parse(result);
             }
         }
+
+        private async void AddCreature(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new CreatureAddModal(encounter)
+            {
+                BindingContext = new CreatureViewModel()
+            });
+        }
     }
 }

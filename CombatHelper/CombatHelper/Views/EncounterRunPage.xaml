@@ -133,6 +133,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </controls:XListView>
+            <Button Text="Add Creature"
+                    Clicked="AddCreature"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -204,6 +204,9 @@ namespace CombatHelper.ViewModels
             if (HP != other.HP)
                 return false;
 
+            if (Friendly != other.Friendly)
+                return false;
+
             if (!string.Equals(Info, other.Info))
                 return false;
 
@@ -214,6 +217,32 @@ namespace CombatHelper.ViewModels
                 Wisdom == other.Wisdom &&
                 Charisma == other.Charisma;
 
+        }
+
+        public static int CompareInitiative(CreatureViewModel a, CreatureViewModel b)
+        {
+            return b.Initiative.CompareTo(a.Initiative);
+        }
+
+        public static CreatureViewModel Copy(CreatureViewModel vm)
+        {
+                var copy = new CreatureViewModel()
+                {
+                    Name = vm.Name,
+                    HP = vm.HP,
+                    EncounterId = vm.EncounterId,
+                    Strength = vm.Strength,
+                    Dexterity = vm.Dexterity,
+                    Constitution = vm.Constitution,
+                    Intelligence = vm.Intelligence,
+                    Wisdom = vm.Wisdom,
+                    Charisma = vm.Charisma,
+                    Info = vm.Info,
+                    Friendly = vm.Friendly,
+                    Initiative = vm.Initiative
+                };
+
+            return copy;
         }
     }
 }
