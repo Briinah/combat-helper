@@ -12,9 +12,9 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>
-            <StackLayout VerticalOptions="FillAndExpand">
                 <controls:XListView x:Name="creatureList"
-                      RowHeight="60">
+                                    RowHeight="60"
+                                    VerticalOptions="FillAndExpand">
                     <ListView.ItemTemplate >
                         <DataTemplate>
                             <ViewCell>
@@ -44,8 +44,6 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </controls:XListView>
-
-            </StackLayout>
             <ImageButton HorizontalOptions="EndAndExpand"
                          VerticalOptions="EndAndExpand"
                          Margin="30"

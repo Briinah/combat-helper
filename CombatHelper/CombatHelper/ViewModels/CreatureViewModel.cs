@@ -31,6 +31,7 @@ namespace CombatHelper.ViewModels
             Wisdom = creature.Wisdom;
             Charisma = creature.Charisma;
             Info = creature.Info;
+            Friendly = creature.Friendly;
         }
 
         public CreatureViewModel(PlayerCharacter pc)
@@ -40,6 +41,7 @@ namespace CombatHelper.ViewModels
             HP = 1;
             IsPC = true;
             HasTurn = false;
+            Friendly = true;
         }
 
         public Creature ToModel()
@@ -56,7 +58,8 @@ namespace CombatHelper.ViewModels
                 Intelligence = this.Intelligence,
                 Wisdom = this.Wisdom,
                 Charisma = this.Charisma,
-                Info = this.Info
+                Info = this.Info,
+                Friendly = this.Friendly
             };
 
             return c;
@@ -77,6 +80,18 @@ namespace CombatHelper.ViewModels
             {
                 SetValue(ref hp, value);
                 OnPropertyChanged("IsDead");
+                OnPropertyChanged("ButtonColor");
+            }
+        }
+
+
+        private bool friendly;
+        public bool Friendly
+        {
+            get { return friendly; }
+            set
+            {
+                SetValue(ref friendly, value);
                 OnPropertyChanged("ButtonColor");
             }
         }
@@ -159,10 +174,10 @@ namespace CombatHelper.ViewModels
             {
                 if (IsDead)
                     return Color.Gray;
-                else if (IsPC)
+                else if (IsPC || Friendly)
                     return ColorConverters.FromHex("#64d9c6");
                 else
-                    return ColorConverters.FromHex("#d96464"); 
+                    return ColorConverters.FromHex("#d96464");
             }
         }
 

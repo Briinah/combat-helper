@@ -36,6 +36,16 @@
                                Grid.Row="1"
                                Text="{Binding HP}"
                                Keyboard="Numeric"/>
+                <Label Text="Friendly"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start"
+                       Padding="10"
+                       TextColor="Accent"
+                       Grid.Row="2"/>
+                <Switch IsToggled="{Binding Friendly}"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        HorizontalOptions="Start"/>
             </Grid>
             <Label Text="Attributes" Padding="10"
                        TextColor="Accent"/>
