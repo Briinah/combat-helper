@@ -28,7 +28,12 @@ namespace CombatHelper.Views
             encounter = BindingContext as EncounterViewModel;
             creatureList.ItemsSource = encounter.Creatures;
 
-            encounter.Creatures[turnIndex].HasTurn = true;
+            // check if a creature has a turn
+            var turn = encounter.Creatures.FirstOrDefault((c) => c.HasTurn);
+            if (turn == null)
+                encounter.Creatures[turnIndex].HasTurn = true;
+            else
+                turnIndex = encounter.Creatures.IndexOf(turn);
         }
 
         private void NextTurn(object sender, EventArgs e)

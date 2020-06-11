@@ -60,7 +60,6 @@ namespace CombatHelper.Views
 
         private async void AddCreatures(object sender, EventArgs e)
         {
-            // todo: add creatures
             for(int i = 0; i < amountOfCreatures; i++)
             {
                 var copy = CreatureViewModel.Copy(creature);
