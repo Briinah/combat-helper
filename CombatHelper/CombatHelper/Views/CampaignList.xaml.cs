@@ -1,4 +1,5 @@
 ﻿using CombatHelper.Models;
+using CombatHelper.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace CombatHelper.Pages
+namespace CombatHelper.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CampaignList : ContentPage
@@ -20,14 +21,15 @@ namespace CombatHelper.Pages
 
         protected async override void OnAppearing()
         {
-            listView.ItemsSource = await App.Database.Campaigns.Get();
+            var listViewModel = new CampaignListViewModel();
+            listView.ItemsSource = await listViewModel.GetCampaignList();
         }
 
         private async void OnAddClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new CampaignEditPage
             {
-                BindingContext = new Campaign()
+                BindingContext = new CampaignViewModel()
             });
         }
 
@@ -37,7 +39,7 @@ namespace CombatHelper.Pages
             {
                 await Navigation.PushAsync(new CampaignDetailPage
                 {
-                    BindingContext = e.SelectedItem as Campaign
+                    BindingContext = e.SelectedItem as CampaignViewModel
                 });
             }
         }

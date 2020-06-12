@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:controls="clr-namespace:CombatHelper.Controls"
+             mc:Ignorable="d"
+             x:Class="CombatHelper.Views.EncounterRunPage"
+             Title="{Binding Round, StringFormat='Round {0}'}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Next" Clicked="NextTurn"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand">
+            <controls:XListView x:Name="creatureList"
+                                SelectionMode="None"
+                                HasUnevenRows="True">
+                <ListView.ItemTemplate >
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <BoxView HeightRequest="1" Color="LightGray" 
+                                         HorizontalOptions="FillAndExpand" 
+                                         IsVisible="{Binding HasTurn}"/>
+                                <Grid Margin="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.5*" />
+                                        <ColumnDefinition Width="8*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button HorizontalOptions="Start"
+                                        VerticalOptions="Start"
+                                        BackgroundColor="{Binding ButtonColor}"
+                                        WidthRequest="40"
+                                        HeightRequest="40"
+                                        CornerRadius="40"
+                                        Text="{Binding Initiative}"
+                                        />
+                                    <StackLayout Grid.Column ="1" >
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="8*"/>
+                                                <ColumnDefinition Width="2*" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackLayout>
+                                                <Label Text="{Binding Name}"
+                                                       VerticalTextAlignment="Center"
+                                                       FontSize="Body"/>
+                                                <Label x:Name="hpLabel"
+                                                       Text="{Binding HP, StringFormat='HP: {0}'}"
+                                                       FontSize="Micro"
+                                                       Grid.Row="1"/>
+                                            </StackLayout>
+                                            <ImageButton BackgroundColor="Accent"
+                                                         CornerRadius="40"
+                                                         WidthRequest="40"
+                                                         HorizontalOptions="Center"
+                                                         Source="ic_hp.png"
+                                                         Clicked="EditHealth"
+                                                         Grid.Column="1"/>
+                                        </Grid>
+                                        <Grid Grid.Row="2"
+                                             IsVisible="{Binding ShowInfo}">
+                                            <Label Text="Str"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   TextColor="Accent"/>
+                                            <Label Grid.Column="1" 
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   Text="{Binding Strength}"/>
+                                            <Label Text="Dex"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   TextColor="Accent"
+                                                   Grid.Column="2"/>
+                                            <Label VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   Grid.Column="3"
+                                                   Text="{Binding Dexterity}"/>
+                                            <Label Text="Con"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   TextColor="Accent"
+                                                   Grid.Column="4"/>
+                                            <Label VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   Grid.Column="5"
+                                                   Text="{Binding Constitution}"/>
+                                            <Label Text="Int"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   TextColor="Accent"
+                                                   Grid.Column="0"
+                                                   Grid.Row="1"/>
+                                            <Label VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   Grid.Column="1"
+                                                   Grid.Row="1"
+                                                   Text="{Binding Intelligence}"/>
+                                            <Label Text="Wis"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   TextColor="Accent"
+                                                   Grid.Column="2"
+                                                   Grid.Row="1"/>
+                                            <Label VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   Grid.Column="3"
+                                                   Grid.Row="1"
+                                                   Text="{Binding Wisdom}"/>
+                                            <Label Text="Cha"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   TextColor="Accent"
+                                                   Grid.Column="4"
+                                                   Grid.Row="1"/>
+                                            <Label VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   Grid.Column="5"
+                                                   Grid.Row="1"
+                                                   Text="{Binding Charisma}"/>
+
+                                        </Grid>
+                                        <Label Grid.Row="3" IsVisible="{Binding ShowInfo}"
+                                               Text="{Binding Info}"/>
+                                    </StackLayout>
+                                </Grid>
+                                <BoxView HeightRequest="1" Color="LightGray" 
+                                         HorizontalOptions="FillAndExpand" 
+                                         IsVisible="{Binding HasTurn}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </controls:XListView>
+            <Button Text="Add Creature"
+                    Clicked="AddCreature"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using SQLite;
+using SQLiteNetExtensionsAsync.Extensions;
 
 namespace CombatHelper.Data
 {
@@ -34,12 +35,18 @@ namespace CombatHelper.Data
         }
 
         public async Task<T> Get(int id) => await db.FindAsync<T>(id);
+        public async Task<T> GetWithChildren(int id) => await db.FindWithChildrenAsync<T>(id);
 
         public async Task<T> Get(Expression<Func<T, bool>> predicate) => await db.FindAsync<T>(predicate);
+        public async Task<T> GetWithChildren(Expression<Func<T, bool>> predicate) => await db.FindWithChildrenAsync<T>(predicate);
 
         public async Task<int> Insert(T entity) => await db.InsertAsync(entity);
 
+        public async Task InsertWithChildren(T entity) => await db.InsertWithChildrenAsync(entity);
+
         public async Task<int> Update(T entity) => await db.UpdateAsync(entity);
+
+        public async Task UpdateWithChildren(T entity) => await db.UpdateWithChildrenAsync(entity);
 
         public async Task<int> Delete(T entity) => await db.DeleteAsync(entity);
     }

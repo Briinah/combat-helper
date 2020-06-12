@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:controls="clr-namespace:CombatHelper.Controls"
+             mc:Ignorable="d"
+             x:Class="CombatHelper.Views.CampaignList"
+             Title="Campaigns">
+    <AbsoluteLayout>
+    <controls:XListView x:Name="listView"
+              ItemSelected="OnListViewItemSelected">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding Name}"/>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </controls:XListView>
+        <ImageButton AbsoluteLayout.LayoutBounds="0.9, 0.95,60,60"
+                     AbsoluteLayout.LayoutFlags="PositionProportional"
+                     BackgroundColor="Accent"
+                     HeightRequest="60"
+                     WidthRequest="60"
+                     CornerRadius="40"
+                     Source="ic_add.png"
+                     Clicked="OnAddClicked">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup Name="CommonStates">
+                    <VisualState Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="Scale" Value="1"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Scale" Value="0.9" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </ImageButton>
+    </AbsoluteLayout>
+</ContentPage>
