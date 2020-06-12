@@ -26,7 +26,11 @@ namespace CombatHelper.ViewModels
 
         public ObservableCollection<PlayerCharacterViewModel> Players { get; private set; }
 
-        public CampaignViewModel() { }
+        public CampaignViewModel() 
+        {
+            Encounters = new ObservableCollection<EncounterViewModel>();
+            Players = new ObservableCollection<PlayerCharacterViewModel>();
+        }
         public CampaignViewModel(Campaign campaign)
         {
             Id = campaign.ID;
@@ -74,6 +78,7 @@ namespace CombatHelper.ViewModels
             {
                 // get id of campaign from db
                 await App.Database.Campaigns.Insert(campaign);
+                this.Id = campaign.ID;
             }
 
             SavePlayers(campaign);

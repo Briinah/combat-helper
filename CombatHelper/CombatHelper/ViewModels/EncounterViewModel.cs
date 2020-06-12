@@ -34,7 +34,11 @@ namespace CombatHelper.ViewModels
         private bool dataLoaded;
         private bool pcsAdded;
 
-        public EncounterViewModel() { }
+        public EncounterViewModel() 
+        {
+            Creatures = new ObservableCollection<CreatureViewModel>();
+            dataLoaded = false;
+        }
 
         public EncounterViewModel(Encounter encounter)
         {
@@ -90,6 +94,7 @@ namespace CombatHelper.ViewModels
             };
 
             encounter.Creatures = new List<Creature>();
+
             foreach (var c in this.Creatures)
                 encounter.Creatures.Add(c.ToModel());
 
@@ -104,6 +109,7 @@ namespace CombatHelper.ViewModels
             {
                 // get id of encounter from db
                 await App.Database.Encounters.Insert(encounter);
+                this.Id = encounter.ID;
             }
 
             SaveCreatures(encounter);
@@ -145,6 +151,9 @@ namespace CombatHelper.ViewModels
 
         public async Task<bool> HasUnsavedChanges()
         {
+            if (Id == 0)
+                return true;
+
             var data = await App.Database.Encounters.GetWithChildren(Id);
 
             var dataVM = new EncounterViewModel(data);
@@ -164,9 +173,9 @@ namespace CombatHelper.ViewModels
             if (Creatures.Count != other.Creatures.Count)
                 return false;
 
-            for(int i = 0; i < Creatures.Count; i++)
+            for (int i = 0; i < Creatures.Count; i++)
             {
-                if(!Creatures[i].Equals(other.Creatures[i]))
+                if (!Creatures[i].Equals(other.Creatures[i]))
                 {
                     return false;
                 }
