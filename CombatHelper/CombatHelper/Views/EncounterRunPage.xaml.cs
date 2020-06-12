@@ -70,5 +70,17 @@ namespace CombatHelper.Views
                 BindingContext = new CreatureViewModel()
             });
         }
+
+        private void HideInfoView(object sender, EventArgs e)
+        {
+            infoPopup.IsVisible = false;
+        }
+
+        private void ShowInfoView(object sender, ItemTappedEventArgs e)
+        {
+            var creature = e.Item as CreatureViewModel;
+            infoPopup.BindingContext = creature;
+            infoPopup.IsVisible = true;
+        }
     }
 }
