@@ -112,7 +112,7 @@ namespace CombatHelper.ViewModels
                 this.Id = encounter.ID;
             }
 
-            SaveCreatures(encounter);
+            SaveCreatures();
             await App.Database.Encounters.UpdateWithChildren(encounter);
         }
 
@@ -122,30 +122,25 @@ namespace CombatHelper.ViewModels
 
             if (encounter.ID != 0)
             {
-                RemoveCreatures(encounter);
+                RemoveCreatures();
                 await App.Database.Encounters.Delete(encounter);
             }
         }
 
-        private async void SaveCreatures(Encounter encounter)
+        private void SaveCreatures()
         {
-            foreach (var creature in encounter.Creatures)
+            foreach (var creature in Creatures)
             {
-                creature.EncounterID = encounter.ID;
-
-                if (creature.ID == 0)
-                    await App.Database.Creatures.Insert(creature);
-                else
-                    await App.Database.Creatures.Update(creature);
+                creature.EncounterId = Id;
+                creature.Save();
             }
         }
 
-        private async void RemoveCreatures(Encounter encounter)
+        private void RemoveCreatures()
         {
-            foreach (var creature in encounter.Creatures)
+            foreach (var creature in Creatures)
             {
-                if (creature.ID != 0)
-                    await App.Database.Creatures.Delete(creature);
+                creature.Delete();
             }
         }
 

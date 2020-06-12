@@ -197,9 +197,18 @@ namespace CombatHelper.ViewModels
             {
                 // get id of encounter from db
                 await App.Database.Creatures.Insert(creature);
+                Id = creature.ID;
             }
 
             await App.Database.Creatures.Update(creature);
+        }
+
+        public async void Delete()
+        {
+            var creature = ToModel();
+
+            if (creature.ID != 0)
+                await App.Database.Creatures.Delete(creature);
         }
 
         public bool Equals(CreatureViewModel other)

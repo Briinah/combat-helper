@@ -37,5 +37,25 @@ namespace CombatHelper.ViewModels
 
             return player;
         }
+
+        public async void Save()
+        {
+            var pc = ToModel();
+            if (pc.ID == 0)
+            {
+                await App.Database.Players.Insert(pc);
+                this.Id = pc.ID;
+            }
+
+            await App.Database.Players.Update(pc);
+        }
+
+        public async void Delete()
+        {
+            var pc = ToModel();
+
+            if (pc.ID != 0)
+                await App.Database.Players.Delete(pc);
+        }
     }
 }
