@@ -25,6 +25,12 @@
                 <local:XEntry Placeholder="Enter creature name"
                                Grid.Column="1"
                                Text="{Binding Name}"/>
+                <ImageButton HorizontalOptions="End" Grid.Column="1" 
+                             WidthRequest="40" HeightRequest="40"
+                             CornerRadius="30"
+                             Source="ic_search"
+                             BackgroundColor="Accent"
+                             Clicked="SearchCreature"/>
                 <Label Text="HP"
                        VerticalOptions="Center"
                        HorizontalOptions="Start"
