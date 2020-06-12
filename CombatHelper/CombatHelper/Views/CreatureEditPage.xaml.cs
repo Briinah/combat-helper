@@ -37,5 +37,20 @@ namespace CombatHelper.Views
         {
             await Navigation.PopAsync();
         }
+
+        private void NextEntry(object sender, EventArgs e)
+        {
+            var entry = sender as Entry;
+            var grid = (entry.Parent as Grid).Children;
+            var index = grid.IndexOf(entry);
+            if (index == -1)
+                return;
+
+            var next = grid.ElementAt(index + 2) as Entry; //skip label
+            next?.Focus();
+            // this way you do not have to remove the 0 before typing a new number
+            if (next.Text == "0")
+                next.Text = "";
+        }
     }
 }
