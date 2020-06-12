@@ -13,6 +13,8 @@ namespace CombatHelper.Models
         public string Name { get; set; }
         public bool Friendly { get; set; }
         public int HP { get; set; }
+        public int AC { get; set; }
+
         [ForeignKey(typeof(Encounter))]
         public int EncounterID { get; set; }
         public int Strength { get; set; }

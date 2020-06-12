@@ -21,6 +21,7 @@ namespace CombatHelper.ViewModels
             EncounterId = creature.EncounterID;
             Name = creature.Name;
             HP = creature.HP;
+            AC = creature.AC;
             Initiative = 0;
             IsPC = false;
             HasTurn = false;
@@ -51,6 +52,7 @@ namespace CombatHelper.ViewModels
                 ID = this.Id,
                 EncounterID = this.EncounterId,
                 HP = this.HP,
+                AC = this.AC,
                 Name = this.Name,
                 Strength = this.Strength,
                 Dexterity = this.Dexterity,
@@ -82,6 +84,13 @@ namespace CombatHelper.ViewModels
                 OnPropertyChanged("IsDead");
                 OnPropertyChanged("ButtonColor");
             }
+        }
+
+        private int ac;
+        public int AC
+        {
+            get { return ac; }
+            set { SetValue(ref ac, value); }
         }
 
 
@@ -204,6 +213,9 @@ namespace CombatHelper.ViewModels
             if (HP != other.HP)
                 return false;
 
+            if (AC != other.AC)
+                return false;
+
             if (Friendly != other.Friendly)
                 return false;
 
@@ -230,6 +242,7 @@ namespace CombatHelper.ViewModels
                 {
                     Name = vm.Name,
                     HP = vm.HP,
+                    AC = vm.AC,
                     EncounterId = vm.EncounterId,
                     Strength = vm.Strength,
                     Dexterity = vm.Dexterity,

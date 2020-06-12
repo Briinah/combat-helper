@@ -36,28 +36,28 @@
                                         Text="{Binding Initiative}"
                                         />
                                     <StackLayout Grid.Column ="1" >
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="8*"/>
-                                                <ColumnDefinition Width="2*" />
-                                            </Grid.ColumnDefinitions>
-                                            <StackLayout>
-                                                <Label Text="{Binding Name}"
-                                                       VerticalTextAlignment="Center"
-                                                       FontSize="Body"/>
-                                                <Label x:Name="hpLabel"
-                                                       Text="{Binding HP, StringFormat='HP: {0}'}"
-                                                       FontSize="Micro"
-                                                       Grid.Row="1"/>
+                                            <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Name}"
+                                               VerticalTextAlignment="Center"
+                                               FontSize="Body"/>
+                                            <StackLayout Orientation="Horizontal"
+                                                         HorizontalOptions="EndAndExpand">
+                                                <Image Source="ic_ac"
+                                                       WidthRequest="20"
+                                                       HorizontalOptions="End"/>
+                                                <Button Text="{Binding AC}"
+                                                        Grid.Column="1"
+                                                        BackgroundColor="Transparent"
+                                                        WidthRequest="40"
+                                                        HorizontalOptions="Start"/>
+                                                <Image Source="ic_hp"
+                                                       WidthRequest="20"/>
+                                                <Button Text="{Binding HP}"
+                                                        BackgroundColor="Transparent"
+                                                        WidthRequest="40"
+                                                        Clicked="EditHealth"/>
                                             </StackLayout>
-                                            <ImageButton BackgroundColor="Accent"
-                                                         CornerRadius="40"
-                                                         WidthRequest="40"
-                                                         HorizontalOptions="Center"
-                                                         Source="ic_hp.png"
-                                                         Clicked="EditHealth"
-                                                         Grid.Column="1"/>
-                                        </Grid>
+                                        </StackLayout>
                                         <Grid Grid.Row="2"
                                              IsVisible="{Binding ShowInfo}">
                                             <Label Text="Str"
