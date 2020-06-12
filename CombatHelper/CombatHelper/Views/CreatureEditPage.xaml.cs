@@ -60,7 +60,9 @@ namespace CombatHelper.Views
         {
             using(RestService service = new RestService())
             {
+                IsBusy = true;
                 var list = await service.GetSearchResults(creature.Name);
+                IsBusy = false;
 
                 if(list.Count > 0)
                 {
