@@ -17,18 +17,18 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Android.Content.Res;
 
-[assembly: ExportRenderer(typeof(XEditor), typeof(XEditorRenderer))]
+[assembly: ExportRenderer(typeof(XEntry), typeof(XEntryRenderer))]
 namespace CombatHelper.Droid.Renderers
 {
-    public class XEditorRenderer : EditorRenderer
+    public class XEntryRenderer : EntryRenderer
     {
-        public XEditorRenderer(Context context)
+        public XEntryRenderer(Context context)
             : base(context)
         {
 
         }
 
-        protected override void OnElementChanged(ElementChangedEventArgs<Editor> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
         {
             base.OnElementChanged(e);
 

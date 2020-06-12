@@ -21,7 +21,7 @@
                        HorizontalOptions="Start"
                        Padding="10"
                        TextColor="Accent"/>
-                <local:XEditor Placeholder="Enter encounter name"
+                <local:XEntry Placeholder="Enter encounter name"
                                Grid.Column="1"
                                Text="{Binding Name}"
                            />

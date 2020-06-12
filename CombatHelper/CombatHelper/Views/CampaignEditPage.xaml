@@ -22,7 +22,7 @@
                        HorizontalOptions="Start"
                        Padding="10"
                        TextColor="Accent"/>
-                <local:XEditor Placeholder="Enter campaign name"
+                <local:XEntry Placeholder="Enter campaign name"
                                Grid.Column="1"
                            Text="{Binding Name}"
                            />
@@ -62,7 +62,7 @@
                     <ColumnDefinition Width="7*" />
                     <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
-                <local:XEditor Placeholder="Player Name" 
+                <local:XEntry Placeholder="Player Name" 
                                x:Name="newPlayer"
                                VerticalOptions="Center"/>
                 <Button Grid.Column="1"
