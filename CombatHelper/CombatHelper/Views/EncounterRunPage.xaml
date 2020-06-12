@@ -21,7 +21,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout>
-                                <BoxView HeightRequest="1" Color="LightGray" 
+                                <BoxView HeightRequest="2" Color="LightGray" 
                                          HorizontalOptions="FillAndExpand" 
                                          IsVisible="{Binding HasTurn}"/>
                                 <Grid Margin="10">
@@ -127,7 +127,7 @@
                                                Text="{Binding Info}"/>
                                     </StackLayout>
                                 </Grid>
-                                <BoxView HeightRequest="1" Color="LightGray" 
+                                <BoxView HeightRequest="2" Color="LightGray" 
                                          HorizontalOptions="FillAndExpand" 
                                          IsVisible="{Binding HasTurn}"/>
                             </StackLayout>
@@ -140,11 +140,10 @@
         </StackLayout>
 
             <!-- Popup-->
-            <ContentView x:Name="infoPopup" IsVisible="false" Margin="10"
+            <ContentView x:Name="infoPopup" IsVisible="false" Margin="20"
                          HorizontalOptions="Center" 
                          VerticalOptions="Center">
-                <Frame CornerRadius="20"
-                       BackgroundColor="LightGray">
+                <Frame CornerRadius="10">
                 <StackLayout>
                     
                     <StackLayout Orientation="Horizontal">
