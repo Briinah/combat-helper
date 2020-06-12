@@ -1,8 +1,10 @@
 ﻿using CombatHelper.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,12 +31,13 @@ namespace CombatHelper.Data
             if(response.IsSuccessStatusCode)
             {
                 string content = await response.Content.ReadAsStringAsync();
-                dynamic json = JsonConvert.DeserializeObject(content);
+                JObject json = JObject.Parse(content);
+                IList<JToken> results = json["results"].Children().ToList();
 
-                foreach(var item in json["results"])
+                foreach(var item in results)
                 {
-                    var r = new Result(item["slug"].Value, item["name"].Value);
-                    result.Add(r);
+                    var monster = item.ToObject<Open5eMonster>();
+                    result.Add(new Result(monster.slug, monster.name));
                 }
             }
 
@@ -48,27 +51,23 @@ namespace CombatHelper.Data
             if(response.IsSuccessStatusCode)
             {
                 string content = await response.Content.ReadAsStringAsync();
-                dynamic json = JsonConvert.DeserializeObject(content);
+                JObject json = JObject.Parse(content);
+                var data = json.ToObject<Open5eMonster>();
 
-                try
+                var creature = new Creature()
                 {
-                    var creature = new Creature();
-                    creature.Name = json["name"].Value;
-                    creature.AC = (int)json["armor_class"].Value;
-                    creature.HP = (int)json["hit_points"].Value;
-                    creature.Strength = Util.GetModifier((int)json["strength"].Value);
-                    creature.Dexterity = Util.GetModifier((int)json["dexterity"].Value);
-                    creature.Constitution = Util.GetModifier((int)json["constitution"].Value);
-                    creature.Intelligence = Util.GetModifier((int)json["intelligence"].Value);
-                    creature.Wisdom = Util.GetModifier((int)json["wisdom"].Value);
-                    creature.Charisma = Util.GetModifier((int)json["charisma"].Value);
+                    Name = data.name,
+                    AC = data.armor_class,
+                    HP = data.hit_points,
+                    Strength = Util.GetModifier(data.strength),
+                    Dexterity = Util.GetModifier(data.dexterity),
+                    Constitution = Util.GetModifier(data.constitution),
+                    Intelligence = Util.GetModifier(data.intelligence),
+                    Wisdom = Util.GetModifier(data.wisdom),
+                    Charisma = Util.GetModifier(data.charisma)
+                };
 
-                    return creature;
-                }
-                catch(Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+                return creature;
             }
 
             return null;

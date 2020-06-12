@@ -92,6 +92,17 @@ namespace CombatHelper.Views
 
         private async void AddCreature(object sender, EventArgs e)
         {
+            if (await encounter.HasUnsavedChanges())
+            {
+                if (await SaveChangesDialog())
+                {
+                    encounter.Save();
+                    return;
+                }
+                else
+                    return;
+            }
+
             var creature = new CreatureViewModel()
             {
                 EncounterId = encounter.Id

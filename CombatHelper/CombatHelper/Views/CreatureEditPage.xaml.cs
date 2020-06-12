@@ -65,7 +65,7 @@ namespace CombatHelper.Views
                 if(list.Count > 0)
                 {
                     var actions = list.Select((l) => l.Name).ToArray();
-                    var action = await DisplayActionSheet($"We found {list.Count} results. Fill data?", "Cancel", null, actions);
+                    var action = await DisplayActionSheet($"We found these results. Fill data?", "Cancel", null, actions);
 
                     if (action == "Cancel")
                         return;
