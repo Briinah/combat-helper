@@ -57,6 +57,7 @@ namespace CombatHelper.Data
                 var creature = new Creature()
                 {
                     Name = data.name,
+                    Slug = data.slug,
                     AC = data.armor_class,
                     HP = data.hit_points,
                     Strength = Util.GetModifier(data.strength),

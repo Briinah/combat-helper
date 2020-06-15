@@ -79,6 +79,7 @@ namespace CombatHelper.Views
                         var data = await service.GetCreature(id);
 
                         creature.Name = data.Name;
+                        creature.Slug = data.Slug;
                         creature.HP = data.HP;
                         creature.AC = data.AC;
                         creature.Strength = data.Strength;

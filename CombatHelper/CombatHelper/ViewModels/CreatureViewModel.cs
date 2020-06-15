@@ -20,6 +20,7 @@ namespace CombatHelper.ViewModels
             Id = creature.ID;
             EncounterId = creature.EncounterID;
             Name = creature.Name;
+            Slug = creature.Slug;
             HP = creature.HP;
             AC = creature.AC;
             Initiative = 0;
@@ -54,6 +55,7 @@ namespace CombatHelper.ViewModels
                 HP = this.HP,
                 AC = this.AC,
                 Name = this.Name,
+                Slug = this.Slug,
                 Strength = this.Strength,
                 Dexterity = this.Dexterity,
                 Constitution = this.Constitution,
@@ -72,6 +74,33 @@ namespace CombatHelper.ViewModels
         {
             get { return name; }
             set { SetValue(ref name, value); }
+        }
+        private string slug;
+        public string Slug
+        {
+            get { return slug; }
+            set 
+            { 
+                SetValue(ref slug, value);
+                OnPropertyChanged("ShowWebPagePopup");
+                OnPropertyChanged("ShowInfoPagePopup");
+                OnPropertyChanged("WebUrl");
+            }
+        }
+
+        public string WebUrl
+        {
+            get { return "https://open5e.com/monsters/" + Slug; }
+        }
+
+        public bool ShowWebPagePopup
+        {
+            get { return !string.IsNullOrEmpty(Slug); }
+        }
+
+        public bool ShowInfoPagePopup
+        {
+            get { return string.IsNullOrEmpty(Slug); }
         }
 
         private int hp;
@@ -219,6 +248,9 @@ namespace CombatHelper.ViewModels
             if (!string.Equals(Name, other.Name))
                 return false;
 
+            if (!string.Equals(Slug, other.Slug))
+                return false;
+
             if (HP != other.HP)
                 return false;
 
@@ -250,6 +282,7 @@ namespace CombatHelper.ViewModels
                 var copy = new CreatureViewModel()
                 {
                     Name = vm.Name,
+                    Slug = vm.Slug,
                     HP = vm.HP,
                     AC = vm.AC,
                     EncounterId = vm.EncounterId,

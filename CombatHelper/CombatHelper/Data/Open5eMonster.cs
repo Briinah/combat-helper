@@ -34,6 +34,7 @@ namespace CombatHelper.Data
         public int walk { get; set; }
         public int fly { get; set; }
         public int swim { get; set; }
+        public int climb { get; set; }
     }
 
     [Serializable]
