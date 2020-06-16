@@ -81,10 +81,12 @@ namespace CombatHelper.Views
 
         private async void StartEncounter(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new EncounterRunPage()
+            Navigation.InsertPageBefore(new EncounterRunPage()
             {
                 BindingContext = encounter
-            });
+            }, this);
+
+            await Navigation.PopAsync();
         }
     }
 }
