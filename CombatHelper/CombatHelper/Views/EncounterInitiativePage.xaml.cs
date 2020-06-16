@@ -27,6 +27,23 @@ namespace CombatHelper.Views
             encounter = BindingContext as EncounterViewModel;
             encounter.AddPlayers();
             creatureList.ItemsSource = encounter.Creatures;
+
+            RollInitiative();
+        }
+
+        private void RollInitiative()
+        {
+            var random = new Random();
+
+            foreach (var c in encounter.Creatures)
+            {
+                if (!c.IsPC)
+                {
+                    c.Initiative = random.Next(20) + c.Dexterity;
+                }
+            }
+
+            encounter.Creatures.Sort(CreatureViewModel.CompareInitiative);
         }
 
         private async void SetInitiative(object sender, EventArgs e)
@@ -42,7 +59,7 @@ namespace CombatHelper.Views
             encounter.Creatures.Sort(CreatureViewModel.CompareInitiative);
         }
 
-        
+
 
         private async void StartEncounter(object sender, EventArgs e)
         {

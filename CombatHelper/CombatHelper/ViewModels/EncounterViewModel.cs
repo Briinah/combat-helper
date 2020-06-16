@@ -55,10 +55,20 @@ namespace CombatHelper.ViewModels
             {
                 var creatures = await App.Database.Creatures.Get<bool>((c) => c.EncounterID == Id, null);
                 foreach (var c in creatures)
-                    Creatures.Add(new CreatureViewModel(c));
+                {
+                    var vm = new CreatureViewModel(c);
+                    SetNumber(vm);
+                    Creatures.Add(vm);
+                }
             }
 
             dataLoaded = true;
+        }
+
+        private void SetNumber(CreatureViewModel creature)
+        {
+            var count = Creatures.Count((c) => c.Name == creature.Name);
+            creature.Number = count + 1;
         }
 
         public async Task ReloadData()

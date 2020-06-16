@@ -44,7 +44,7 @@
                                     <ColumnDefinition Width="2*" />
                                 </Grid.ColumnDefinitions>
                                 <StackLayout Margin="10">
-                                    <Label Text="{Binding Name}"
+                                    <Label Text="{Binding DisplayName}"
                                        VerticalTextAlignment="Center"
                                        FontSize="Body"/>
                                     <StackLayout Orientation="Horizontal">

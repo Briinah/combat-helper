@@ -73,14 +73,41 @@ namespace CombatHelper.ViewModels
         public string Name
         {
             get { return name; }
-            set { SetValue(ref name, value); }
+            set
+            {
+                SetValue(ref name, value);
+                OnPropertyChanged("DisplayName");
+            }
+        }
+
+        // if multiple similar creatures are in the same encounter
+        private int number;
+        public int Number
+        {
+            get { return number; }
+            set
+            {
+                SetValue(ref number, value);
+                OnPropertyChanged("DisplayName");
+            }
+        }
+
+        public string DisplayName
+        {
+            get
+            {
+                if (number > 1)
+                    return Name + $" ({Number})";
+                else
+                    return Name;
+            }
         }
         private string slug;
         public string Slug
         {
             get { return slug; }
-            set 
-            { 
+            set
+            {
                 SetValue(ref slug, value);
                 OnPropertyChanged("ShowWebPagePopup");
                 OnPropertyChanged("ShowInfoPagePopup");
@@ -251,6 +278,9 @@ namespace CombatHelper.ViewModels
             if (!string.Equals(Slug, other.Slug))
                 return false;
 
+            if (Number != other.Number)
+                return false;
+
             if (HP != other.HP)
                 return false;
 
@@ -279,23 +309,23 @@ namespace CombatHelper.ViewModels
 
         public static CreatureViewModel Copy(CreatureViewModel vm)
         {
-                var copy = new CreatureViewModel()
-                {
-                    Name = vm.Name,
-                    Slug = vm.Slug,
-                    HP = vm.HP,
-                    AC = vm.AC,
-                    EncounterId = vm.EncounterId,
-                    Strength = vm.Strength,
-                    Dexterity = vm.Dexterity,
-                    Constitution = vm.Constitution,
-                    Intelligence = vm.Intelligence,
-                    Wisdom = vm.Wisdom,
-                    Charisma = vm.Charisma,
-                    Info = vm.Info,
-                    Friendly = vm.Friendly,
-                    Initiative = vm.Initiative
-                };
+            var copy = new CreatureViewModel()
+            {
+                Name = vm.Name,
+                Slug = vm.Slug,
+                HP = vm.HP,
+                AC = vm.AC,
+                EncounterId = vm.EncounterId,
+                Strength = vm.Strength,
+                Dexterity = vm.Dexterity,
+                Constitution = vm.Constitution,
+                Intelligence = vm.Intelligence,
+                Wisdom = vm.Wisdom,
+                Charisma = vm.Charisma,
+                Info = vm.Info,
+                Friendly = vm.Friendly,
+                Initiative = vm.Initiative
+            };
 
             return copy;
         }
