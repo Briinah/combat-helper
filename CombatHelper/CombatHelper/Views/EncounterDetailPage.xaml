@@ -12,6 +12,12 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>
+            <StackLayout>
+                <StackLayout  Margin="10" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                    <Label Text="Group initiative by name" FontSize="Medium"/>
+                    <Switch x:Name="groupByName" IsToggled="True" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray"/>
                 <controls:XListView x:Name="creatureList"
                                     RowHeight="60"
                                     VerticalOptions="FillAndExpand">
@@ -45,6 +51,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </controls:XListView>
+            </StackLayout>
             <ImageButton HorizontalOptions="EndAndExpand"
                          VerticalOptions="EndAndExpand"
                          Margin="30"

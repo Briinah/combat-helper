@@ -16,9 +16,13 @@ namespace CombatHelper.Views
     public partial class EncounterInitiativePage : ContentPage
     {
         private EncounterViewModel encounter;
-        public EncounterInitiativePage()
+        private bool groupByName = false;
+
+        public EncounterInitiativePage(bool groupByName)
         {
             InitializeComponent();
+
+            this.groupByName = groupByName;
         }
 
         protected override void OnAppearing()
@@ -35,11 +39,25 @@ namespace CombatHelper.Views
         {
             var random = new Random();
 
+            // creatures with the same name are grouped in the same initative
+            var namedict = new Dictionary<string, int>();
+
             foreach (var c in encounter.Creatures)
             {
                 if (!c.IsPC)
                 {
-                    c.Initiative = random.Next(20) + c.Dexterity;
+                    if (groupByName)
+                    {
+                        if (namedict.ContainsKey(c.Name))
+                            c.Initiative = namedict[c.Name];
+                        else
+                        {
+                            c.Initiative = random.Next(20) + c.Dexterity;
+                            namedict.Add(c.Name, c.Initiative);
+                        }
+                    }
+                    else
+                        c.Initiative = random.Next(20) + c.Dexterity;
                 }
             }
 

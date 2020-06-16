@@ -41,7 +41,7 @@ namespace CombatHelper.Views
 
         private async void RollInitiative(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new EncounterInitiativePage()
+            await Navigation.PushAsync(new EncounterInitiativePage(groupByName.IsToggled)
             {
                 BindingContext = encounter
             });
