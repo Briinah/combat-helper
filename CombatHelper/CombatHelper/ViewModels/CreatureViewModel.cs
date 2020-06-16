@@ -329,5 +329,19 @@ namespace CombatHelper.ViewModels
 
             return copy;
         }
+
+        public void FillFromData(Creature model)
+        {
+            Name = model.Name;
+            Slug = model.Slug;
+            HP = model.HP;
+            AC = model.AC;
+            Strength = model.Strength;
+            Dexterity = model.Dexterity;
+            Constitution = model.Constitution;
+            Intelligence = model.Intelligence;
+            Wisdom = model.Wisdom;
+            Charisma = model.Charisma;
+        }
     }
 }

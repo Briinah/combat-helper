@@ -1,4 +1,5 @@
-﻿using CombatHelper.ViewModels;
+﻿using CombatHelper.Data;
+using CombatHelper.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -63,7 +64,7 @@ namespace CombatHelper.Views
             for(int i = 0; i < amountOfCreatures; i++)
             {
                 var copy = CreatureViewModel.Copy(creature);
-                copy.Name = copy.Name + " " + (i + 1);
+                copy.Number = i + 1;
                 encounter.Creatures.Add(copy);
             }
 
@@ -75,6 +76,38 @@ namespace CombatHelper.Views
         private async void OnCancel(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
+        }
+
+        private async void SearchCreature(object sender, EventArgs e)
+        {
+            using (RestService service = new RestService())
+            {
+                IsBusy = true;
+                var list = await service.GetSearchResults(creature.Name);
+                IsBusy = false;
+
+                if (list.Count > 0)
+                {
+                    var actions = list.Select((l) => l.Name).ToArray();
+                    var action = await DisplayActionSheet($"We found these results. Fill data?", "Cancel", null, actions);
+
+                    if (action == "Cancel")
+                        return;
+
+                    var id = list.FirstOrDefault((l) => l.Name == action)?.Id;
+
+                    if (id != null)
+                    {
+                        var data = await service.GetCreature(id);
+                        creature.FillFromData(data);
+                    }
+
+                }
+                else
+                {
+                    await DisplayAlert("Nothing found", "No search result for " + creature.Name, "Cancel");
+                }
+            }
         }
     }
 }

@@ -4,12 +4,14 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:CombatHelper.Controls"
              mc:Ignorable="d"
-             x:Class="CombatHelper.Views.CreatureAddModal">
+             x:Class="CombatHelper.Views.CreatureAddModal"
+             x:Name="page">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Cancel" 
                      Clicked="OnCancel" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
+        <Grid>
         <StackLayout>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -21,9 +23,17 @@
                        HorizontalOptions="Start"
                        Padding="10"
                        TextColor="Accent"/>
-                <local:XEditor Placeholder="Enter creature name"
+                <local:XEntry Placeholder="Enter creature name"
                                Grid.Column="1"
                                Text="{Binding Name}"/>
+                <ImageButton HorizontalOptions="End" Grid.Column="1" 
+                             WidthRequest="30" HeightRequest="30"
+                             VerticalOptions="Center"
+                             Margin="10"
+                             CornerRadius="30"
+                             Source="ic_search"
+                             BackgroundColor="Accent"
+                             Clicked="SearchCreature"/>
                 <Label Text="HP"
                        VerticalOptions="Center"
                        HorizontalOptions="Start"
@@ -175,5 +185,9 @@
                     Clicked="AddCreatures" 
                     VerticalOptions="End"/>
         </StackLayout>
+        <ActivityIndicator IsRunning="{Binding Path=IsBusy, Source={x:Reference page}}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

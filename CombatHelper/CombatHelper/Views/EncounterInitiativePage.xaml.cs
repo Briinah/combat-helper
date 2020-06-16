@@ -77,8 +77,6 @@ namespace CombatHelper.Views
             encounter.Creatures.Sort(CreatureViewModel.CompareInitiative);
         }
 
-
-
         private async void StartEncounter(object sender, EventArgs e)
         {
             Navigation.InsertPageBefore(new EncounterRunPage()

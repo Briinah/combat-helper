@@ -77,21 +77,10 @@ namespace CombatHelper.Views
                     if(id != null)
                     {
                         var data = await service.GetCreature(id);
-
-                        creature.Name = data.Name;
-                        creature.Slug = data.Slug;
-                        creature.HP = data.HP;
-                        creature.AC = data.AC;
-                        creature.Strength = data.Strength;
-                        creature.Dexterity = data.Dexterity;
-                        creature.Constitution = data.Constitution;
-                        creature.Intelligence = data.Intelligence;
-                        creature.Wisdom = data.Wisdom;
-                        creature.Charisma = data.Charisma;
+                        creature.FillFromData(data);
                     }
 
                 }
-
                 else
                 {
                     await DisplayAlert("Nothing found", "No search result for " + creature.Name, "Cancel");
