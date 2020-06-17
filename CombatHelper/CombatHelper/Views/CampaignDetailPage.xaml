@@ -27,8 +27,14 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </controls:XListView>
-            <Button Text="Manage Encounters"
+            <Button Text="Encounters "
                     Clicked="ManageEncounters"
+                    ImageSource="ic_sword"
+                    TextColor="White"
+                    BackgroundColor="Accent"
+                    Margin="20"
+                    CornerRadius="30"
+                    HorizontalOptions="Center"
                     />
         </StackLayout>
     </ContentPage.Content>

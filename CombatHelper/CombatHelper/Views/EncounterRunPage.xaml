@@ -140,12 +140,12 @@
         </StackLayout>
 
             <!-- Popup-->
-            <ContentView x:Name="infoPopup" IsVisible="false" Margin="10"
+            <ContentView x:Name="infoPopup" IsVisible="false"
                          HorizontalOptions="Center" 
                          VerticalOptions="Center">
-                <Frame CornerRadius="10">
+                <Frame Padding="0">
                     <StackLayout>
-                        <StackLayout IsVisible="{Binding ShowInfoPagePopup}">
+                        <StackLayout IsVisible="{Binding ShowInfoPagePopup}" Padding="20">
 
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="{Binding Name}"
@@ -234,7 +234,7 @@
                             <Label Grid.Row="3" Text="{Binding Info}"/>
 
                         </StackLayout>
-                        <WebView IsVisible="{Binding ShowWebPagePopup}"
+                        <controls:Open5eWebView IsVisible="{Binding ShowWebPagePopup}"
                                  Source="{Binding WebUrl}"
                                  HeightRequest="500"/>
                         <Button Text="Exit" HorizontalOptions="End" Clicked="HideInfoView"
