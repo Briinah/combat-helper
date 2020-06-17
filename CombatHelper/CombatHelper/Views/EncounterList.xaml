@@ -13,13 +13,16 @@
     <ContentPage.Content>
         <AbsoluteLayout>
             <StackLayout>
-                <Label Text="Encounters"
-                   HorizontalTextAlignment="Center"
-                   Padding="10"
-                   FontSize="Medium"/>
-            <BoxView HeightRequest="1" 
-                     Color="LightGray" 
-                     HorizontalOptions="FillAndExpand" />
+                <StackLayout Orientation="Horizontal"
+                       BackgroundColor="Accent">
+                    <Image Source="ic_sword"
+                           VerticalOptions="Center"/>
+
+                    <Label Text="Encounters"
+                           Padding="10"
+                           FontSize="Medium"
+                           TextColor="White"/> 
+                </StackLayout>
             <controls:XListView x:Name="encounterList"
                       ItemSelected="OnListViewItemSelected">
                 <ListView.ItemTemplate>

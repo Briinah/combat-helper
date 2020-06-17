@@ -13,11 +13,18 @@
     <ContentPage.Content>
         <Grid>
             <StackLayout>
+                <Label Text="Options" 
+                       BackgroundColor="Accent"
+                       TextColor="White"
+                       Padding="10"/>
                 <StackLayout  Margin="10" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-                    <Label Text="Group initiative by name" FontSize="Medium"/>
+                    <Label Text="Group initiative by name"/>
                     <Switch x:Name="groupByName" IsToggled="True" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
-                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray"/>
+                <Label Text="Creatures"
+                       BackgroundColor="Accent"
+                       TextColor="White"
+                       Padding="10"/>
                 <controls:XListView x:Name="creatureList"
                                     RowHeight="60"
                                     VerticalOptions="FillAndExpand">
