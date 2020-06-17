@@ -27,17 +27,26 @@ namespace CombatHelper.Views
 
         private async void OnAddClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CampaignEditPage
+            var campaign = new CampaignViewModel();
+
+            var name = await DisplayPromptAsync("New Campaign", "Name: ");
+            if (!string.IsNullOrEmpty(name))
             {
-                BindingContext = new CampaignViewModel()
-            });
+                campaign.Name = name;
+                campaign.Save();
+
+                await Navigation.PushAsync(new CampaignEditPage
+                {
+                    BindingContext = campaign
+                });
+            }
         }
 
         private async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem != null)
             {
-                await Navigation.PushAsync(new CampaignDetailPage
+                await Navigation.PushAsync(new EncounterList
                 {
                     BindingContext = e.SelectedItem as CampaignViewModel
                 });

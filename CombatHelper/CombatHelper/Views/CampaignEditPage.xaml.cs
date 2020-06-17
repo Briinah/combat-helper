@@ -36,7 +36,7 @@ namespace CombatHelper.Views
         private async void OnSaveButtonClicked(object sender, EventArgs e)
         {
             campaign.Save();
-            Navigation.InsertPageBefore(new CampaignDetailPage()
+            Navigation.InsertPageBefore(new EncounterList()
             {
                 BindingContext = campaign
             }, this);
@@ -52,7 +52,7 @@ namespace CombatHelper.Views
             {
                 campaign.Delete();
 
-                await Navigation.PopAsync();
+                await Navigation.PopToRootAsync();
             }
         }
 
@@ -74,13 +74,13 @@ namespace CombatHelper.Views
 
         protected override bool OnBackButtonPressed()
         {
-            if (campaign.Id != 0)
-            {
-                Navigation.InsertPageBefore(new CampaignDetailPage()
-                {
-                    BindingContext = this.BindingContext
-                }, this);
-            }
+            //if (campaign.Id != 0)
+            //{
+            //    Navigation.InsertPageBefore(new CampaignDetailPage()
+            //    {
+            //        BindingContext = this.BindingContext
+            //    }, this);
+            //}
 
             Navigation.PopAsync();
             return true;

@@ -26,6 +26,11 @@ namespace CombatHelper.ViewModels
 
         public ObservableCollection<PlayerCharacterViewModel> Players { get; private set; }
 
+        public string PlayerList
+        {
+            get { return string.Join(", ", Players.Select(p=> p.Name)); }
+        }
+
         public CampaignViewModel() 
         {
             Encounters = new ObservableCollection<EncounterViewModel>();
@@ -60,15 +65,20 @@ namespace CombatHelper.ViewModels
 
         public async Task LoadData()
         {
-            Players.Clear();
-            var players = await App.Database.Players.Get<bool>((pc) => pc.CampaignID == Id, null);
-            foreach (var pc in players)
-                Players.Add(new PlayerCharacterViewModel(pc));
+            await LoadPlayerData();
 
             Encounters.Clear();
             var encounters = await App.Database.Encounters.Get<bool>((e) => e.CampaignID == Id, null);
             foreach (var e in encounters)
                 Encounters.Add(new EncounterViewModel(e));
+        }
+
+        public async Task LoadPlayerData()
+        {
+            Players.Clear();
+            var players = await App.Database.Players.Get<bool>((pc) => pc.CampaignID == Id, null);
+            foreach (var pc in players)
+                Players.Add(new PlayerCharacterViewModel(pc));
         }
 
         public async void Save()

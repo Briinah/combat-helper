@@ -12,7 +12,8 @@
               ItemSelected="OnListViewItemSelected">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <TextCell Text="{Binding Name}"/>
+                <TextCell Text="{Binding Name}"
+                          Detail="{Binding PlayerList}"/>
             </DataTemplate>
         </ListView.ItemTemplate>
     </controls:XListView>

@@ -6,6 +6,10 @@
              xmlns:controls="clr-namespace:CombatHelper.Controls"
              mc:Ignorable="d"
              x:Class="CombatHelper.Views.EncounterList">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Edit" 
+                     Clicked="OnEditClicked" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout>
             <StackLayout>
