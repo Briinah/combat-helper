@@ -41,10 +41,12 @@ namespace CombatHelper.Views
 
         private async void RollInitiative(object sender, EventArgs e)
         {
+            IsBusy = true;
             await Navigation.PushAsync(new EncounterInitiativePage(groupByName.IsToggled)
             {
                 BindingContext = encounter
             });
+            IsBusy = false;
         }
     }
 }

@@ -71,6 +71,8 @@ namespace CombatHelper.Views
             if (!string.IsNullOrEmpty(response))
             {
                 creature.Initiative = int.Parse(response);
+                if (creature.Initiative < 1)
+                    creature.Initiative = 1;
             }
 
             // sort list on initiative
@@ -79,12 +81,14 @@ namespace CombatHelper.Views
 
         private async void StartEncounter(object sender, EventArgs e)
         {
+            IsBusy = true;
             Navigation.InsertPageBefore(new EncounterRunPage()
             {
                 BindingContext = encounter
             }, this);
 
             await Navigation.PopAsync();
+            IsBusy = false;
         }
     }
 }

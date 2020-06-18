@@ -304,7 +304,11 @@ namespace CombatHelper.ViewModels
 
         public static int CompareInitiative(CreatureViewModel a, CreatureViewModel b)
         {
-            return b.Initiative.CompareTo(a.Initiative);
+            // compare b to a, because the highest comes first
+            var compareInitiative = b.Initiative.CompareTo(a.Initiative);
+            if (compareInitiative == 0)
+                return b.Dexterity.CompareTo(a.Dexterity);
+            return compareInitiative;
         }
 
         public static CreatureViewModel Copy(CreatureViewModel vm)
