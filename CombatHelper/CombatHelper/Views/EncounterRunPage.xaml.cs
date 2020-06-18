@@ -79,8 +79,11 @@ namespace CombatHelper.Views
         private void ShowInfoView(object sender, ItemTappedEventArgs e)
         {
             var creature = e.Item as CreatureViewModel;
-            infoPopup.BindingContext = creature;
-            infoPopup.IsVisible = true;
+            if (!creature.IsPC)
+            {
+                infoPopup.BindingContext = creature;
+                infoPopup.IsVisible = true;
+            }
         }
     }
 }
