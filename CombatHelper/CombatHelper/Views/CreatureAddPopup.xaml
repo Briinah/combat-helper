@@ -1,17 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<pages:PopupPage  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                  xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:CombatHelper.Controls"
              mc:Ignorable="d"
-             x:Class="CombatHelper.Views.CreatureAddModal"
+             x:Class="CombatHelper.Views.CreatureAddPopup"
              x:Name="page">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Cancel" 
-                     Clicked="OnCancel" />
-    </ContentPage.ToolbarItems>
-    <ContentPage.Content>
-        <Grid>
+        <Grid BackgroundColor="White">
         <StackLayout>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -193,5 +189,4 @@
                                HorizontalOptions="Center"
                                VerticalOptions="Center"/>
         </Grid>
-    </ContentPage.Content>
-</ContentPage>
+</pages:PopupPage>

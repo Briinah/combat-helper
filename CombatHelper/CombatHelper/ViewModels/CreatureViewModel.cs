@@ -214,7 +214,7 @@ namespace CombatHelper.ViewModels
 
         public bool IsDead
         {
-            get { return HP == 0; }
+            get { return HP <= 0; }
         }
 
         private bool hasTurn = false;

@@ -1,5 +1,6 @@
 ﻿using CombatHelper.Data;
 using CombatHelper.ViewModels;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,12 +14,12 @@ using Xamarin.Forms.Xaml;
 namespace CombatHelper.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CreatureAddModal : ContentPage
+    public partial class CreatureAddPopup : Rg.Plugins.Popup.Pages.PopupPage
     {
         CreatureViewModel creature;
         EncounterViewModel encounter;
 
-        public CreatureAddModal(EncounterViewModel encounter)
+        public CreatureAddPopup(EncounterViewModel encounter)
         {
             this.encounter = encounter;
             InitializeComponent();
@@ -71,11 +72,6 @@ namespace CombatHelper.Views
             encounter.Creatures.Sort(CreatureViewModel.CompareInitiative);
 
             await Navigation.PopModalAsync(true);
-        }
-
-        private async void OnCancel(object sender, EventArgs e)
-        {
-            await Navigation.PopModalAsync();
         }
 
         private async void SearchCreature(object sender, EventArgs e)
