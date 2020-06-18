@@ -67,21 +67,14 @@ namespace CombatHelper.Views
         {
             if (!string.IsNullOrEmpty(newPlayer.Text))
             {
-                campaign.Players.Add(new PlayerCharacterViewModel() { Name = newPlayer.Text });
+                // insert in front of the list
+                campaign.Players.Insert(0, new PlayerCharacterViewModel() { Name = newPlayer.Text });
                 newPlayer.Text = "";
             }
         }
 
         protected override bool OnBackButtonPressed()
         {
-            //if (campaign.Id != 0)
-            //{
-            //    Navigation.InsertPageBefore(new CampaignDetailPage()
-            //    {
-            //        BindingContext = this.BindingContext
-            //    }, this);
-            //}
-
             Navigation.PopAsync();
             return true;
         }

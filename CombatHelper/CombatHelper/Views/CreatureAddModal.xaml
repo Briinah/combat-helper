@@ -179,9 +179,11 @@
                         Text="{Binding Initiative}"
                         Clicked="SetInitiative"/>
             </Grid>
-            <Button Text="Add"
+                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="LightGray"/>
+                <Button Text="Add"
                     Clicked="AddCreatures" 
                     VerticalOptions="End"
+                    HorizontalOptions="Center"
                     TextColor="White"
                     BackgroundColor="Accent"
                     CornerRadius="40"

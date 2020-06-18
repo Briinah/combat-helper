@@ -81,16 +81,31 @@
                 </ListView.ItemTemplate>
             </local:XListView>
             <Button Text="Add Creature"
-                    Clicked="AddCreature"/>
-            <Grid>
+                    Clicked="AddCreature"
+                    ImageSource="ic_monster_add"
+                    BackgroundColor="Accent"
+                    TextColor="White"
+                    CornerRadius="30"
+                    Margin="10"
+                    HorizontalOptions="Center"/>
+            <BoxView BackgroundColor="LightGray" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
+            <Grid Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Button Text="Delete"
-                        Clicked="OnDeleteButtonClicked"/>
+                        Clicked="OnDeleteButtonClicked"
+                        BackgroundColor="White"
+                        TextColor="Accent"
+                        CornerRadius="30"
+                        BorderColor="Accent"
+                        BorderWidth="1"/>
                 <Button Grid.Column="1" Text="Save"
-                        Clicked="OnSaveButtonClicked" />
+                        Clicked="OnSaveButtonClicked" 
+                        BackgroundColor="Accent"
+                        TextColor="White"
+                        CornerRadius="30"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

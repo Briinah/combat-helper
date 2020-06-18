@@ -139,14 +139,15 @@
                             BackgroundColor="White"
                             TextColor="Accent"
                             CornerRadius="30"
-                            Padding="10"/>
+                            BorderColor="Accent"
+                            BorderWidth="1"
+                            ImageSource="ic_monster_add_red"/>
                     <Button Text="Next Turn"
                             Clicked="NextTurn"
                             Grid.Column="1"
                             BackgroundColor="Accent"
                             TextColor="White"
                             CornerRadius="30"
-                            Padding="10"
                             ImageSource="ic_play_arrow"/>
                 </Grid>
             </StackLayout>

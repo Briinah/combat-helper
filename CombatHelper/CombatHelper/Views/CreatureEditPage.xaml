@@ -69,9 +69,8 @@
                         HorizontalOptions="Start"/>
                 </Grid>
                 <Label Text="Attributes" Padding="10"
-                       TextColor="Accent"/>
-                <BoxView HeightRequest="1" Color="LightGray" 
-                     HorizontalOptions="FillAndExpand" />
+                       TextColor="White"
+                       BackgroundColor="Accent"/>
                 <Grid>
                     <Label Text="Str"
                        VerticalOptions="Center"
@@ -145,16 +144,22 @@
                                Keyboard="Numeric"/>
                 </Grid>
                 <Label Text="Info" Padding="10"
-                       TextColor="Accent"/>
-                <BoxView HeightRequest="1" Color="LightGray" 
-                     HorizontalOptions="FillAndExpand" />
+                       TextColor="White"
+                       BackgroundColor="Accent"/>
+                
                 <local:XEditor Text="{Binding Info}"
                            Placeholder="Anything you want to add..."
                            Margin="10"
                            VerticalOptions="FillAndExpand"/>
+                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="LightGray"/>
                 <Button Text="Save"
                     Clicked="OnSaveButtonClicked" 
-                    VerticalOptions="End"/>
+                    VerticalOptions="End"
+                        BackgroundColor="Accent"
+                        TextColor="White"
+                        CornerRadius="30"
+                        Margin="10"
+                        HorizontalOptions="Center"/>
             </StackLayout>
             <ActivityIndicator IsRunning="{Binding Path=IsBusy, Source={x:Reference page}}"
                                HorizontalOptions="Center"

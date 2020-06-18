@@ -31,6 +31,24 @@
                    Padding="10"
                    VerticalOptions="Center"
                    TextColor="Accent"/>
+            <Grid Margin="0"
+                  Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <local:XEntry Placeholder="Player Name" 
+                               x:Name="newPlayer"
+                               VerticalOptions="Center"/>
+                <Button Grid.Column="1"
+                        Text="Add"
+                        Clicked="OnPlayerAdded"
+                        HeightRequest="40"
+                        ImageSource="ic_person_add"
+                        BackgroundColor="Accent"
+                        TextColor="White"
+                        CornerRadius="30"/>
+            </Grid>
             <local:XListView x:Name="playerList"
                       HeightRequest="300">
                 <ListView.ItemTemplate>
@@ -56,30 +74,25 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </local:XListView>
-            <Grid Margin="0"
-                  Padding="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="7*" />
-                    <ColumnDefinition Width="3*" />
-                </Grid.ColumnDefinitions>
-                <local:XEntry Placeholder="Player Name" 
-                               x:Name="newPlayer"
-                               VerticalOptions="Center"/>
-                <Button Grid.Column="1"
-                        Text="Add"
-                        Clicked="OnPlayerAdded"
-                        HeightRequest="40"/>
-            </Grid>
-            <Grid>
+            <BoxView BackgroundColor="LightGray" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
+            <Grid Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Button Text="Delete"
-                        Clicked="OnDeleteButtonClicked"/>
+                        Clicked="OnDeleteButtonClicked"
+                        BackgroundColor="White"
+                        TextColor="Accent"
+                        CornerRadius="30"
+                        BorderColor="Accent"
+                        BorderWidth="1"/>
                 <Button Grid.Column="1"
                         Text="Save"
-                        Clicked="OnSaveButtonClicked" />
+                        Clicked="OnSaveButtonClicked" 
+                        BackgroundColor="Accent"
+                        TextColor="White"
+                        CornerRadius="30"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

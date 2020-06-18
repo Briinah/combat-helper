@@ -16,7 +16,8 @@
                 <StackLayout Orientation="Horizontal"
                        BackgroundColor="Accent">
                     <Image Source="ic_sword"
-                           VerticalOptions="Center"/>
+                           VerticalOptions="Center"
+                           Margin="0, 0, 0, 10"/>
 
                     <Label Text="Encounters"
                            Padding="10"
