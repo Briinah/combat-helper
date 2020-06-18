@@ -65,7 +65,7 @@
                                                 <Label Text="Str"
                                                    VerticalOptions="Center"
                                                    HorizontalOptions="Start"
-                                                   TextColor="Accent"/>
+                                                   TextColor="{StaticResource Titles}"/>
                                                 <Label Grid.Column="1" 
                                                    VerticalOptions="Center"
                                                    HorizontalOptions="Start"
@@ -73,7 +73,7 @@
                                                 <Label Text="Dex"
                                                    VerticalOptions="Center"
                                                    HorizontalOptions="Start"
-                                                   TextColor="Accent"
+                                                   TextColor="{StaticResource Titles}"
                                                    Grid.Column="2"/>
                                                 <Label VerticalOptions="Center"
                                                    HorizontalOptions="Start"
@@ -82,7 +82,7 @@
                                                 <Label Text="Con"
                                                    VerticalOptions="Center"
                                                    HorizontalOptions="Start"
-                                                   TextColor="Accent"
+                                                   TextColor="{StaticResource Titles}"
                                                    Grid.Column="4"/>
                                                 <Label VerticalOptions="Center"
                                                    HorizontalOptions="Start"
@@ -91,7 +91,7 @@
                                                 <Label Text="Int"
                                                    VerticalOptions="Center"
                                                    HorizontalOptions="Start"
-                                                   TextColor="Accent"
+                                                   TextColor="{StaticResource Titles}"
                                                    Grid.Column="0"
                                                    Grid.Row="1"/>
                                                 <Label VerticalOptions="Center"
@@ -102,7 +102,7 @@
                                                 <Label Text="Wis"
                                                    VerticalOptions="Center"
                                                    HorizontalOptions="Start"
-                                                   TextColor="Accent"
+                                                   TextColor="{StaticResource Titles}"
                                                    Grid.Column="2"
                                                    Grid.Row="1"/>
                                                 <Label VerticalOptions="Center"
@@ -113,7 +113,7 @@
                                                 <Label Text="Cha"
                                                    VerticalOptions="Center"
                                                    HorizontalOptions="Start"
-                                                   TextColor="Accent"
+                                                   TextColor="{StaticResource Titles}"
                                                    Grid.Column="4"
                                                    Grid.Row="1"/>
                                                 <Label VerticalOptions="Center"
@@ -184,7 +184,7 @@
                             <Label Text="Str"
                                                        VerticalOptions="Center"
                                                        HorizontalOptions="Start"
-                                                       TextColor="Accent"/>
+                                                       TextColor="{StaticResource Titles}"/>
                             <Label Grid.Column="1" 
                                                        VerticalOptions="Center"
                                                        HorizontalOptions="Start"
@@ -192,7 +192,7 @@
                             <Label Text="Dex"
                                                        VerticalOptions="Center"
                                                        HorizontalOptions="Start"
-                                                       TextColor="Accent"
+                                                       TextColor="{StaticResource Titles}"
                                                        Grid.Column="2"/>
                             <Label VerticalOptions="Center"
                                                        HorizontalOptions="Start"
@@ -201,7 +201,7 @@
                             <Label Text="Con"
                                                        VerticalOptions="Center"
                                                        HorizontalOptions="Start"
-                                                       TextColor="Accent"
+                                                       TextColor="{StaticResource Titles}"
                                                        Grid.Column="4"/>
                             <Label VerticalOptions="Center"
                                                        HorizontalOptions="Start"
@@ -210,7 +210,7 @@
                             <Label Text="Int"
                                                        VerticalOptions="Center"
                                                        HorizontalOptions="Start"
-                                                       TextColor="Accent"
+                                                       TextColor="{StaticResource Titles}"
                                                        Grid.Column="0"
                                                        Grid.Row="1"/>
                             <Label VerticalOptions="Center"
@@ -221,7 +221,7 @@
                             <Label Text="Wis"
                                                        VerticalOptions="Center"
                                                        HorizontalOptions="Start"
-                                                       TextColor="Accent"
+                                                       TextColor="{StaticResource Titles}"
                                                        Grid.Column="2"
                                                        Grid.Row="1"/>
                             <Label VerticalOptions="Center"
@@ -232,7 +232,7 @@
                             <Label Text="Cha"
                                                        VerticalOptions="Center"
                                                        HorizontalOptions="Start"
-                                                       TextColor="Accent"
+                                                       TextColor="{StaticResource Titles}"
                                                        Grid.Column="4"
                                                        Grid.Row="1"/>
                             <Label VerticalOptions="Center"

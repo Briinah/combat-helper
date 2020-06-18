@@ -14,7 +14,7 @@
         <Grid>
             <StackLayout>
                 <Label Text="Options" 
-                       BackgroundColor="Accent"
+                       BackgroundColor="{StaticResource Headers}"
                        TextColor="White"
                        Padding="10"/>
                 <StackLayout  Margin="10" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
@@ -22,7 +22,7 @@
                     <Switch x:Name="groupByName" IsToggled="True" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
                 <Label Text="Creatures"
-                       BackgroundColor="Accent"
+                       BackgroundColor="{StaticResource Headers}"
                        TextColor="White"
                        Padding="10"/>
                 <controls:XListView x:Name="creatureList"

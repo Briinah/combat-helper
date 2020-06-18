@@ -20,7 +20,7 @@
                        VerticalOptions="Center"
                        HorizontalOptions="Start"
                        Padding="10"
-                       TextColor="Accent"/>
+                       TextColor="{StaticResource Titles}"/>
                 <local:XEntry Placeholder="Enter encounter name"
                                Grid.Column="1"
                                Text="{Binding Name}"
@@ -29,7 +29,8 @@
             <Label Text="Creatures" 
                    Padding="10"
                    VerticalOptions="Center"
-                   TextColor="Accent"/>
+                   TextColor="White"
+                   BackgroundColor="{StaticResource Headers}"/>
 
             <local:XListView x:Name="creatureList"
                       HeightRequest="300"

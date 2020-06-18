@@ -14,7 +14,7 @@
         <AbsoluteLayout>
             <StackLayout>
                 <StackLayout Orientation="Horizontal"
-                       BackgroundColor="Accent">
+                       BackgroundColor="{StaticResource Headers}">
                     <Image Source="ic_sword"
                            VerticalOptions="Center"
                            Margin="10, 0, 0, 0"/>
@@ -28,7 +28,8 @@
                       ItemSelected="OnListViewItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Name}" />
+                        <TextCell Text="{Binding Name}" 
+                                  TextColor="{StaticResource Titles}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </controls:XListView>

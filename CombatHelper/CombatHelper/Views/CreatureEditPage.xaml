@@ -23,7 +23,7 @@
                        VerticalOptions="Center"
                        HorizontalOptions="Start"
                        Padding="10"
-                       TextColor="Accent"/>
+                       TextColor="{StaticResource Titles}"/>
                     <local:XEntry Placeholder="Enter creature name"
                                Grid.Column="1"
                                Text="{Binding Name}"/>
@@ -39,7 +39,7 @@
                        VerticalOptions="Center"
                        HorizontalOptions="Start"
                        Padding="10"
-                       TextColor="Accent"
+                       TextColor="{StaticResource Titles}"
                        Grid.Row="1"/>
                     <local:XEntry Placeholder="Enter HP"
                                Grid.Column="1"
@@ -50,7 +50,7 @@
                        VerticalOptions="Center"
                        HorizontalOptions="Start"
                        Padding="10"
-                       TextColor="Accent"
+                       TextColor="{StaticResource Titles}"
                        Grid.Row="2"/>
                     <local:XEntry Placeholder="Enter AC"
                                Grid.Column="1"
@@ -61,7 +61,7 @@
                        VerticalOptions="Center"
                        HorizontalOptions="Start"
                        Padding="10"
-                       TextColor="Accent"
+                       TextColor="{StaticResource Titles}"
                        Grid.Row="3"/>
                     <Switch IsToggled="{Binding Friendly}"
                         Grid.Row="3"
@@ -70,13 +70,13 @@
                 </Grid>
                 <Label Text="Attributes" Padding="10"
                        TextColor="White"
-                       BackgroundColor="Accent"/>
+                       BackgroundColor="{StaticResource Headers}"/>
                 <Grid>
                     <Label Text="Str"
                        VerticalOptions="Center"
                        HorizontalOptions="Center"
                        Padding="10"
-                       TextColor="Accent"/>
+                       TextColor="{StaticResource Titles}"/>
                     <local:XEntry Placeholder="0"
                                Grid.Column="1"
                                Text="{Binding Strength}"
@@ -86,7 +86,7 @@
                        VerticalOptions="Center"
                        HorizontalOptions="Center"
                        Padding="10"
-                       TextColor="Accent"
+                       TextColor="{StaticResource Titles}"
                        Grid.Column="2"/>
                     <local:XEntry Placeholder="0"
                                Grid.Column="3"
@@ -97,7 +97,7 @@
                        VerticalOptions="Center"
                        HorizontalOptions="Center"
                        Padding="10"
-                       TextColor="Accent"
+                       TextColor="{StaticResource Titles}"
                        Grid.Column="4"/>
                     <local:XEntry Placeholder="0"
                                Grid.Column="5"
@@ -108,7 +108,7 @@
                        VerticalOptions="Center"
                        HorizontalOptions="Center"
                        Padding="10"
-                       TextColor="Accent"
+                       TextColor="{StaticResource Titles}"
                        Grid.Column="0"
                        Grid.Row="1"/>
                     <local:XEntry Placeholder="0"
@@ -121,7 +121,7 @@
                        VerticalOptions="Center"
                        HorizontalOptions="Center"
                        Padding="10"
-                       TextColor="Accent"
+                       TextColor="{StaticResource Titles}"
                        Grid.Column="2"
                        Grid.Row="1"/>
                     <local:XEntry Placeholder="0"
@@ -134,7 +134,7 @@
                        VerticalOptions="Center"
                        HorizontalOptions="Center"
                        Padding="10"
-                       TextColor="Accent"
+                       TextColor="{StaticResource Titles}"
                        Grid.Column="4"
                        Grid.Row="1"/>
                     <local:XEntry Placeholder="0"
@@ -145,7 +145,7 @@
                 </Grid>
                 <Label Text="Info" Padding="10"
                        TextColor="White"
-                       BackgroundColor="Accent"/>
+                       BackgroundColor="{StaticResource Headers}"/>
                 
                 <local:XEditor Text="{Binding Info}"
                            Placeholder="Anything you want to add..."

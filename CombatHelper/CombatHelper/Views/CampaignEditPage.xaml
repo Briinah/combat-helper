@@ -21,7 +21,7 @@
                        VerticalOptions="Center"
                        HorizontalOptions="Start"
                        Padding="10"
-                       TextColor="Accent"/>
+                       TextColor="{StaticResource Titles}"/>
                 <local:XEntry Placeholder="Enter campaign name"
                                Grid.Column="1"
                            Text="{Binding Name}"
@@ -30,7 +30,8 @@
             <Label Text="Players" 
                    Padding="10"
                    VerticalOptions="Center"
-                   TextColor="Accent"/>
+                   TextColor="White"
+                   BackgroundColor="{StaticResource Headers}"/>
             <Grid Margin="0"
                   Padding="10">
                 <Grid.ColumnDefinitions>
