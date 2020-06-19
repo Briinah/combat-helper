@@ -33,7 +33,7 @@ namespace CombatHelper.Views
             if (!string.IsNullOrEmpty(name))
             {
                 campaign.Name = name;
-                campaign.Save();
+                await campaign.Save();
 
                 await Navigation.PushAsync(new CampaignEditPage
                 {

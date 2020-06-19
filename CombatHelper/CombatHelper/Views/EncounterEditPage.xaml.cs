@@ -86,7 +86,7 @@ namespace CombatHelper.Views
 
         private async void OnSaveButtonClicked(object sender, EventArgs e)
         {
-            encounter.Save();
+            await encounter.Save();
 
             Navigation.InsertPageBefore(new EncounterDetailPage()
             {
@@ -125,7 +125,7 @@ namespace CombatHelper.Views
             {
                 if (await SaveChangesDialog())
                 {
-                    encounter.Save();
+                    await encounter.Save();
                     return;
                 }
                 else
@@ -149,7 +149,7 @@ namespace CombatHelper.Views
             {
                 if (await SaveChangesDialog())
                 {
-                    encounter.Save();
+                    await encounter.Save();
                     return;
                 }
                 else

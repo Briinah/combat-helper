@@ -32,7 +32,7 @@ namespace CombatHelper.Views
 
         private async void OnSaveButtonClicked(object sender, EventArgs e)
         {
-            creature.Save();
+            await creature.Save();
             await Navigation.PopAsync();
         }
 

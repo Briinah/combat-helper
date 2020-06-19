@@ -111,7 +111,7 @@ namespace CombatHelper.ViewModels
             return encounter;
         }
 
-        public async void Save()
+        public async Task Save()
         {
             var encounter = ToModel();
 
@@ -137,12 +137,12 @@ namespace CombatHelper.ViewModels
             }
         }
 
-        private void SaveCreatures()
+        private async void SaveCreatures()
         {
             foreach (var creature in Creatures)
             {
                 creature.EncounterId = Id;
-                creature.Save();
+                await creature.Save();
             }
         }
 

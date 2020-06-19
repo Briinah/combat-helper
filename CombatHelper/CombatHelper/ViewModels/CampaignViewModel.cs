@@ -81,7 +81,7 @@ namespace CombatHelper.ViewModels
                 Players.Add(new PlayerCharacterViewModel(pc));
         }
 
-        public async void Save()
+        public async Task Save()
         {
             var campaign = ToModel();
             if (campaign.ID == 0)
@@ -91,7 +91,7 @@ namespace CombatHelper.ViewModels
                 this.Id = campaign.ID;
             }
 
-            SavePlayers();
+            await SavePlayers();
             // update campaign with players
             await App.Database.Campaigns.UpdateWithChildren(campaign);
         }
@@ -109,12 +109,12 @@ namespace CombatHelper.ViewModels
             }
         }
 
-        private void SavePlayers()
+        private async Task SavePlayers()
         {
             foreach (var pc in Players)
             {
                 pc.CampaignId = Id;
-                pc.Save();
+                await pc.Save();
             }
         }
 

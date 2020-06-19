@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -268,7 +269,7 @@ namespace CombatHelper.ViewModels
             }
         }
 
-        public async void Save()
+        public async Task Save()
         {
             var creature = ToModel();
             if (creature.ID == 0)

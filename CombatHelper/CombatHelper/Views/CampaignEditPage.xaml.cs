@@ -35,7 +35,7 @@ namespace CombatHelper.Views
 
         private async void OnSaveButtonClicked(object sender, EventArgs e)
         {
-            campaign.Save();
+            await campaign.Save();
             Navigation.InsertPageBefore(new EncounterList()
             {
                 BindingContext = campaign
