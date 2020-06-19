@@ -89,5 +89,17 @@ namespace CombatHelper.Views
             PlayerCharacterViewModel pc = ((ImageButton)sender).BindingContext as PlayerCharacterViewModel;
             campaign.Players.Remove(pc);
         }
+
+        private void SetButtonColor(object sender, TextChangedEventArgs e)
+        {
+            if(string.IsNullOrEmpty(e.NewTextValue))
+            {
+                playerButton.BackgroundColor = Color.LightGray;
+            }
+            else
+            {
+                playerButton.BackgroundColor = Color.Accent;
+            }
+        }
     }
 }

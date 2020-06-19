@@ -46,13 +46,15 @@
                 <Entry Placeholder="Player Name" 
                        x:Name="newPlayer"
                        VerticalOptions="Center"
-                       Margin="0,0,30,0"/>
+                       Margin="0,0,30,0"
+                       TextChanged="SetButtonColor"/>
                 <Button Grid.Column="1"
+                        x:Name="playerButton"
                         Text="Add"
                         Clicked="OnPlayerAdded"
                         HeightRequest="40"
                         ImageSource="ic_person_add"
-                        BackgroundColor="Accent"
+                        BackgroundColor="LightGray"
                         TextColor="White"
                         CornerRadius="30"/>
             </Grid>
