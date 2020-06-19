@@ -34,6 +34,13 @@ namespace CombatHelper.ViewModels
             Charisma = creature.Charisma;
             Info = creature.Info;
             Friendly = creature.Friendly;
+            Speed = new Speed
+            {
+                Walk = creature.Walk,
+                Fly = creature.Fly,
+                Climb = creature.Climb,
+                Swim = creature.Swim
+            };
         }
 
         public CreatureViewModel(PlayerCharacter pc)
@@ -63,7 +70,11 @@ namespace CombatHelper.ViewModels
                 Wisdom = this.Wisdom,
                 Charisma = this.Charisma,
                 Info = this.Info,
-                Friendly = this.Friendly
+                Friendly = this.Friendly,
+                Walk = this.Speed.Walk,
+                Fly = this.Speed.Fly,
+                Climb = this.Speed.Climb,
+                Swim = this.Speed.Swim
             };
 
             return c;
@@ -149,6 +160,12 @@ namespace CombatHelper.ViewModels
             set { SetValue(ref ac, value); }
         }
 
+        private Speed speed;
+        public Speed Speed
+        {
+            get { return speed; }
+            set { SetValue(ref speed, value); }
+        }
 
         private bool friendly;
         public bool Friendly
@@ -167,7 +184,7 @@ namespace CombatHelper.ViewModels
             get { return initiative; }
             set { SetValue(ref initiative, value); }
         }
-
+        #region attributes
         private int strength;
         public int Strength
         {
@@ -204,7 +221,7 @@ namespace CombatHelper.ViewModels
             get { return charisma; }
             set { SetValue(ref charisma, value); }
         }
-
+        #endregion
         private string info;
         public string Info
         {
@@ -272,33 +289,20 @@ namespace CombatHelper.ViewModels
             if (other == null)
                 return false;
 
-            if (!string.Equals(Name, other.Name))
-                return false;
-
-            if (!string.Equals(Slug, other.Slug))
-                return false;
-
-            if (Number != other.Number)
-                return false;
-
-            if (HP != other.HP)
-                return false;
-
-            if (AC != other.AC)
-                return false;
-
-            if (Friendly != other.Friendly)
-                return false;
-
-            if (!string.Equals(Info, other.Info))
-                return false;
-
-            return Strength == other.Strength &&
-                Dexterity == other.Dexterity &&
-                Constitution == other.Constitution &&
-                Intelligence == other.Intelligence &&
-                Wisdom == other.Wisdom &&
-                Charisma == other.Charisma;
+            return string.Equals(Name, other.Name) &&
+                   string.Equals(Slug, other.Slug) &&
+                   Speed.Equals(other.Speed) &&
+                   Number == other.Number &&
+                   HP == other.HP &&
+                   AC == other.AC &&
+                   Friendly == other.Friendly &&
+                   string.Equals(Info, other.Info) &&
+                   Strength == other.Strength &&
+                   Dexterity == other.Dexterity &&
+                   Constitution == other.Constitution &&
+                   Intelligence == other.Intelligence &&
+                   Wisdom == other.Wisdom &&
+                   Charisma == other.Charisma;
 
         }
 
@@ -328,7 +332,14 @@ namespace CombatHelper.ViewModels
                 Charisma = vm.Charisma,
                 Info = vm.Info,
                 Friendly = vm.Friendly,
-                Initiative = vm.Initiative
+                Initiative = vm.Initiative,
+                Speed = new Speed
+                {
+                    Walk = vm.Speed.Walk,
+                    Fly = vm.Speed.Fly,
+                    Climb = vm.Speed.Climb,
+                    Swim = vm.Speed.Swim
+                }
             };
 
             return copy;
@@ -346,6 +357,46 @@ namespace CombatHelper.ViewModels
             Intelligence = model.Intelligence;
             Wisdom = model.Wisdom;
             Charisma = model.Charisma;
+            Speed.Fly = model.Fly;
+            Speed.Walk = model.Walk;
+            Speed.Swim = model.Swim;
+            Speed.Climb = model.Climb;
+        }
+    }
+
+    public class Speed : BaseViewModel, IEquatable<Speed>
+    {
+        private int walk;
+        public int Walk
+        {
+            get { return walk; }
+            set { SetValue(ref walk, value); }
+        }
+
+        private int fly;
+        public int Fly
+        {
+            get { return fly; }
+            set { SetValue(ref fly, value); }
+        }
+
+        private int swim;
+        public int Swim
+        {
+            get { return swim; }
+            set { SetValue(ref swim, value); }
+        }
+
+        private int climb;
+        public int Climb
+        {
+            get { return climb; }
+            set { SetValue(ref climb, value); }
+        }
+
+        public bool Equals(Speed other)
+        {
+            return Walk.Equals(other.Walk) && Fly.Equals(other.Fly) && Swim.Equals(other.Swim) && Climb.Equals(other.Climb);
         }
     }
 }

@@ -25,5 +25,10 @@ namespace CombatHelper.Models
         public int Intelligence { get; set; }
         public int Charisma { get; set; }
         public string Info { get; set; }
+        public int Walk { get; set; }
+        public int Swim { get; set; }
+        public int Fly { get; set; }
+        public int Climb { get; set; }
     }
+
 }

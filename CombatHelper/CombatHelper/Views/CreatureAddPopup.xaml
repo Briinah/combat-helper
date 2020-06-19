@@ -137,6 +137,49 @@
                                Keyboard="Numeric"/>
                     </Grid>
                     <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                        <Image Source="ic_feet_black"
+                           VerticalOptions="Center"
+                           Margin="10, 0, 0, 0"/>
+                        <Label Text="Speed"
+                       TextColor="{StaticResource Titles}"
+                       FontSize="Medium"
+                           VerticalTextAlignment="Center"/>
+                    </StackLayout>
+                    <BoxView BackgroundColor="{StaticResource Headers}" HeightRequest="3" HorizontalOptions="FillAndExpand"/>
+                    <Grid Padding="10">
+                        <Label Text="Walk" VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                       TextColor="{StaticResource Titles}"/>
+                        <local:XEntry Grid.Column="1" 
+                                      Placeholder="0"
+                                      Keyboard="Numeric"
+                                      Text="{Binding Speed.Walk}"/>
+                        <Label Text="Fly" Grid.Column="2"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                       TextColor="{StaticResource Titles}"/>
+                        <local:XEntry Grid.Column="3" 
+                                      Placeholder="0"
+                                      Keyboard="Numeric"
+                                      Text="{Binding Speed.Fly}"/>
+                        <Label Text="Swim" Grid.Row="1"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                       TextColor="{StaticResource Titles}"/>
+                        <local:XEntry Grid.Column="1" Grid.Row="1"
+                                      Placeholder="0"
+                                      Keyboard="Numeric"
+                                      Text="{Binding Speed.Swim}"/>
+                        <Label Text="Climb" Grid.Row="1" Grid.Column="2"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                       TextColor="{StaticResource Titles}"/>
+                        <local:XEntry Grid.Column="3" Grid.Row="1"
+                                      Placeholder="0"
+                                      Keyboard="Numeric"
+                                      Text="{Binding Speed.Climb}"/>
+                    </Grid>
+                    <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
                         <Image Source="ic_info"
                            VerticalOptions="Center"
                            Margin="10, 0, 0, 0"/>

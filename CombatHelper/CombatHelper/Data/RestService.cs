@@ -65,7 +65,11 @@ namespace CombatHelper.Data
                     Constitution = Util.GetModifier(data.constitution),
                     Intelligence = Util.GetModifier(data.intelligence),
                     Wisdom = Util.GetModifier(data.wisdom),
-                    Charisma = Util.GetModifier(data.charisma)
+                    Charisma = Util.GetModifier(data.charisma),
+                    Fly = data.speed.fly,
+                    Walk = data.speed.walk,
+                    Swim = data.speed.swim,
+                    Climb = data.speed.climb
                 };
 
                 return creature;
