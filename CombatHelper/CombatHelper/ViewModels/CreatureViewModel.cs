@@ -13,7 +13,10 @@ namespace CombatHelper.ViewModels
         public int EncounterId { get; set; }
         public bool IsPC { get; private set; }
 
-        public CreatureViewModel() { }
+        public CreatureViewModel() 
+        {
+            Speed = new Speed();
+        }
 
         public CreatureViewModel(Creature creature)
         {
@@ -357,10 +360,13 @@ namespace CombatHelper.ViewModels
             Intelligence = model.Intelligence;
             Wisdom = model.Wisdom;
             Charisma = model.Charisma;
-            Speed.Fly = model.Fly;
-            Speed.Walk = model.Walk;
-            Speed.Swim = model.Swim;
-            Speed.Climb = model.Climb;
+            Speed = new Speed
+            {
+                Fly = model.Fly,
+                Walk = model.Walk,
+                Swim = model.Swim,
+                Climb = model.Climb
+            };
         }
     }
 
