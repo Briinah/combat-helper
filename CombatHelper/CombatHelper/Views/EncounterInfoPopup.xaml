@@ -2,7 +2,7 @@
 <pages:PopupPage  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                   xmlns="http://xamarin.com/schemas/2014/forms" 
                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-                  xmlns:controls="clr-namespace:CombatHelper.Controls"
+                  xmlns:controls="clr-namespace:CombatHelper.Controls" xmlns:helpers="clr-namespace:CombatHelper.Helpers"
                   x:Class="CombatHelper.Views.EncounterInfoPopup">
 
     <Frame Margin="10" HorizontalOptions="Center" VerticalOptions="Center"
@@ -13,20 +13,46 @@
                 <Label Text="{Binding Name}" FontSize="Title" TextColor="Black"/>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="ic_ac"
-                                                           WidthRequest="20"
-                                                           HorizontalOptions="End"/>
+                           WidthRequest="20"
+                           HorizontalOptions="End"/>
                     <Button Text="{Binding AC}"
-                                                            Grid.Column="1"
-                                                            BackgroundColor="Transparent"
-                                                            WidthRequest="40"
-                                                            HorizontalOptions="Start"/>
+                            Grid.Column="1"
+                            BackgroundColor="Transparent"
+                            WidthRequest="40"
+                            HorizontalOptions="Start"/>
                     <Image Source="ic_hp"
-                                                           WidthRequest="20"/>
+                           WidthRequest="20"/>
                     <Button Text="{Binding HP}"
-                                                            BackgroundColor="Transparent"
-                                                            WidthRequest="40"/>
+                            BackgroundColor="Transparent"
+                            WidthRequest="40"/>
                 </StackLayout>
-                <Grid Grid.Row="2" >
+                <StackLayout Orientation="Horizontal" Grid.Row="2" IsVisible="{Binding ShowInfo}">
+                    <StackLayout Orientation="Horizontal"
+                                 IsVisible="{Binding Speed.Walk, Converter={helpers:HasValueConverter}}">
+                        <Image Source="ic_feet"/>
+                        <Label Text="{Binding Speed.Walk}"
+                               VerticalOptions="Center"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal"
+                                 IsVisible="{Binding Speed.Fly, Converter={helpers:HasValueConverter}}">
+                        <Image Source="ic_wing"/>
+                        <Label Text="{Binding Speed.Fly}"
+                               VerticalOptions="Center"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal"
+                                 IsVisible="{Binding Speed.Swim, Converter={helpers:HasValueConverter}}">
+                        <Image Source="ic_fin"/>
+                        <Label Text="{Binding Speed.Swim}"
+                               VerticalOptions="Center"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal"
+                                 IsVisible="{Binding Speed.Climb, Converter={helpers:HasValueConverter}}">
+                        <Image Source="ic_climb"/>
+                        <Label Text="{Binding Speed.Climb}"
+                               VerticalOptions="Center"/>
+                    </StackLayout>
+                </StackLayout>
+                <Grid Grid.Row="3" >
                     <Label Text="Str"
                                                        VerticalOptions="Center"
                                                        HorizontalOptions="Start"

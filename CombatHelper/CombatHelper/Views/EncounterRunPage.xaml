@@ -60,7 +60,7 @@
                                                         Clicked="EditHealth"/>
                                                 </StackLayout>
                                             </StackLayout>
-                                            <StackLayout Orientation="Horizontal" Grid.Row="2" IsVisible="{Binding ShowInfo}">
+                                            <StackLayout Orientation="Horizontal" Grid.Row="2" IsVisible="{Binding ShowInfo}" Spacing="20">
                                                 <StackLayout Orientation="Horizontal"
                                                              IsVisible="{Binding Speed.Walk, Converter={helpers:HasValueConverter}}">
                                                     <Image Source="ic_feet"/>

@@ -54,6 +54,8 @@ namespace CombatHelper.ViewModels
             IsPC = true;
             HasTurn = false;
             Friendly = true;
+
+            Speed = new Speed();
         }
 
         public Creature ToModel()

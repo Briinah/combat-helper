@@ -71,7 +71,7 @@ namespace CombatHelper.Views
 
             encounter.Creatures.Sort(CreatureViewModel.CompareInitiative);
 
-            await Navigation.PopModalAsync(true);
+            await PopupNavigation.Instance.PopAsync();
         }
 
         private async void SearchCreature(object sender, EventArgs e)
