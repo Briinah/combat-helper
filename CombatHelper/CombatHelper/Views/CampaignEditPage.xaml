@@ -22,25 +22,31 @@
                        HorizontalOptions="Start"
                        Padding="10"
                        TextColor="{StaticResource Titles}"/>
-                <local:XEntry Placeholder="Enter campaign name"
+                <Entry Placeholder="Enter campaign name"
                                Grid.Column="1"
                            Text="{Binding Name}"
-                           />
+                       Margin="0, 0, 20, 0"/>
             </Grid>
-            <Label Text="Players" 
-                   Padding="10"
+            <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                <Image Source="ic_person"
+                           VerticalOptions="Center"
+                           Margin="10, 0, 0, 0"/>
+                <Label Text="Players" 
                    VerticalOptions="Center"
-                   TextColor="White"
-                   BackgroundColor="{StaticResource Headers}"/>
+                       FontSize="Medium"
+                   TextColor="{StaticResource Titles}"/>
+            </StackLayout>
+            <BoxView BackgroundColor="{StaticResource Headers}" HeightRequest="3" HorizontalOptions="FillAndExpand"/>
             <Grid Margin="0"
                   Padding="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="7*" />
                     <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
-                <local:XEntry Placeholder="Player Name" 
-                               x:Name="newPlayer"
-                               VerticalOptions="Center"/>
+                <Entry Placeholder="Player Name" 
+                       x:Name="newPlayer"
+                       VerticalOptions="Center"
+                       Margin="0,0,30,0"/>
                 <Button Grid.Column="1"
                         Text="Add"
                         Clicked="OnPlayerAdded"

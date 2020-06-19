@@ -7,22 +7,24 @@
              mc:Ignorable="d"
              x:Class="CombatHelper.Views.CreatureAddPopup"
              x:Name="page">
-        <Grid BackgroundColor="White">
-        <StackLayout>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="8*" />
-                </Grid.ColumnDefinitions>
-                <Label Text="Name"
+    <Grid BackgroundColor="White">
+        <StackLayout Spacing="0">
+            <ScrollView>
+                <StackLayout>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="8*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Name"
                        VerticalOptions="Center"
                        HorizontalOptions="Start"
                        Padding="10"
                        TextColor="{StaticResource Titles}"/>
-                <local:XEntry Placeholder="Enter creature name"
+                        <local:XEntry Placeholder="Enter creature name"
                                Grid.Column="1"
                                Text="{Binding Name}"/>
-                <ImageButton HorizontalOptions="End" Grid.Column="1" 
+                        <ImageButton HorizontalOptions="End" Grid.Column="1" 
                              WidthRequest="30" HeightRequest="30"
                              VerticalOptions="Center"
                              Margin="10"
@@ -30,114 +32,133 @@
                              Source="ic_search"
                              BackgroundColor="Accent"
                              Clicked="SearchCreature"/>
-                <Label Text="HP"
+                        <Label Text="HP"
                        VerticalOptions="Center"
                        HorizontalOptions="Start"
                        Padding="10"
                        TextColor="{StaticResource Titles}"
                        Grid.Row="1"/>
-                <local:XEditor Placeholder="Enter HP"
+                        <local:XEditor Placeholder="Enter HP"
                                Grid.Column="1"
                                Grid.Row="1"
                                Text="{Binding HP}"
                                Keyboard="Numeric"/>
-                <Label Text="Friendly"
+                        <Label Text="Friendly"
                        VerticalOptions="Center"
                        HorizontalOptions="Start"
                        Padding="10"
                        TextColor="{StaticResource Titles}"
                        Grid.Row="2"/>
-                <Switch IsToggled="{Binding Friendly}"
+                        <Switch IsToggled="{Binding Friendly}"
                         Grid.Row="2"
                         Grid.Column="1"
                         HorizontalOptions="Start"/>
-            </Grid>
-            <Label Text="Attributes" Padding="10"
-                       TextColor="White"
-                   BackgroundColor="{StaticResource Headers}"/>
-            <Grid>
-                <Label Text="Str"
+                    </Grid>
+                    <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                        <Image Source="ic_attributes"
+                           VerticalOptions="Center"
+                           Margin="10, 0, 0, 0"/>
+                        <Label Text="Attributes"
+                       TextColor="{StaticResource Titles}"
+                       FontSize="Medium"
+                           VerticalTextAlignment="Center"/>
+                    </StackLayout>
+                    <BoxView BackgroundColor="{StaticResource Headers}" HeightRequest="3" HorizontalOptions="FillAndExpand"/>
+                    <Grid>
+                        <Label Text="Str"
                        VerticalOptions="Center"
                        HorizontalOptions="Center"
                        Padding="10"
                        TextColor="{StaticResource Titles}"/>
-                <local:XEditor Placeholder="0"
+                        <local:XEntry Placeholder="0"
                                Grid.Column="1"
                                Text="{Binding Strength}"
-                               Keyboard="Numeric"/>
-                <Label Text="Dex"
+                               Keyboard="Numeric"
+                              Completed="NextEntry"/>
+                        <Label Text="Dex"
                        VerticalOptions="Center"
                        HorizontalOptions="Center"
                        Padding="10"
                        TextColor="{StaticResource Titles}"
                        Grid.Column="2"/>
-                <local:XEditor Placeholder="0"
+                        <local:XEntry Placeholder="0"
                                Grid.Column="3"
                                Text="{Binding Dexterity}"
-                               Keyboard="Numeric"/>
-                <Label Text="Con"
+                               Keyboard="Numeric"
+                              Completed="NextEntry"/>
+                        <Label Text="Con"
                        VerticalOptions="Center"
                        HorizontalOptions="Center"
                        Padding="10"
                        TextColor="{StaticResource Titles}"
                        Grid.Column="4"/>
-                <local:XEditor Placeholder="0"
+                        <local:XEntry Placeholder="0"
                                Grid.Column="5"
                                Text="{Binding Constitution}"
-                               Keyboard="Numeric"/>
-                <Label Text="Int"
+                               Keyboard="Numeric"
+                              Completed="NextEntry"/>
+                        <Label Text="Int"
                        VerticalOptions="Center"
                        HorizontalOptions="Center"
                        Padding="10"
                        TextColor="{StaticResource Titles}"
                        Grid.Column="0"
                        Grid.Row="1"/>
-                <local:XEditor Placeholder="0"
+                        <local:XEntry Placeholder="0"
                                Grid.Column="1"
                                Grid.Row="1"
                                Text="{Binding Intelligence}"
-                               Keyboard="Numeric"/>
-                <Label Text="Wis"
+                               Keyboard="Numeric"
+                              Completed="NextEntry"/>
+                        <Label Text="Wis"
                        VerticalOptions="Center"
                        HorizontalOptions="Center"
                        Padding="10"
                        TextColor="{StaticResource Titles}"
                        Grid.Column="2"
                        Grid.Row="1"/>
-                <local:XEditor Placeholder="0"
+                        <local:XEntry Placeholder="0"
                                Grid.Column="3"
                                Grid.Row="1"
                                Text="{Binding Wisdom}"
-                               Keyboard="Numeric"/>
-                <Label Text="Cha"
+                               Keyboard="Numeric"
+                              Completed="NextEntry"/>
+                        <Label Text="Cha"
                        VerticalOptions="Center"
                        HorizontalOptions="Center"
                        Padding="10"
                        TextColor="{StaticResource Titles}"
                        Grid.Column="4"
                        Grid.Row="1"/>
-                <local:XEditor Placeholder="0"
+                        <local:XEntry Placeholder="0"
                                Grid.Column="5"
                                Grid.Row="1"
                                Text="{Binding Charisma}"
                                Keyboard="Numeric"/>
-            </Grid>
-            <Label Text="Info" Padding="10"
-                       TextColor="White"
-                   BackgroundColor="{StaticResource Headers}"/>
-            <local:XEditor Text="{Binding Info}"
+                    </Grid>
+                    <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                        <Image Source="ic_info"
+                           VerticalOptions="Center"
+                           Margin="10, 0, 0, 0"/>
+                        <Label Text="Info"
+                       TextColor="{StaticResource Titles}"
+                       FontSize="Medium"
+                           VerticalTextAlignment="Center"/>
+                    </StackLayout>
+                    <BoxView BackgroundColor="{StaticResource Headers}" HeightRequest="3" HorizontalOptions="FillAndExpand"/>
+                    <local:XEditor Text="{Binding Info}"
                            Placeholder="Anything you want to add..."
                            Margin="10"
                            VerticalOptions="FillAndExpand"/>
-            <BoxView HeightRequest="1" Color="LightGray" 
+                    <BoxView HeightRequest="1" Color="LightGray" 
                      HorizontalOptions="FillAndExpand" />
-            <Grid Padding="10">
-                <Label Text="How many to add?" 
+                    <Grid Padding="10">
+                        <Label Text="How many to add?" 
                        TextColor="{StaticResource Titles}"
                        Padding="10"
                        HorizontalOptions="Center"/>
-                <Grid Grid.Row="1">
-                    <ImageButton Clicked="SubtractAmount"
+                        <Grid Grid.Row="1">
+                            <ImageButton Clicked="SubtractAmount"
                             Grid.Column="0"
                             BackgroundColor="Accent"
                             WidthRequest="40"
@@ -145,12 +166,12 @@
                             HorizontalOptions="End"
                             VerticalOptions="Center"
                                  Source="ic_min.png"/>
-                    <Label Text="1"
+                            <Label Text="1"
                            x:Name="Amount"
                            Grid.Column="1"
                            HorizontalTextAlignment="Center"
                            VerticalTextAlignment="Center"/>
-                    <ImageButton Clicked="AddAmount"
+                            <ImageButton Clicked="AddAmount"
                             Grid.Column="2"
                             BackgroundColor="Accent"
                             WidthRequest="40"
@@ -158,25 +179,29 @@
                             HorizontalOptions="Start"
                             VerticalOptions="Center"
                         Source="ic_add.png"/>
-                </Grid>
-                <Label Text="Initiative"
+                        </Grid>
+                        <Label Text="Initiative"
                        Grid.Column="1"
                        TextColor="{StaticResource Titles}"
                        Padding="10"
                        HorizontalOptions="Center"/>
-                <Button Grid.Row="1"
+                        <Button Grid.Row="1"
                         Grid.Column="1"
                         CornerRadius="40"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         WidthRequest="55"
                         HeightRequest="55"
-                        BackgroundColor="LightGray"
+                        BackgroundColor="White"
                         Text="{Binding Initiative}"
-                        Clicked="SetInitiative"/>
-            </Grid>
-                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="LightGray"/>
-                <Button Text="Add"
+                        Clicked="SetInitiative"
+                        BorderColor="Accent"
+                        BorderWidth="1"/>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+            <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="LightGray" Margin="0"/>
+            <Button Text="Add"
                     Clicked="AddCreatures" 
                     VerticalOptions="End"
                     HorizontalOptions="Center"
@@ -188,5 +213,5 @@
         <ActivityIndicator IsRunning="{Binding Path=IsBusy, Source={x:Reference page}}"
                                HorizontalOptions="Center"
                                VerticalOptions="Center"/>
-        </Grid>
+    </Grid>
 </pages:PopupPage>
