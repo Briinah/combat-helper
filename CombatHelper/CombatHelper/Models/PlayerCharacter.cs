@@ -6,7 +6,6 @@ using System.Text;
 
 namespace CombatHelper.Models
 {
-    [Table("PlayerCharacters")]
     public class PlayerCharacter
     {
         [AutoIncrement, PrimaryKey]

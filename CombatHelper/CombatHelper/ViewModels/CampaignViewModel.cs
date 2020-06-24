@@ -83,6 +83,7 @@ namespace CombatHelper.ViewModels
 
         public async Task Save()
         {
+
             var campaign = ToModel();
             if (campaign.ID == 0)
             {
@@ -91,9 +92,11 @@ namespace CombatHelper.ViewModels
                 this.Id = campaign.ID;
             }
 
-            await SavePlayers();
+            SavePlayers();
             // update campaign with players
             await App.Database.Campaigns.UpdateWithChildren(campaign);
+
+            var players = await App.Database.Players.Get();
         }
 
         public async void Delete()
@@ -109,7 +112,7 @@ namespace CombatHelper.ViewModels
             }
         }
 
-        private async Task SavePlayers()
+        private async void SavePlayers()
         {
             foreach (var pc in Players)
             {
