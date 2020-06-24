@@ -53,10 +53,12 @@ namespace CombatHelper.Views
         }
         private async void OnEditClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CampaignEditPage()
+            Navigation.InsertPageBefore(new CampaignEditPage()
             {
                 BindingContext = this.BindingContext
-            });
+            }, this);
+
+            await Navigation.PopAsync();
         }
         private async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
