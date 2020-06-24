@@ -16,6 +16,10 @@
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="3.2.2" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="3.2.2" />
     <PackageReference Include="Microsoft.AppCenter.Distribute" Version="3.2.2" />
+    <PackageReference Include="Mobile.BuildTools" Version="1.4.0.638">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.3" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="SQLiteNetExtensions.Async" Version="2.1.0" />
