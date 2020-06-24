@@ -75,6 +75,11 @@ namespace CombatHelper.Views
 
         protected override bool OnBackButtonPressed()
         {
+            Navigation.InsertPageBefore(new EncounterList()
+            {
+                BindingContext = campaign
+            }, this);
+
             Navigation.PopAsync();
             return true;
         }

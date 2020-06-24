@@ -31,6 +31,7 @@ namespace CombatHelper
             InitializeComponent();
 
             MainPage = new NavigationPage(new CampaignList());
+
         }
 
         protected override void OnStart()
