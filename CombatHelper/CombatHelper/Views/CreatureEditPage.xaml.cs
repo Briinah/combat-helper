@@ -12,7 +12,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace CombatHelper.Views
-{
+{ 
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreatureEditPage : ContentPage
     {

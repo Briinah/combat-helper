@@ -37,8 +37,8 @@ namespace CombatHelper
         {
             base.OnStart();
 
-            AppCenter.Start("android=0fd34a77-9449-44f6-ba95-a9bafde73e4a", typeof(Analytics), typeof(Crashes));
-            AppCenter.Start("android=0fd34a77-9449-44f6-ba95-a9bafde73e4a", typeof(Distribute));
+            AppCenter.Start(Helpers.Secrets.android, typeof(Analytics), typeof(Crashes));
+            AppCenter.Start(Helpers.Secrets.android, typeof(Distribute));
         }
 
         protected override void OnSleep()
