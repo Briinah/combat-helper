@@ -26,7 +26,16 @@ namespace CombatHelper.ViewModels
 
         public ObservableCollection<PlayerCharacterViewModel> Players { get; private set; }
 
-        public CampaignViewModel() { }
+        public string PlayerList
+        {
+            get { return string.Join(", ", Players.Select(p=> p.Name)); }
+        }
+
+        public CampaignViewModel() 
+        {
+            Encounters = new ObservableCollection<EncounterViewModel>();
+            Players = new ObservableCollection<PlayerCharacterViewModel>();
+        }
         public CampaignViewModel(Campaign campaign)
         {
             Id = campaign.ID;
@@ -56,10 +65,7 @@ namespace CombatHelper.ViewModels
 
         public async Task LoadData()
         {
-            Players.Clear();
-            var players = await App.Database.Players.Get<bool>((pc) => pc.CampaignID == Id, null);
-            foreach (var pc in players)
-                Players.Add(new PlayerCharacterViewModel(pc));
+            await LoadPlayerData();
 
             Encounters.Clear();
             var encounters = await App.Database.Encounters.Get<bool>((e) => e.CampaignID == Id, null);
@@ -67,16 +73,25 @@ namespace CombatHelper.ViewModels
                 Encounters.Add(new EncounterViewModel(e));
         }
 
-        public async void Save()
+        public async Task LoadPlayerData()
+        {
+            Players.Clear();
+            var players = await App.Database.Players.Get<bool>((pc) => pc.CampaignID == Id, null);
+            foreach (var pc in players)
+                Players.Add(new PlayerCharacterViewModel(pc));
+        }
+
+        public async Task Save()
         {
             var campaign = ToModel();
             if (campaign.ID == 0)
             {
                 // get id of campaign from db
                 await App.Database.Campaigns.Insert(campaign);
+                this.Id = campaign.ID;
             }
 
-            SavePlayers(campaign);
+            await SavePlayers();
             // update campaign with players
             await App.Database.Campaigns.UpdateWithChildren(campaign);
         }
@@ -85,7 +100,8 @@ namespace CombatHelper.ViewModels
         {
             var campaign = ToModel();
 
-            RemovePlayers(campaign);
+            RemovePlayers();
+            RemoveEncounters();
 
             if (campaign.ID != 0)
             {
@@ -93,25 +109,28 @@ namespace CombatHelper.ViewModels
             }
         }
 
-        private async void SavePlayers(Campaign campaign)
+        private async Task SavePlayers()
         {
-            foreach (var pc in campaign.Players)
+            foreach (var pc in Players)
             {
-                pc.CampaignID = campaign.ID;
-
-                if (pc.ID == 0)
-                    await App.Database.Players.Insert(pc);
-                else
-                    await App.Database.Players.Update(pc);
+                pc.CampaignId = Id;
+                await pc.Save();
             }
         }
 
-        private async void RemovePlayers(Campaign campaign)
+        private void RemovePlayers()
         {
-            foreach (var pc in campaign.Players)
+            foreach (var pc in Players)
             {
-                if (pc.ID != 0)
-                    await App.Database.Players.Delete(pc);
+                pc.Delete();
+            }
+        }
+
+        private void RemoveEncounters()
+        {
+            foreach(var en in Encounters)
+            {
+                en.Delete();
             }
         }
     }

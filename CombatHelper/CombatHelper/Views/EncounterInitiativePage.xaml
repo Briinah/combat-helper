@@ -28,13 +28,15 @@
                                         Text="{Binding Initiative}"
                                         Clicked="SetInitiative"/>
                                 <StackLayout Grid.Column ="1" >
-                                    <Label Text="{Binding Name}"
+                                    <Label Text="{Binding DisplayName}"
                                        VerticalTextAlignment="Center"
                                        FontSize="Body"/>
-                                    <Label x:Name="hpLabel"
-                                           Text="{Binding HP, StringFormat='HP: {0}'}"
-                                           FontSize="Micro"
-                                           Grid.Row="1"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding HP, StringFormat='HP: {0}'}"
+                                                   FontSize="Micro"/>
+                                        <Label Text="{Binding AC, StringFormat='AC: {0}'}"
+                                                   FontSize="Micro"/>
+                                    </StackLayout>
                                 </StackLayout>
 
                             </Grid>

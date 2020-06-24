@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CombatHelper.ViewModels
 {
@@ -36,6 +37,26 @@ namespace CombatHelper.ViewModels
             };
 
             return player;
+        }
+
+        public async Task Save()
+        {
+            var pc = ToModel();
+            if (pc.ID == 0)
+            {
+                await App.Database.Players.Insert(pc);
+                this.Id = pc.ID;
+            }
+
+            await App.Database.Players.Update(pc);
+        }
+
+        public async void Delete()
+        {
+            var pc = ToModel();
+
+            if (pc.ID != 0)
+                await App.Database.Players.Delete(pc);
         }
     }
 }

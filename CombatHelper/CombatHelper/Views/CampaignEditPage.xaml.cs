@@ -35,8 +35,8 @@ namespace CombatHelper.Views
 
         private async void OnSaveButtonClicked(object sender, EventArgs e)
         {
-            campaign.Save();
-            Navigation.InsertPageBefore(new CampaignDetailPage()
+            await campaign.Save();
+            Navigation.InsertPageBefore(new EncounterList()
             {
                 BindingContext = campaign
             }, this);
@@ -52,7 +52,7 @@ namespace CombatHelper.Views
             {
                 campaign.Delete();
 
-                await Navigation.PopAsync();
+                await Navigation.PopToRootAsync();
             }
         }
 
@@ -67,21 +67,14 @@ namespace CombatHelper.Views
         {
             if (!string.IsNullOrEmpty(newPlayer.Text))
             {
-                campaign.Players.Add(new PlayerCharacterViewModel() { Name = newPlayer.Text });
+                // insert in front of the list
+                campaign.Players.Insert(0, new PlayerCharacterViewModel() { Name = newPlayer.Text });
                 newPlayer.Text = "";
             }
         }
 
         protected override bool OnBackButtonPressed()
         {
-            if (campaign.Id != 0)
-            {
-                Navigation.InsertPageBefore(new CampaignDetailPage()
-                {
-                    BindingContext = this.BindingContext
-                }, this);
-            }
-
             Navigation.PopAsync();
             return true;
         }
@@ -95,6 +88,18 @@ namespace CombatHelper.Views
         {
             PlayerCharacterViewModel pc = ((ImageButton)sender).BindingContext as PlayerCharacterViewModel;
             campaign.Players.Remove(pc);
+        }
+
+        private void SetButtonColor(object sender, TextChangedEventArgs e)
+        {
+            if(string.IsNullOrEmpty(e.NewTextValue))
+            {
+                playerButton.BackgroundColor = Color.LightGray;
+            }
+            else
+            {
+                playerButton.BackgroundColor = Color.Accent;
+            }
         }
     }
 }

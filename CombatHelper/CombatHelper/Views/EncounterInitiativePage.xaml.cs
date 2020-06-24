@@ -16,9 +16,13 @@ namespace CombatHelper.Views
     public partial class EncounterInitiativePage : ContentPage
     {
         private EncounterViewModel encounter;
-        public EncounterInitiativePage()
+        private bool groupByName = false;
+
+        public EncounterInitiativePage(bool groupByName)
         {
             InitializeComponent();
+
+            this.groupByName = groupByName;
         }
 
         protected override void OnAppearing()
@@ -27,6 +31,37 @@ namespace CombatHelper.Views
             encounter = BindingContext as EncounterViewModel;
             encounter.AddPlayers();
             creatureList.ItemsSource = encounter.Creatures;
+
+            RollInitiative();
+        }
+
+        private void RollInitiative()
+        {
+            var random = new Random();
+
+            // creatures with the same name are grouped in the same initative
+            var namedict = new Dictionary<string, int>();
+
+            foreach (var c in encounter.Creatures)
+            {
+                if (!c.IsPC)
+                {
+                    if (groupByName)
+                    {
+                        if (namedict.ContainsKey(c.Name))
+                            c.Initiative = namedict[c.Name];
+                        else
+                        {
+                            c.Initiative = random.Next(20) + c.Dexterity;
+                            namedict.Add(c.Name, c.Initiative);
+                        }
+                    }
+                    else
+                        c.Initiative = random.Next(20) + c.Dexterity;
+                }
+            }
+
+            encounter.Creatures.Sort(CreatureViewModel.CompareInitiative);
         }
 
         private async void SetInitiative(object sender, EventArgs e)
@@ -36,20 +71,24 @@ namespace CombatHelper.Views
             if (!string.IsNullOrEmpty(response))
             {
                 creature.Initiative = int.Parse(response);
+                if (creature.Initiative < 1)
+                    creature.Initiative = 1;
             }
 
             // sort list on initiative
             encounter.Creatures.Sort(CreatureViewModel.CompareInitiative);
         }
 
-        
-
         private async void StartEncounter(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new EncounterRunPage()
+            IsBusy = true;
+            Navigation.InsertPageBefore(new EncounterRunPage()
             {
                 BindingContext = encounter
-            });
+            }, this);
+
+            await Navigation.PopAsync();
+            IsBusy = false;
         }
     }
 }

@@ -20,17 +20,22 @@
                        VerticalOptions="Center"
                        HorizontalOptions="Start"
                        Padding="10"
-                       TextColor="Accent"/>
-                <local:XEditor Placeholder="Enter encounter name"
+                       TextColor="{StaticResource Titles}"/>
+                <Entry Placeholder="Enter encounter name"
                                Grid.Column="1"
                                Text="{Binding Name}"
-                           />
+                       Margin="0,0,20,0"/>
             </Grid>
-            <Label Text="Creatures" 
-                   Padding="10"
-                   VerticalOptions="Center"
-                   TextColor="Accent"/>
-
+            <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                <Image Source="ic_dragon_black"
+                           VerticalOptions="Center"
+                           Margin="10, 0, 0, 0"/>
+                <Label Text="Creatures"
+                       TextColor="{StaticResource Titles}"
+                       FontSize="Medium"
+                           VerticalTextAlignment="Center"/>
+            </StackLayout>
+            <BoxView BackgroundColor="{StaticResource Headers}" HeightRequest="3" HorizontalOptions="FillAndExpand"/>
             <local:XListView x:Name="creatureList"
                       HeightRequest="300"
                       RowHeight="60"
@@ -42,18 +47,21 @@
                                 <Grid.ColumnDefinitions >
                                     <ColumnDefinition Width="6*" />
                                     <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="2*" />
                                 </Grid.ColumnDefinitions>
                                 <StackLayout Margin="10">
-                                    <Label Text="{Binding Name}"
+                                    <Label Text="{Binding DisplayName}"
                                        VerticalTextAlignment="Center"
                                        FontSize="Body"/>
-                                    <Label x:Name="hpLabel"
-                                           Text="{Binding HP, StringFormat='HP: {0}'}"
-                                           FontSize="Micro"
-                                           Grid.Row="1"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding HP, StringFormat='HP: {0}'}"
+                                                   FontSize="Micro"/>
+                                        <Label Text="{Binding AC, StringFormat='AC: {0}'}"
+                                                   FontSize="Micro"/>
+                                    </StackLayout>
                                 </StackLayout>
-                                <ImageButton Grid.Column ="1" 
+                                <StackLayout Grid.Column ="1" 
+                                             Orientation="Horizontal">
+                                    <ImageButton 
                                              HorizontalOptions="End"
                                              VerticalOptions="Center"
                                              BackgroundColor="Accent"
@@ -62,8 +70,7 @@
                                              Source="ic_content_copy.png"
                                              Clicked="CopyCreature"
                                              Margin="0, 0, 10, 0"/>
-                                <ImageButton Grid.Column ="2" 
-                                             HorizontalOptions="End"
+                                <ImageButton HorizontalOptions="End"
                                              VerticalOptions="Center"
                                              BackgroundColor="Accent"
                                              CornerRadius="40"
@@ -71,22 +78,39 @@
                                              Source="ic_delete.png"
                                              Clicked="RemoveCreature"
                                              Margin="0, 0, 10, 0"/>
+                                </StackLayout>
+                                
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </local:XListView>
             <Button Text="Add Creature"
-                    Clicked="AddCreature"/>
-            <Grid>
+                    Clicked="AddCreature"
+                    ImageSource="ic_monster_add"
+                    BackgroundColor="Accent"
+                    TextColor="White"
+                    CornerRadius="30"
+                    Margin="10"
+                    HorizontalOptions="Center"/>
+            <BoxView BackgroundColor="LightGray" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
+            <Grid Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Button Text="Delete"
-                        Clicked="OnDeleteButtonClicked"/>
+                        Clicked="OnDeleteButtonClicked"
+                        BackgroundColor="White"
+                        TextColor="Accent"
+                        CornerRadius="30"
+                        BorderColor="Accent"
+                        BorderWidth="1"/>
                 <Button Grid.Column="1" Text="Save"
-                        Clicked="OnSaveButtonClicked" />
+                        Clicked="OnSaveButtonClicked" 
+                        BackgroundColor="Accent"
+                        TextColor="White"
+                        CornerRadius="30"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

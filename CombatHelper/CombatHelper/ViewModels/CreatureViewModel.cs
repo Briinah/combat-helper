@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -13,14 +14,19 @@ namespace CombatHelper.ViewModels
         public int EncounterId { get; set; }
         public bool IsPC { get; private set; }
 
-        public CreatureViewModel() { }
+        public CreatureViewModel() 
+        {
+            Speed = new Speed();
+        }
 
         public CreatureViewModel(Creature creature)
         {
             Id = creature.ID;
             EncounterId = creature.EncounterID;
             Name = creature.Name;
+            Slug = creature.Slug;
             HP = creature.HP;
+            AC = creature.AC;
             Initiative = 0;
             IsPC = false;
             HasTurn = false;
@@ -32,6 +38,13 @@ namespace CombatHelper.ViewModels
             Charisma = creature.Charisma;
             Info = creature.Info;
             Friendly = creature.Friendly;
+            Speed = new Speed
+            {
+                Walk = creature.Walk,
+                Fly = creature.Fly,
+                Climb = creature.Climb,
+                Swim = creature.Swim
+            };
         }
 
         public CreatureViewModel(PlayerCharacter pc)
@@ -42,6 +55,8 @@ namespace CombatHelper.ViewModels
             IsPC = true;
             HasTurn = false;
             Friendly = true;
+
+            Speed = new Speed();
         }
 
         public Creature ToModel()
@@ -51,7 +66,9 @@ namespace CombatHelper.ViewModels
                 ID = this.Id,
                 EncounterID = this.EncounterId,
                 HP = this.HP,
+                AC = this.AC,
                 Name = this.Name,
+                Slug = this.Slug,
                 Strength = this.Strength,
                 Dexterity = this.Dexterity,
                 Constitution = this.Constitution,
@@ -59,7 +76,11 @@ namespace CombatHelper.ViewModels
                 Wisdom = this.Wisdom,
                 Charisma = this.Charisma,
                 Info = this.Info,
-                Friendly = this.Friendly
+                Friendly = this.Friendly,
+                Walk = this.Speed.Walk,
+                Fly = this.Speed.Fly,
+                Climb = this.Speed.Climb,
+                Swim = this.Speed.Swim
             };
 
             return c;
@@ -69,7 +90,61 @@ namespace CombatHelper.ViewModels
         public string Name
         {
             get { return name; }
-            set { SetValue(ref name, value); }
+            set
+            {
+                SetValue(ref name, value);
+                OnPropertyChanged("DisplayName");
+            }
+        }
+
+        // if multiple similar creatures are in the same encounter
+        private int number;
+        public int Number
+        {
+            get { return number; }
+            set
+            {
+                SetValue(ref number, value);
+                OnPropertyChanged("DisplayName");
+            }
+        }
+
+        public string DisplayName
+        {
+            get
+            {
+                if (number > 1)
+                    return Name + $" ({Number})";
+                else
+                    return Name;
+            }
+        }
+        private string slug;
+        public string Slug
+        {
+            get { return slug; }
+            set
+            {
+                SetValue(ref slug, value);
+                OnPropertyChanged("ShowWebPagePopup");
+                OnPropertyChanged("ShowInfoPagePopup");
+                OnPropertyChanged("WebUrl");
+            }
+        }
+
+        public string WebUrl
+        {
+            get { return "https://open5e.com/monsters/" + Slug; }
+        }
+
+        public bool ShowWebPagePopup
+        {
+            get { return !string.IsNullOrEmpty(Slug); }
+        }
+
+        public bool ShowInfoPagePopup
+        {
+            get { return string.IsNullOrEmpty(Slug); }
         }
 
         private int hp;
@@ -84,6 +159,19 @@ namespace CombatHelper.ViewModels
             }
         }
 
+        private int ac;
+        public int AC
+        {
+            get { return ac; }
+            set { SetValue(ref ac, value); }
+        }
+
+        private Speed speed;
+        public Speed Speed
+        {
+            get { return speed; }
+            set { SetValue(ref speed, value); }
+        }
 
         private bool friendly;
         public bool Friendly
@@ -102,7 +190,7 @@ namespace CombatHelper.ViewModels
             get { return initiative; }
             set { SetValue(ref initiative, value); }
         }
-
+        #region attributes
         private int strength;
         public int Strength
         {
@@ -139,7 +227,7 @@ namespace CombatHelper.ViewModels
             get { return charisma; }
             set { SetValue(ref charisma, value); }
         }
-
+        #endregion
         private string info;
         public string Info
         {
@@ -149,7 +237,7 @@ namespace CombatHelper.ViewModels
 
         public bool IsDead
         {
-            get { return HP == 0; }
+            get { return HP <= 0; }
         }
 
         private bool hasTurn = false;
@@ -181,16 +269,25 @@ namespace CombatHelper.ViewModels
             }
         }
 
-        public async void Save()
+        public async Task Save()
         {
             var creature = ToModel();
             if (creature.ID == 0)
             {
                 // get id of encounter from db
                 await App.Database.Creatures.Insert(creature);
+                Id = creature.ID;
             }
 
             await App.Database.Creatures.Update(creature);
+        }
+
+        public async void Delete()
+        {
+            var creature = ToModel();
+
+            if (creature.ID != 0)
+                await App.Database.Creatures.Delete(creature);
         }
 
         public bool Equals(CreatureViewModel other)
@@ -198,51 +295,117 @@ namespace CombatHelper.ViewModels
             if (other == null)
                 return false;
 
-            if (!string.Equals(Name, other.Name))
-                return false;
-
-            if (HP != other.HP)
-                return false;
-
-            if (Friendly != other.Friendly)
-                return false;
-
-            if (!string.Equals(Info, other.Info))
-                return false;
-
-            return Strength == other.Strength &&
-                Dexterity == other.Dexterity &&
-                Constitution == other.Constitution &&
-                Intelligence == other.Intelligence &&
-                Wisdom == other.Wisdom &&
-                Charisma == other.Charisma;
+            return string.Equals(Name, other.Name) &&
+                   string.Equals(Slug, other.Slug) &&
+                   Speed.Equals(other.Speed) &&
+                   Number == other.Number &&
+                   HP == other.HP &&
+                   AC == other.AC &&
+                   Friendly == other.Friendly &&
+                   string.Equals(Info, other.Info) &&
+                   Strength == other.Strength &&
+                   Dexterity == other.Dexterity &&
+                   Constitution == other.Constitution &&
+                   Intelligence == other.Intelligence &&
+                   Wisdom == other.Wisdom &&
+                   Charisma == other.Charisma;
 
         }
 
         public static int CompareInitiative(CreatureViewModel a, CreatureViewModel b)
         {
-            return b.Initiative.CompareTo(a.Initiative);
+            // compare b to a, because the highest comes first
+            var compareInitiative = b.Initiative.CompareTo(a.Initiative);
+            if (compareInitiative == 0)
+                return b.Dexterity.CompareTo(a.Dexterity);
+            return compareInitiative;
         }
 
         public static CreatureViewModel Copy(CreatureViewModel vm)
         {
-                var copy = new CreatureViewModel()
+            var copy = new CreatureViewModel()
+            {
+                Name = vm.Name,
+                Slug = vm.Slug,
+                HP = vm.HP,
+                AC = vm.AC,
+                EncounterId = vm.EncounterId,
+                Strength = vm.Strength,
+                Dexterity = vm.Dexterity,
+                Constitution = vm.Constitution,
+                Intelligence = vm.Intelligence,
+                Wisdom = vm.Wisdom,
+                Charisma = vm.Charisma,
+                Info = vm.Info,
+                Friendly = vm.Friendly,
+                Initiative = vm.Initiative,
+                Speed = new Speed
                 {
-                    Name = vm.Name,
-                    HP = vm.HP,
-                    EncounterId = vm.EncounterId,
-                    Strength = vm.Strength,
-                    Dexterity = vm.Dexterity,
-                    Constitution = vm.Constitution,
-                    Intelligence = vm.Intelligence,
-                    Wisdom = vm.Wisdom,
-                    Charisma = vm.Charisma,
-                    Info = vm.Info,
-                    Friendly = vm.Friendly,
-                    Initiative = vm.Initiative
-                };
+                    Walk = vm.Speed.Walk,
+                    Fly = vm.Speed.Fly,
+                    Climb = vm.Speed.Climb,
+                    Swim = vm.Speed.Swim
+                }
+            };
 
             return copy;
+        }
+
+        public void FillFromData(Creature model)
+        {
+            Name = model.Name;
+            Slug = model.Slug;
+            HP = model.HP;
+            AC = model.AC;
+            Strength = model.Strength;
+            Dexterity = model.Dexterity;
+            Constitution = model.Constitution;
+            Intelligence = model.Intelligence;
+            Wisdom = model.Wisdom;
+            Charisma = model.Charisma;
+            Speed = new Speed
+            {
+                Fly = model.Fly,
+                Walk = model.Walk,
+                Swim = model.Swim,
+                Climb = model.Climb
+            };
+        }
+    }
+
+    public class Speed : BaseViewModel, IEquatable<Speed>
+    {
+        private int walk;
+        public int Walk
+        {
+            get { return walk; }
+            set { SetValue(ref walk, value); }
+        }
+
+        private int fly;
+        public int Fly
+        {
+            get { return fly; }
+            set { SetValue(ref fly, value); }
+        }
+
+        private int swim;
+        public int Swim
+        {
+            get { return swim; }
+            set { SetValue(ref swim, value); }
+        }
+
+        private int climb;
+        public int Climb
+        {
+            get { return climb; }
+            set { SetValue(ref climb, value); }
+        }
+
+        public bool Equals(Speed other)
+        {
+            return Walk.Equals(other.Walk) && Fly.Equals(other.Fly) && Swim.Equals(other.Swim) && Climb.Equals(other.Climb);
         }
     }
 }

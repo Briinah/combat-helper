@@ -1,4 +1,5 @@
 ﻿using CombatHelper.ViewModels;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,21 +55,36 @@ namespace CombatHelper.Views
 
         private async void EditHealth(object sender, EventArgs e)
         {
-            var creature = ((ImageButton)sender).BindingContext as CreatureViewModel;
-            string result = await DisplayPromptAsync($"Change HP of {creature.Name}", $"{creature.HP} + _", keyboard: Keyboard.Numeric);
-
-            if (!string.IsNullOrEmpty(result))
+            var creature = ((Button)sender).BindingContext as CreatureViewModel;
+            await PopupNavigation.Instance.PushAsync(new HealthPopup
             {
-                creature.HP += int.Parse(result);
-            }
+                BindingContext = creature
+            });
         }
 
         private async void AddCreature(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new CreatureAddModal(encounter)
+            await PopupNavigation.Instance.PushAsync(new CreatureAddPopup(encounter)
             {
                 BindingContext = new CreatureViewModel()
             });
+        }
+
+        private void HideInfoView(object sender, EventArgs e)
+        {
+            infoPopup.IsVisible = false;
+        }
+
+        private async void ShowInfoView(object sender, ItemTappedEventArgs e)
+        {
+            var creature = e.Item as CreatureViewModel;
+            if (!creature.IsPC)
+            {
+                await PopupNavigation.Instance.PushAsync(new EncounterInfoPopup
+                {
+                    BindingContext = creature
+                });
+            }
         }
     }
 }

@@ -11,8 +11,11 @@ namespace CombatHelper.Models
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         public string Name { get; set; }
+        public string Slug { get; set; }
         public bool Friendly { get; set; }
         public int HP { get; set; }
+        public int AC { get; set; }
+
         [ForeignKey(typeof(Encounter))]
         public int EncounterID { get; set; }
         public int Strength { get; set; }
@@ -22,5 +25,10 @@ namespace CombatHelper.Models
         public int Intelligence { get; set; }
         public int Charisma { get; set; }
         public string Info { get; set; }
+        public int Walk { get; set; }
+        public int Swim { get; set; }
+        public int Fly { get; set; }
+        public int Climb { get; set; }
     }
+
 }

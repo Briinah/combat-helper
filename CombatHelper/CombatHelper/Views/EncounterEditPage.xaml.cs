@@ -33,7 +33,36 @@ namespace CombatHelper.Views
                 Title = $"Edit: {encounter.Name}";
             }
 
+            encounter.Creatures.CollectionChanged += Creatures_CollectionChanged;
             creatureList.ItemsSource = encounter.Creatures;
+        }
+
+        protected override void OnDisappearing()
+        {
+            encounter.Creatures.CollectionChanged -= Creatures_CollectionChanged;
+        }
+
+        private void Creatures_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+            {
+                foreach (var item in e.NewItems)
+                {
+                    SetNumber(item as CreatureViewModel);
+                }
+            }
+            else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            {
+                foreach (var item in e.OldItems)
+                {
+                    var creature = item as CreatureViewModel;
+                    var sameNameList = encounter.Creatures.Where((c) => c.Name == creature.Name).ToArray();
+                    for(int i = 0; i < sameNameList.Length; i ++)
+                    {
+                        sameNameList[i].Number = i + 1;
+                    }
+                }
+            }
         }
 
         protected override bool OnBackButtonPressed()
@@ -57,7 +86,7 @@ namespace CombatHelper.Views
 
         private async void OnSaveButtonClicked(object sender, EventArgs e)
         {
-            encounter.Save();
+            await encounter.Save();
 
             Navigation.InsertPageBefore(new EncounterDetailPage()
             {
@@ -92,6 +121,17 @@ namespace CombatHelper.Views
 
         private async void AddCreature(object sender, EventArgs e)
         {
+            if (await encounter.HasUnsavedChanges())
+            {
+                if (await SaveChangesDialog())
+                {
+                    await encounter.Save();
+                    return;
+                }
+                else
+                    return;
+            }
+
             var creature = new CreatureViewModel()
             {
                 EncounterId = encounter.Id
@@ -109,7 +149,7 @@ namespace CombatHelper.Views
             {
                 if (await SaveChangesDialog())
                 {
-                    encounter.Save();
+                    await encounter.Save();
                     return;
                 }
                 else
@@ -134,10 +174,14 @@ namespace CombatHelper.Views
         private void CopyCreature(object sender, EventArgs e)
         {
             var creature = ((ImageButton)sender).BindingContext as CreatureViewModel;
-
             var copy = CreatureViewModel.Copy(creature);
-
             encounter.Creatures.Add(copy);
+        }
+
+        private void SetNumber(CreatureViewModel creature)
+        {
+            var count = encounter.Creatures.Count((c) => c.Name == creature.Name);
+            creature.Number = count;
         }
     }
 }

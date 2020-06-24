@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                  xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CombatHelper.Views.HealthPopup"
+                  >
+
+    <Frame HorizontalOptions="Fill"
+           VerticalOptions="Center"
+           BackgroundColor="White"
+           Margin="20">
+    <StackLayout HorizontalOptions="FillAndExpand">
+        <Label Text="{Binding Name}"
+               FontSize="Title"
+               TextColor="Black"/>
+            <Grid>
+        <RadioButton Text="Healing"
+                     CheckedChanged="SetHealing"/>
+        <RadioButton Text="Damage" IsChecked="True"
+                     Grid.Column="1"/>
+            </Grid>
+        <Entry x:Name="amount" Placeholder="0" Keyboard="Numeric"/>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+            <Button Text="Cancel"
+                    TextColor="Accent"
+                    BackgroundColor="White"
+                    Clicked="OnCancel"/>
+            <Button Text="OK"
+                    TextColor="Accent"
+                    BackgroundColor="White"
+                    Clicked="OnOK"/>
+        </StackLayout>
+    </StackLayout>
+    </Frame>
+</pages:PopupPage>

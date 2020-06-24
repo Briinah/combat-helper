@@ -34,7 +34,11 @@ namespace CombatHelper.ViewModels
         private bool dataLoaded;
         private bool pcsAdded;
 
-        public EncounterViewModel() { }
+        public EncounterViewModel() 
+        {
+            Creatures = new ObservableCollection<CreatureViewModel>();
+            dataLoaded = false;
+        }
 
         public EncounterViewModel(Encounter encounter)
         {
@@ -51,10 +55,20 @@ namespace CombatHelper.ViewModels
             {
                 var creatures = await App.Database.Creatures.Get<bool>((c) => c.EncounterID == Id, null);
                 foreach (var c in creatures)
-                    Creatures.Add(new CreatureViewModel(c));
+                {
+                    var vm = new CreatureViewModel(c);
+                    SetNumber(vm);
+                    Creatures.Add(vm);
+                }
             }
 
             dataLoaded = true;
+        }
+
+        private void SetNumber(CreatureViewModel creature)
+        {
+            var count = Creatures.Count((c) => c.Name == creature.Name);
+            creature.Number = count + 1;
         }
 
         public async Task ReloadData()
@@ -90,13 +104,14 @@ namespace CombatHelper.ViewModels
             };
 
             encounter.Creatures = new List<Creature>();
+
             foreach (var c in this.Creatures)
                 encounter.Creatures.Add(c.ToModel());
 
             return encounter;
         }
 
-        public async void Save()
+        public async Task Save()
         {
             var encounter = ToModel();
 
@@ -104,9 +119,10 @@ namespace CombatHelper.ViewModels
             {
                 // get id of encounter from db
                 await App.Database.Encounters.Insert(encounter);
+                this.Id = encounter.ID;
             }
 
-            SaveCreatures(encounter);
+            SaveCreatures();
             await App.Database.Encounters.UpdateWithChildren(encounter);
         }
 
@@ -116,35 +132,33 @@ namespace CombatHelper.ViewModels
 
             if (encounter.ID != 0)
             {
-                RemoveCreatures(encounter);
+                RemoveCreatures();
                 await App.Database.Encounters.Delete(encounter);
             }
         }
 
-        private async void SaveCreatures(Encounter encounter)
+        private async void SaveCreatures()
         {
-            foreach (var creature in encounter.Creatures)
+            foreach (var creature in Creatures)
             {
-                creature.EncounterID = encounter.ID;
-
-                if (creature.ID == 0)
-                    await App.Database.Creatures.Insert(creature);
-                else
-                    await App.Database.Creatures.Update(creature);
+                creature.EncounterId = Id;
+                await creature.Save();
             }
         }
 
-        private async void RemoveCreatures(Encounter encounter)
+        private void RemoveCreatures()
         {
-            foreach (var creature in encounter.Creatures)
+            foreach (var creature in Creatures)
             {
-                if (creature.ID != 0)
-                    await App.Database.Creatures.Delete(creature);
+                creature.Delete();
             }
         }
 
         public async Task<bool> HasUnsavedChanges()
         {
+            if (Id == 0)
+                return true;
+
             var data = await App.Database.Encounters.GetWithChildren(Id);
 
             var dataVM = new EncounterViewModel(data);
@@ -164,9 +178,9 @@ namespace CombatHelper.ViewModels
             if (Creatures.Count != other.Creatures.Count)
                 return false;
 
-            for(int i = 0; i < Creatures.Count; i++)
+            for (int i = 0; i < Creatures.Count; i++)
             {
-                if(!Creatures[i].Equals(other.Creatures[i]))
+                if (!Creatures[i].Equals(other.Creatures[i]))
                 {
                     return false;
                 }

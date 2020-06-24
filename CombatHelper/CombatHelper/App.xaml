@@ -6,6 +6,7 @@
              mc:Ignorable="d"
              x:Class="CombatHelper.App">
     <Application.Resources>
-
+        <Color x:Key="Headers">#CC0029</Color>
+        <Color x:Key="Titles">#000000</Color>
     </Application.Resources>
 </Application>

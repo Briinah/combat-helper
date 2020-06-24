@@ -38,12 +38,26 @@ namespace CombatHelper.Views
                 CampaignId = campaign.Id
             };
 
-            await Navigation.PushAsync(new EncounterEditPage()
+            var name = await DisplayPromptAsync("New Encounter", "Name: ");
+
+            if (!string.IsNullOrEmpty(name))
             {
-                BindingContext = encounter
+                encounter.Name = name;
+                await encounter.Save();
+
+                await Navigation.PushAsync(new EncounterEditPage()
+                {
+                    BindingContext = encounter
+                });
+            }
+        }
+        private async void OnEditClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new CampaignEditPage()
+            {
+                BindingContext = this.BindingContext
             });
         }
-
         private async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem != null)

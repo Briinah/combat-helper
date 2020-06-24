@@ -34,17 +34,9 @@ namespace CombatHelper.Droid.Renderers
 
             if (Control != null)
             {
-                int[][] states = new int[][]
-                {
-                    new int[] { -Android.Resource.Attribute.StateFocused}, // enabled
-                    new int[] {Android.Resource.Attribute.StateFocused} // disabled
-                };
-
                 GradientDrawable gd = new GradientDrawable();
                 gd.SetColor(global::Android.Graphics.Color.Transparent);
-                gd.SetCornerRadius(10);
                 Control.SetBackground(gd);
-                //Control.SetRawInputType(InputTypes.TextFlagNoSuggestions);
             }
         }
     }

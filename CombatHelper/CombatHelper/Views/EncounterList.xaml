@@ -6,21 +6,29 @@
              xmlns:controls="clr-namespace:CombatHelper.Controls"
              mc:Ignorable="d"
              x:Class="CombatHelper.Views.EncounterList">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Edit" 
+                     Clicked="OnEditClicked" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout>
             <StackLayout>
-                <Label Text="Encounters"
-                   HorizontalTextAlignment="Center"
-                   Padding="10"
-                   FontSize="Medium"/>
-            <BoxView HeightRequest="1" 
-                     Color="LightGray" 
-                     HorizontalOptions="FillAndExpand" />
-            <controls:XListView x:Name="encounterList"
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                    <Image Source="ic_sword_black"
+                           VerticalOptions="Center"
+                           Margin="10, 0, 0, 0"/>
+                    <Label Text="Encounters"
+                           FontSize="Medium"
+                           TextColor="{StaticResource Titles}"
+                           VerticalOptions="Center"/> 
+                </StackLayout>
+                <BoxView BackgroundColor="{StaticResource Headers}" HeightRequest="3" HorizontalOptions="FillAndExpand"/>
+                <controls:XListView x:Name="encounterList"
                       ItemSelected="OnListViewItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Name}" />
+                        <TextCell Text="{Binding Name}" 
+                                  TextColor="{StaticResource Titles}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </controls:XListView>
