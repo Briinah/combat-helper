@@ -4,6 +4,10 @@ using System;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Distribute;
 
 namespace CombatHelper
 {
@@ -32,6 +36,9 @@ namespace CombatHelper
         protected override void OnStart()
         {
             base.OnStart();
+
+            AppCenter.Start("android=0fd34a77-9449-44f6-ba95-a9bafde73e4a", typeof(Analytics), typeof(Crashes));
+            AppCenter.Start("android=0fd34a77-9449-44f6-ba95-a9bafde73e4a", typeof(Distribute));
         }
 
         protected override void OnSleep()
