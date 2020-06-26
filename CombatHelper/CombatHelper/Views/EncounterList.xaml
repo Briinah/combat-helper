@@ -14,6 +14,17 @@
         <AbsoluteLayout>
             <StackLayout>
                 <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                    <Image Source="ic_person"
+                           VerticalOptions="Center"
+                           Margin="10, 0, 0, 0"/>
+                    <Label Text="Players"
+                           FontSize="Medium"
+                           TextColor="{StaticResource Titles}"
+                           VerticalOptions="Center"/>
+                </StackLayout>
+                <BoxView BackgroundColor="{StaticResource Headers}" HeightRequest="3" HorizontalOptions="FillAndExpand"/>
+                <Label Text="{Binding PlayerList}" Padding="15"/>
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
                     <Image Source="ic_sword_black"
                            VerticalOptions="Center"
                            Margin="10, 0, 0, 0"/>
