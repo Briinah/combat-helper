@@ -83,6 +83,7 @@ namespace CombatHelper.ViewModels
 
         public async Task Save()
         {
+            await SavePlayers();
 
             var campaign = ToModel();
             if (campaign.ID == 0)
@@ -92,18 +93,17 @@ namespace CombatHelper.ViewModels
                 this.Id = campaign.ID;
             }
 
-            SavePlayers();
             // update campaign with players
             await App.Database.Campaigns.UpdateWithChildren(campaign);
+            //Console.WriteLine("campaign model players:  " + string.Join(", ", campaign.Players.Select(p => $"{p.Name} c-id: {p.CampaignID}  id: {p.ID}")));
 
-            var players = await App.Database.Players.Get();
         }
 
-        public async void Delete()
+        public async Task Delete()
         {
             var campaign = ToModel();
 
-            RemovePlayers();
+            await RemovePlayers();
             RemoveEncounters();
 
             if (campaign.ID != 0)
@@ -112,7 +112,7 @@ namespace CombatHelper.ViewModels
             }
         }
 
-        private async void SavePlayers()
+        private async Task SavePlayers()
         {
             foreach (var pc in Players)
             {
@@ -121,11 +121,11 @@ namespace CombatHelper.ViewModels
             }
         }
 
-        private void RemovePlayers()
+        private async Task RemovePlayers()
         {
             foreach (var pc in Players)
             {
-                pc.Delete();
+                await pc.Delete();
             }
         }
 

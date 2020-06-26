@@ -47,10 +47,13 @@ namespace CombatHelper.ViewModels
                 await App.Database.Players.Insert(pcModel);
                 Id = pcModel.ID;
             }
-            await App.Database.Players.Update(pcModel);
+            else
+            {
+                await App.Database.Players.Update(pcModel);
+            }
         }
 
-        public async void Delete()
+        public async Task Delete()
         {
             var pc = ToModel();
 

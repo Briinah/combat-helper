@@ -50,7 +50,7 @@ namespace CombatHelper.Views
         {
             if (await OnAlertYesNoClicked(campaign.Name))
             {
-                campaign.Delete();
+                await campaign.Delete();
 
                 await Navigation.PopToRootAsync();
             }
