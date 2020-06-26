@@ -41,17 +41,19 @@ namespace CombatHelper.ViewModels
 
         public async Task Save()
         {
-            var pc = ToModel();
-            if (pc.ID == 0)
+            var pcModel = ToModel();
+            if (pcModel.ID == 0)
             {
-                await App.Database.Players.Insert(pc);
-                this.Id = pc.ID;
+                await App.Database.Players.Insert(pcModel);
+                Id = pcModel.ID;
             }
-
-            await App.Database.Players.Update(pc);
+            else
+            {
+                await App.Database.Players.Update(pcModel);
+            }
         }
 
-        public async void Delete()
+        public async Task Delete()
         {
             var pc = ToModel();
 

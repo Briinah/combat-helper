@@ -50,7 +50,7 @@ namespace CombatHelper.Views
         {
             if (await OnAlertYesNoClicked(campaign.Name))
             {
-                campaign.Delete();
+                await campaign.Delete();
 
                 await Navigation.PopToRootAsync();
             }
@@ -75,6 +75,11 @@ namespace CombatHelper.Views
 
         protected override bool OnBackButtonPressed()
         {
+            Navigation.InsertPageBefore(new EncounterList()
+            {
+                BindingContext = campaign
+            }, this);
+
             Navigation.PopAsync();
             return true;
         }
