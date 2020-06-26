@@ -12,7 +12,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="obj\Debug\netstandard2.0\Secrets.cs" />
+    <Compile Remove="obj\Debug\**" />
+    <EmbeddedResource Remove="obj\Debug\**" />
+    <None Remove="obj\Debug\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="obj\Release\netstandard2.0\Secrets.cs" />
   </ItemGroup>
 
   <ItemGroup>
