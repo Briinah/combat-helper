@@ -18,6 +18,8 @@ namespace CombatHelper.Views
         private EncounterViewModel encounter;
         private bool groupByName = false;
 
+        private bool rolled = false;
+
         public EncounterInitiativePage(bool groupByName)
         {
             InitializeComponent();
@@ -32,7 +34,8 @@ namespace CombatHelper.Views
             encounter.AddPlayers();
             creatureList.ItemsSource = encounter.Creatures;
 
-            RollInitiative();
+            if(!rolled)
+                RollInitiative();
         }
 
         private void RollInitiative()
@@ -62,6 +65,8 @@ namespace CombatHelper.Views
             }
 
             encounter.Creatures.Sort(CreatureViewModel.CompareInitiative);
+
+            rolled = true;
         }
 
         private async void SetInitiative(object sender, EventArgs e)
