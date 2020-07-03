@@ -46,7 +46,7 @@ namespace CombatHelper.Views
         {
             if (e.SelectedItem != null)
             {
-                await Navigation.PushAsync(new EncounterList
+                await Navigation.PushAsync(new CampaignDetailPage
                 {
                     BindingContext = e.SelectedItem as CampaignViewModel
                 });

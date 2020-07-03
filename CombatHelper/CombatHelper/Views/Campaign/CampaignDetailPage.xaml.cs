@@ -13,11 +13,11 @@ using Xamarin.Forms.Xaml;
 namespace CombatHelper.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class EncounterList : ContentPage
+    public partial class CampaignDetailPage : ContentPage
     {
         private CampaignViewModel campaign;
 
-        public EncounterList()
+        public CampaignDetailPage()
         {
             InitializeComponent();
         }
