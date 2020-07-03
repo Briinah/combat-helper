@@ -33,13 +33,7 @@ namespace CombatHelper.Droid
 
         public override void OnBackPressed()
         {
-            if(Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed))
-            {
-            }
-            else
-            {
-                base.OnBackPressed();
-            }
+            Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed);
         }
     }
 }
