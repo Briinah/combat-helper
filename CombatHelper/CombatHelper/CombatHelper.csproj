@@ -38,49 +38,52 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\CampaignEditPage.xaml.cs">
+    <Compile Update="Views\Campaign\CampaignEditPage.xaml.cs">
       <DependentUpon>CampaignEditPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\CreatureAddPopup.xaml.cs">
+    <Compile Update="Views\Creature\CreatureAddPopup.xaml.cs">
       <DependentUpon>CreatureAddPopup.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\EncounterInitiativePage.xaml.cs">
+    <Compile Update="Views\Encounter\EncounterInitiativePage.xaml.cs">
       <DependentUpon>EncounterInitiativePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Campaign\CampaignDetailPage.xaml.cs">
+      <DependentUpon>CampaignDetailPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\CampaignEditPage.xaml">
+    <EmbeddedResource Update="Views\Campaign\CampaignEditPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CampaignList.xaml">
+    <EmbeddedResource Update="Views\Campaign\CampaignList.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CreatureAddPopup.xaml">
+    <EmbeddedResource Update="Views\Creature\CreatureAddPopup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CreatureEditPage.xaml">
+    <EmbeddedResource Update="Views\Creature\CreatureEditPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\EncounterDetailPage.xaml">
+    <EmbeddedResource Update="Views\Encounter\EncounterDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\EncounterEditPage.xaml">
+    <EmbeddedResource Update="Views\Encounter\EncounterEditPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\EncounterInfoPopup.xaml">
+    <EmbeddedResource Update="Views\Encounter\EncounterInfoPopup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\EncounterList.xaml">
+    <EmbeddedResource Update="Views\Campaign\CampaignDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\EncounterInitiativePage.xaml">
+    <EmbeddedResource Update="Views\Encounter\EncounterInitiativePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\EncounterRunPage.xaml">
+    <EmbeddedResource Update="Views\Encounter\EncounterRunPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\HealthPopup.xaml">
+    <EmbeddedResource Update="Views\Encounter\HealthPopup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

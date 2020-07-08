@@ -139,7 +139,7 @@ namespace CombatHelper.ViewModels
 
         private async void SaveCreatures()
         {
-            foreach (var creature in Creatures)
+            foreach (var creature in Creatures.ToList()) // create a copy of the list, so it is not modified while looping
             {
                 creature.EncounterId = Id;
                 await creature.Save();

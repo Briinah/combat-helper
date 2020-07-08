@@ -114,7 +114,7 @@ namespace CombatHelper.ViewModels
 
         private async Task SavePlayers()
         {
-            foreach (var pc in Players)
+            foreach (var pc in Players.ToList()) // create copy of the list, so it is not modified while looping
             {
                 pc.CampaignId = Id;
                 await pc.Save();
