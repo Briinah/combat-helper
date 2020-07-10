@@ -34,9 +34,15 @@ namespace CombatHelper.Views
 
         private int amountOfCreatures = 1;
 
-        private async void SetInitiative(object sender, EventArgs e)
+        private async void OnInitativeClicked(object sender, EventArgs e)
         {
-            string response = await DisplayPromptAsync(creature.Name, "Set initiative: ", maxLength: 2, keyboard: Keyboard.Numeric);
+            await SetInitative();
+        }
+
+        private async Task SetInitative()
+        {
+            var dex = creature.GetModString(creature.Dexterity);
+            string response = await DisplayPromptAsync(creature.Name, $"Set initiative, dex ({dex}): ", maxLength: 2, keyboard: Keyboard.Numeric);
             if (!string.IsNullOrEmpty(response))
             {
                 creature.Initiative = int.Parse(response);
@@ -62,7 +68,15 @@ namespace CombatHelper.Views
 
         private async void AddCreatures(object sender, EventArgs e)
         {
-            for(int i = 0; i < amountOfCreatures; i++)
+            if (IsBusy) return;
+
+            IsBusy = true;
+            if (creature.Initiative == 0)
+            {
+                await SetInitative();
+            }
+
+            for (int i = 0; i < amountOfCreatures; i++)
             {
                 var copy = CreatureViewModel.Copy(creature);
                 copy.Number = i + 1;
@@ -72,6 +86,8 @@ namespace CombatHelper.Views
             encounter.Creatures.Sort(CreatureViewModel.CompareInitiative);
 
             await PopupNavigation.Instance.PopAsync();
+
+            IsBusy = false;
         }
 
         private async void SearchCreature(object sender, EventArgs e)

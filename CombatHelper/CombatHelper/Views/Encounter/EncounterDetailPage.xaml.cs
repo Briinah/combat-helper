@@ -31,16 +31,22 @@ namespace CombatHelper.Views
         }
         private async void OnEditClicked(object sender, EventArgs e)
         {
+            if (IsBusy) return;
+
+            IsBusy = true;
             Navigation.InsertPageBefore(new EncounterEditPage()
             {
                 BindingContext = encounter
             }, this);
 
             await Navigation.PopAsync();
+            IsBusy = false;
         }
 
         private async void RollInitiative(object sender, EventArgs e)
         {
+            if (IsBusy) return;
+
             IsBusy = true;
             await Navigation.PushAsync(new EncounterInitiativePage(groupByName.IsToggled)
             {

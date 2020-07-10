@@ -27,6 +27,9 @@ namespace CombatHelper.Views
 
         private async void OnAddClicked(object sender, EventArgs e)
         {
+            if (IsBusy) return;
+
+            IsBusy = true;
             var campaign = new CampaignViewModel();
 
             var name = await DisplayPromptAsync("New Campaign", "Name: ");
@@ -40,17 +43,24 @@ namespace CombatHelper.Views
                     BindingContext = campaign
                 });
             }
+
+            IsBusy = false;
         }
 
         private async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
             if (e.SelectedItem != null)
             {
-                await Navigation.PushAsync(new EncounterList
+                await Navigation.PushAsync(new CampaignDetailPage
                 {
                     BindingContext = e.SelectedItem as CampaignViewModel
                 });
             }
+            IsBusy = false;
         }
     }
 }

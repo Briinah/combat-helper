@@ -64,10 +64,13 @@ namespace CombatHelper.Views
 
         private async void AddCreature(object sender, EventArgs e)
         {
+            if (IsBusy) return;
+            IsBusy = true;
             await PopupNavigation.Instance.PushAsync(new CreatureAddPopup(encounter)
             {
                 BindingContext = new CreatureViewModel()
             });
+            IsBusy = false;
         }
 
         private void HideInfoView(object sender, EventArgs e)
@@ -77,6 +80,8 @@ namespace CombatHelper.Views
 
         private async void ShowInfoView(object sender, ItemTappedEventArgs e)
         {
+            if (IsBusy) return;
+            IsBusy = true;
             var creature = e.Item as CreatureViewModel;
             if (!creature.IsPC)
             {
@@ -85,6 +90,7 @@ namespace CombatHelper.Views
                     BindingContext = creature
                 });
             }
+            IsBusy = false;
         }
     }
 }

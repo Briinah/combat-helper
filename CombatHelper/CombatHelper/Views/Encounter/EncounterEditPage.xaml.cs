@@ -1,10 +1,7 @@
-﻿using CombatHelper.Models;
+﻿using CombatHelper.Helpers;
 using CombatHelper.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -57,7 +54,7 @@ namespace CombatHelper.Views
                 {
                     var creature = item as CreatureViewModel;
                     var sameNameList = encounter.Creatures.Where((c) => c.Name == creature.Name).ToArray();
-                    for(int i = 0; i < sameNameList.Length; i ++)
+                    for (int i = 0; i < sameNameList.Length; i++)
                     {
                         sameNameList[i].Number = i + 1;
                     }
@@ -67,6 +64,9 @@ namespace CombatHelper.Views
 
         protected override bool OnBackButtonPressed()
         {
+            if (IsBusy) return false;
+
+            IsBusy = true;
             if (encounter.Id != 0)
             {
                 Navigation.InsertPageBefore(new EncounterDetailPage()
@@ -76,6 +76,7 @@ namespace CombatHelper.Views
             }
 
             Navigation.PopAsync();
+            IsBusy = false;
             return true;
         }
 
@@ -86,6 +87,9 @@ namespace CombatHelper.Views
 
         private async void OnSaveButtonClicked(object sender, EventArgs e)
         {
+            if (IsBusy) return;
+
+            IsBusy = true;
             await encounter.Save();
 
             Navigation.InsertPageBefore(new EncounterDetailPage()
@@ -94,15 +98,19 @@ namespace CombatHelper.Views
             }, this);
 
             await Navigation.PopAsync();
+            IsBusy = false;
         }
 
         private async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
+            if (IsBusy) return;
+            IsBusy = true;
             if (await OnAlertYesNoClicked(encounter.Name))
             {
                 encounter.Delete();
                 await Navigation.PopAsync();
             }
+            IsBusy = false;
         }
 
 
@@ -121,6 +129,9 @@ namespace CombatHelper.Views
 
         private async void AddCreature(object sender, EventArgs e)
         {
+            if (IsBusy) return;
+
+            IsBusy = true;
             if (await encounter.HasUnsavedChanges())
             {
                 if (await SaveChangesDialog())
@@ -141,10 +152,14 @@ namespace CombatHelper.Views
             {
                 BindingContext = creature
             });
+            IsBusy = false;
         }
 
         private async void EditCreature(object sender, ItemTappedEventArgs e)
         {
+            if (IsBusy) return;
+
+            IsBusy = true;
             if (await encounter.HasUnsavedChanges())
             {
                 if (await SaveChangesDialog())
@@ -157,11 +172,11 @@ namespace CombatHelper.Views
             }
 
             var creature = e.Item as CreatureViewModel;
-
             await Navigation.PushAsync(new CreatureEditPage()
             {
                 BindingContext = creature
             });
+            IsBusy = false;
         }
 
         private async Task<bool> SaveChangesDialog()

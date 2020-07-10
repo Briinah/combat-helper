@@ -9,7 +9,7 @@ using Android.OS;
 
 namespace CombatHelper.Droid
 {
-    [Activity(Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -33,13 +33,7 @@ namespace CombatHelper.Droid
 
         public override void OnBackPressed()
         {
-            if(Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed))
-            {
-            }
-            else
-            {
-                base.OnBackPressed();
-            }
+            Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed);
         }
     }
 }

@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:controls="clr-namespace:CombatHelper.Controls"
              mc:Ignorable="d"
-             x:Class="CombatHelper.Views.EncounterList">
+             x:Class="CombatHelper.Views.CampaignDetailPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Edit" 
                      Clicked="OnEditClicked" />
@@ -13,6 +13,17 @@
     <ContentPage.Content>
         <AbsoluteLayout>
             <StackLayout>
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                    <Image Source="ic_person"
+                           VerticalOptions="Center"
+                           Margin="10, 0, 0, 0"/>
+                    <Label Text="Players"
+                           FontSize="Medium"
+                           TextColor="{StaticResource Titles}"
+                           VerticalOptions="Center"/>
+                </StackLayout>
+                <BoxView BackgroundColor="{StaticResource Headers}" HeightRequest="3" HorizontalOptions="FillAndExpand"/>
+                <Label Text="{Binding PlayerList}" Padding="15"/>
                 <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
                     <Image Source="ic_sword_black"
                            VerticalOptions="Center"

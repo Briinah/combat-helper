@@ -190,6 +190,15 @@ namespace CombatHelper.ViewModels
             get { return initiative; }
             set { SetValue(ref initiative, value); }
         }
+
+        public string GetModString(int modifier)
+        {
+            if (modifier >= 0)
+                return "+" + modifier;
+            else
+                return modifier.ToString();
+        }
+
         #region attributes
         private int strength;
         public int Strength
