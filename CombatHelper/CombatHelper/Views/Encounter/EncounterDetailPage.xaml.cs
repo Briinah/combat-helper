@@ -31,13 +31,13 @@ namespace CombatHelper.Views
 
             if(App.ResourceManager.EncounterExists(encounter.Id))
             {
-                continueButton.IsEnabled = true;
-                continueButton.BackgroundColor = Color.Accent;
+                startButton.IsVisible = false;
+                startButton.IsEnabled = false;
             }
             else
             {
                 continueButton.IsEnabled = false;
-                continueButton.BackgroundColor = Color.LightGray;
+                continueButton.IsVisible = false;
             }
         }
         private async void OnEditClicked(object sender, EventArgs e)
