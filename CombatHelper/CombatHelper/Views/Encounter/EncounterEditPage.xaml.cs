@@ -90,7 +90,21 @@ namespace CombatHelper.Views
             if (IsBusy) return;
 
             IsBusy = true;
+
+            if(App.ResourceManager.EncounterExists(encounter.Id))
+            {
+                var result = await DisplayAlert("Saved Encounter", "Changing the encounter will remove the saved encounter. Continue?", "Yes", "No");
+
+                if(!result)
+                {
+                    IsBusy = false;
+                    return;
+                }
+            }
+
             await encounter.Save();
+
+            App.ResourceManager.RemoveEncounter(encounter);
 
             Navigation.InsertPageBefore(new EncounterDetailPage()
             {
