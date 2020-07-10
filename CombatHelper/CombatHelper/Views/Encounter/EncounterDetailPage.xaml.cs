@@ -16,6 +16,8 @@ namespace CombatHelper.Views
     {
         EncounterViewModel encounter;
 
+        private bool prevEncounterExists;
+
         public EncounterDetailPage()
         {
             InitializeComponent();
@@ -29,12 +31,9 @@ namespace CombatHelper.Views
             creatureList.ItemsSource = encounter.Creatures;
             Title = encounter.Name;
 
-            if(App.ResourceManager.EncounterExists(encounter.Id))
-            {
-                startButton.IsVisible = false;
-                startButton.IsEnabled = false;
-            }
-            else
+            prevEncounterExists = App.ResourceManager.EncounterExists(encounter.Id);
+
+            if(!prevEncounterExists)
             {
                 continueButton.IsEnabled = false;
                 continueButton.IsVisible = false;
@@ -57,8 +56,19 @@ namespace CombatHelper.Views
         private async void RollInitiative(object sender, EventArgs e)
         {
             if (IsBusy) return;
-
             IsBusy = true;
+
+            if(prevEncounterExists)
+            {
+                var result = await DisplayAlert("Start new Encounter", "Starting this encounter will overwrite the saved one. Are you sure?", "Yes", "No");
+
+                if(!result)
+                {
+                    IsBusy = false;
+                    return;
+                }
+            }
+
             await Navigation.PushAsync(new EncounterInitiativePage(groupByName.IsToggled)
             {
                 BindingContext = encounter

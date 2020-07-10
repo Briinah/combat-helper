@@ -107,5 +107,10 @@ namespace CombatHelper.Views
             }
             IsBusy = false;
         }
+
+        private void ResetEncounter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
