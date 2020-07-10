@@ -1,4 +1,5 @@
 ﻿using CombatHelper.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -188,6 +189,11 @@ namespace CombatHelper.ViewModels
             }
 
             return true;
+        }
+
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
         }
     }
 }
