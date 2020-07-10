@@ -35,6 +35,21 @@ namespace CombatHelper.Views
                 encounter.Creatures[turnIndex].HasTurn = true;
             else
                 turnIndex = encounter.Creatures.IndexOf(turn);
+
+            App.OnSleeping += App_OnSleeping;
+        }
+
+        private void App_OnSleeping(object sender, EventArgs e)
+        {
+            App.ResourceManager.SaveEncounter(encounter);
+        }
+
+        protected override void OnDisappearing()
+        {
+            App.OnSleeping -= App_OnSleeping;
+            App.ResourceManager.SaveEncounter(encounter);
+
+            base.OnDisappearing();
         }
 
         private void NextTurn(object sender, EventArgs e)
