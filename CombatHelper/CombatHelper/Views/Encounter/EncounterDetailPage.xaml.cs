@@ -28,6 +28,17 @@ namespace CombatHelper.Views
             await encounter.ReloadData();
             creatureList.ItemsSource = encounter.Creatures;
             Title = encounter.Name;
+
+            if(App.ResourceManager.EncounterExists(encounter.Id))
+            {
+                continueButton.IsEnabled = true;
+                continueButton.BackgroundColor = Color.Accent;
+            }
+            else
+            {
+                continueButton.IsEnabled = false;
+                continueButton.BackgroundColor = Color.LightGray;
+            }
         }
         private async void OnEditClicked(object sender, EventArgs e)
         {
@@ -52,6 +63,22 @@ namespace CombatHelper.Views
             {
                 BindingContext = encounter
             });
+            IsBusy = false;
+        }
+
+        private async void ContinueEncounter(object sender, EventArgs e)
+        {
+            if (IsBusy) return;
+
+            IsBusy = true;
+
+            var newEncounter = App.ResourceManager.GetEncounter(encounter.Id);
+
+            await Navigation.PushAsync(new EncounterRunPage()
+            {
+                BindingContext = newEncounter
+            });
+
             IsBusy = false;
         }
     }

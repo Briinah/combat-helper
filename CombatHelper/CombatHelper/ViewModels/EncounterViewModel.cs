@@ -137,6 +137,8 @@ namespace CombatHelper.ViewModels
                 RemoveCreatures();
                 await App.Database.Encounters.Delete(encounter);
             }
+
+            App.ResourceManager.RemoveEncounter(this);
         }
 
         private async void SaveCreatures()

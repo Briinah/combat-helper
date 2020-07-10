@@ -71,6 +71,15 @@
                     </ListView.ItemTemplate>
                 </controls:XListView>
             </StackLayout>
+            <Button x:Name="continueButton"
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="EndAndExpand"
+                    Text="Continue"
+                    BackgroundColor="Accent"
+                    TextColor="White"
+                    Clicked="ContinueEncounter"
+                    Margin="30"
+                    CornerRadius="40"/>
             <ImageButton HorizontalOptions="EndAndExpand"
                          VerticalOptions="EndAndExpand"
                          Margin="30"
