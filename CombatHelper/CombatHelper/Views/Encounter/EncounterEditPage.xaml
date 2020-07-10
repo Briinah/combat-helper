@@ -10,7 +10,7 @@
                      Clicked="OnCancel" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Spacing="0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*" />
@@ -85,6 +85,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </local:XListView>
+            <BoxView BackgroundColor="Accent" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
             <Button Text="Add Creature"
                     Clicked="AddCreature"
                     ImageSource="ic_monster_add"

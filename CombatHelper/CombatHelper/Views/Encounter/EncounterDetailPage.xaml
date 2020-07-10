@@ -5,14 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:controls="clr-namespace:CombatHelper.Controls"
              mc:Ignorable="d"
-             x:Class="CombatHelper.Views.EncounterDetailPage">
+             x:Class="CombatHelper.Views.EncounterDetailPage"
+             x:Name="page">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Edit" 
                      Clicked="OnEditClicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>
-            <StackLayout>
+            <StackLayout Spacing="0">
                 <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
                     <Image Source="ic_settings"
                            VerticalOptions="Center"
@@ -71,15 +72,33 @@
                     </ListView.ItemTemplate>
                 </controls:XListView>
             </StackLayout>
-            <ImageButton HorizontalOptions="EndAndExpand"
+            <StackLayout VerticalOptions="End"
+                         HorizontalOptions="End"
+                         Margin="30">
+            <Button x:Name="startButton"
+                    Text="Start"
+                    TextColor="White"
+                         HorizontalOptions="EndAndExpand"
                          VerticalOptions="EndAndExpand"
-                         Margin="30"
                          BackgroundColor="Accent"
-                         HeightRequest="60"
-                         WidthRequest="60"
                          CornerRadius="40"
-                         Source="ic_d20.png"
-                         Clicked="RollInitiative"/>
+                         ImageSource="ic_d20"
+                         Clicked="RollInitiative"
+                    Padding="10, 0, 20, 0"/>
+            <Button x:Name="continueButton"
+                    HorizontalOptions="EndAndExpand"
+                    VerticalOptions="EndAndExpand"
+                    Text="Continue"
+                    ImageSource="ic_d20"
+                    BackgroundColor="Accent"
+                    TextColor="White"
+                    Clicked="ContinueEncounter"
+                    CornerRadius="40"
+                    Padding="10, 0, 20, 0"/>
+            </StackLayout>
+            <ActivityIndicator IsRunning="{Binding Path=IsBusy, Source={x:Reference page}}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -7,7 +7,6 @@
              mc:Ignorable="d"
              x:Class="CombatHelper.Views.EncounterRunPage"
              Title="{Binding Round, StringFormat='Round {0}'}">
-
     <ContentPage.Content>
         <Grid>
             <StackLayout VerticalOptions="FillAndExpand">
