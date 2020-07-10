@@ -36,7 +36,8 @@ namespace CombatHelper.Views
 
         private async void SetInitiative(object sender, EventArgs e)
         {
-            string response = await DisplayPromptAsync(creature.Name, "Set initiative: ", maxLength: 2, keyboard: Keyboard.Numeric);
+            var dex = creature.GetModString(creature.Dexterity);
+            string response = await DisplayPromptAsync(creature.Name, $"Set initiative, dex ({dex}): ", maxLength: 2, keyboard: Keyboard.Numeric);
             if (!string.IsNullOrEmpty(response))
             {
                 creature.Initiative = int.Parse(response);
