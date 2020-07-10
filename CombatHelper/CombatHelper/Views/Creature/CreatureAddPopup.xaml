@@ -237,7 +237,7 @@
                         HeightRequest="55"
                         BackgroundColor="White"
                         Text="{Binding Initiative}"
-                        Clicked="SetInitiative"
+                        Clicked="OnInitativeClicked"
                         BorderColor="Accent"
                         BorderWidth="1"/>
                     </Grid>
