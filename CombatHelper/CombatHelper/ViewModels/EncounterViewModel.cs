@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace CombatHelper.ViewModels
 {
@@ -40,7 +41,7 @@ namespace CombatHelper.ViewModels
             dataLoaded = false;
         }
 
-        public EncounterViewModel(Encounter encounter)
+        public EncounterViewModel(Encounter encounter) 
         {
             Id = encounter.ID;
             Name = encounter.Name;

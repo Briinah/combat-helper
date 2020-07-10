@@ -35,6 +35,9 @@ namespace CombatHelper.Views
 
         private async void OnSaveButtonClicked(object sender, EventArgs e)
         {
+            if (IsBusy) return;
+
+            IsBusy = true;
             await campaign.Save();
             Navigation.InsertPageBefore(new CampaignDetailPage()
             {
@@ -42,18 +45,25 @@ namespace CombatHelper.Views
             }, this);
 
             await Navigation.PopAsync();
+
+            IsBusy = false;
         }
 
 
 
         private async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
+            if (IsBusy) return;
+
+            IsBusy = true;
             if (await OnAlertYesNoClicked(campaign.Name))
             {
                 await campaign.Delete();
 
                 await Navigation.PopToRootAsync();
             }
+
+            IsBusy = false;
         }
 
         private async Task<bool> OnAlertYesNoClicked(string campaignName)
@@ -75,12 +85,17 @@ namespace CombatHelper.Views
 
         protected override bool OnBackButtonPressed()
         {
+            if (IsBusy) return false;
+
+            IsBusy = true;
             Navigation.InsertPageBefore(new CampaignDetailPage()
             {
                 BindingContext = campaign
             }, this);
 
             Navigation.PopAsync();
+
+            IsBusy = false;
             return true;
         }
 

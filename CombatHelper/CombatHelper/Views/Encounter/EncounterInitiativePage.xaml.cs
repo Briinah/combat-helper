@@ -86,6 +86,8 @@ namespace CombatHelper.Views
 
         private async void StartEncounter(object sender, EventArgs e)
         {
+            if (IsBusy) return;
+
             IsBusy = true;
             Navigation.InsertPageBefore(new EncounterRunPage()
             {

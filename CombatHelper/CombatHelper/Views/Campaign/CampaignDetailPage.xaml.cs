@@ -33,6 +33,9 @@ namespace CombatHelper.Views
 
         private async void NewEncounter(object sender, EventArgs e)
         {
+            if (IsBusy) return;
+
+            IsBusy = true;
             var encounter = new EncounterViewModel()
             {
                 CampaignId = campaign.Id
@@ -50,18 +53,28 @@ namespace CombatHelper.Views
                     BindingContext = encounter
                 });
             }
+
+            IsBusy = false;
         }
         private async void OnEditClicked(object sender, EventArgs e)
         {
+            if (IsBusy) return;
+
+            IsBusy = true;
             Navigation.InsertPageBefore(new CampaignEditPage()
             {
                 BindingContext = this.BindingContext
             }, this);
 
             await Navigation.PopAsync();
+
+            IsBusy = false;
         }
         private async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            if (IsBusy) return;
+
+            IsBusy = true;
             if (e.SelectedItem != null)
             {
                 await Navigation.PushAsync(new EncounterDetailPage
@@ -69,6 +82,7 @@ namespace CombatHelper.Views
                     BindingContext = e.SelectedItem as EncounterViewModel
                 });
             }
+            IsBusy = false;
         }
     }
 }
