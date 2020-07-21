@@ -8,6 +8,7 @@ using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Distribute;
+using CombatHelper.Helpers;
 
 namespace CombatHelper
 {
@@ -26,6 +27,23 @@ namespace CombatHelper
                 return database;
             }
         }
+
+        private static ResourceManager resourceManager;
+        public static ResourceManager ResourceManager
+        {
+            get
+            {
+                if(resourceManager == null)
+                {
+                    resourceManager = new ResourceManager(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)));
+                }
+
+                return resourceManager;
+            }
+        }
+
+        public static event EventHandler OnSleeping;
+
         public App()
         {
             InitializeComponent();
@@ -44,6 +62,8 @@ namespace CombatHelper
 
         protected override void OnSleep()
         {
+            OnSleeping?.Invoke(this, new EventArgs());
+
             base.OnSleep();
         }
 
