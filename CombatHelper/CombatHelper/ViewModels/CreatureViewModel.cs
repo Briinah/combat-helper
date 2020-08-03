@@ -14,7 +14,7 @@ namespace CombatHelper.ViewModels
     {
         public int Id { get; set; }
         public int EncounterId { get; set; }
-        public bool IsPC { get; private set; }
+        public bool IsPC { get; set; }
 
         public CreatureViewModel()
         {
@@ -261,7 +261,7 @@ namespace CombatHelper.ViewModels
 
         public bool ShowInfo
         {
-            get { return HasTurn && !IsPC; }
+            get { return HasTurn; }
         }
 
         public Color ButtonColor

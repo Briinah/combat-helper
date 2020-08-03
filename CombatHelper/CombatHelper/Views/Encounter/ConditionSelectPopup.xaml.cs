@@ -25,12 +25,12 @@ namespace CombatHelper.Views.Encounter
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
-
             creature = BindingContext as CreatureViewModel;
 
             collectionView.ItemsSource = Mechanics.Conditions;
             collectionView.SelectedItems = creature.Conditions.ToList<object>();
+
+            base.OnAppearing();
         }
         private async void ClosePopup(object sender, EventArgs e)
         {

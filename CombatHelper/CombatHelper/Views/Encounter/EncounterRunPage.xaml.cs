@@ -94,13 +94,11 @@ namespace CombatHelper.Views
             if (IsBusy) return;
             IsBusy = true;
             var creature = e.Item as CreatureViewModel;
-            if (!creature.IsPC)
+
+            await PopupNavigation.Instance.PushAsync(new EncounterInfoPopup
             {
-                await PopupNavigation.Instance.PushAsync(new EncounterInfoPopup
-                {
-                    BindingContext = creature
-                });
-            }
+                BindingContext = creature
+            });
             IsBusy = false;
         }
 
