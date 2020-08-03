@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:helpers="clr-namespace:CombatHelper.Helpers" xmlns:controls="clr-namespace:CombatHelper.Controls"
+             mc:Ignorable="d"
+             x:Class="CombatHelper.Controls.EncounterCreatureListItem">
+    <StackLayout>
+        <BoxView HeightRequest="2" Color="Accent" 
+                 HorizontalOptions="FillAndExpand" 
+                 IsVisible="{Binding HasTurn}"/>
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="8*" />
+            </Grid.ColumnDefinitions>
+            <Button HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    BackgroundColor="{Binding ButtonColor}"
+                    WidthRequest="40"
+                    HeightRequest="40"
+                    CornerRadius="40"
+                    Text="{Binding Initiative}"/>
+            <StackLayout Grid.Column ="1" >
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding DisplayName}"
+                           VerticalTextAlignment="Center"
+                           FontSize="Body"/>
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="EndAndExpand">
+                        <Image Source="ic_ac"
+                               WidthRequest="20"
+                               HorizontalOptions="End"
+                               IsVisible="{Binding IsPC, Converter={helpers:InverseBoolConverter}}"/>
+                        <Button Text="{Binding AC}"
+                                Grid.Column="1"
+                                BackgroundColor="Transparent"
+                                WidthRequest="40"
+                                HorizontalOptions="Start"
+                                IsVisible="{Binding IsPC, Converter={helpers:InverseBoolConverter}}"/>
+                        <Image Source="ic_hp" WidthRequest="20"/>
+                        <Button Text="{Binding HP}"
+                                x:Name="HealthButton"
+                                BackgroundColor="Transparent"
+                                WidthRequest="50"
+                                Clicked="HealthButton_Clicked"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Grid.Row="2" IsVisible="{Binding ShowInfo}" Spacing="20">
+                    <StackLayout Orientation="Horizontal" IsVisible="{Binding Speed.Walk, Converter={helpers:HasValueConverter}}">
+                        <Image Source="ic_feet"/>
+                        <Label Text="{Binding Speed.Walk}" VerticalOptions="Center"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" IsVisible="{Binding Speed.Fly, Converter={helpers:HasValueConverter}}">
+                        <Image Source="ic_wing"/>
+                        <Label Text="{Binding Speed.Fly}" VerticalOptions="Center"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" IsVisible="{Binding Speed.Swim, Converter={helpers:HasValueConverter}}">
+                        <Image Source="ic_fin"/>
+                        <Label Text="{Binding Speed.Swim}" VerticalOptions="Center"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" IsVisible="{Binding Speed.Climb, Converter={helpers:HasValueConverter}}">
+                        <Image Source="ic_climb"/>
+                        <Label Text="{Binding Speed.Climb}" VerticalOptions="Center"/>
+                    </StackLayout>
+                </StackLayout>
+                <controls:AttributeTable Grid.Row="3" IsVisible="{Binding ShowInfo}"/>
+                <Label Grid.Row="3" IsVisible="{Binding ShowInfo}"
+                                               Text="{Binding Info}"/>
+            </StackLayout>
+        </Grid>
+        <BoxView HeightRequest="2" Color="Accent" 
+                                         HorizontalOptions="FillAndExpand" 
+                                         IsVisible="{Binding HasTurn}"/>
+    </StackLayout>
+</ContentView>
