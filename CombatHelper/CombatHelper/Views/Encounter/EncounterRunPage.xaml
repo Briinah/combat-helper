@@ -18,7 +18,7 @@
                     <ListView.ItemTemplate >
                         <DataTemplate>
                             <ViewCell>
-                                <controls:EncounterCreatureListItem OnHealthClicked="EditHealth"/>
+                                <controls:EncounterCreatureListItem OnHealthClicked="EditHealth" OnSetConditionsClicked="OnSetConditionsClicked"/>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>

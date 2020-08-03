@@ -24,11 +24,17 @@
                     BackgroundColor="Transparent"
                     WidthRequest="40"/>
             </StackLayout>
-            <controls:SpeedControl Grid.Row="2" />
-            <controls:AttributeTable Grid.Row="3"/>
-            <Label Grid.Row="4" Text="{Binding Info}"/>
-            <Label Grid.Row="5" Text="{Binding ConditionString}" IsVisible="{Binding ShowConditionString}" FontAttributes="Italic"/>
-            <Button Grid.Row="6" Text="Set Conditions" Clicked="SetConditions"/>
+            <controls:SpeedControl  />
+            <controls:AttributeTable />
+            <Label  Text="{Binding Info}"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Label Text="{Binding ConditionString}" IsVisible="{Binding ShowConditionString}" FontAttributes="Italic" VerticalOptions="Center"/>
+                <Button Grid.Column="2" HorizontalOptions="EndAndExpand"
+                        Text="Set Conditions" FontSize="Micro"
+                        TextColor="Accent" BorderColor="Accent" BackgroundColor="White" BorderWidth="1" CornerRadius="30" HeightRequest="35"
+                        Clicked="SetConditions"/>
+            </StackLayout>
+            
         </StackLayout>
     </StackLayout>
 </ContentView>

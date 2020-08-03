@@ -1,4 +1,5 @@
 ﻿using CombatHelper.ViewModels;
+using CombatHelper.Views.Encounter;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -100,6 +101,18 @@ namespace CombatHelper.Views
                     BindingContext = creature
                 });
             }
+            IsBusy = false;
+        }
+
+        private async void OnSetConditionsClicked(object sender, EventArgs e)
+        {
+            if (IsBusy) return;
+            IsBusy = true;
+            var creature = ((Button)sender).BindingContext as CreatureViewModel;
+            await PopupNavigation.Instance.PushAsync(new ConditionSelectPopup
+            {
+                BindingContext = creature
+            });
             IsBusy = false;
         }
     }

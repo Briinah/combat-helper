@@ -14,7 +14,8 @@ namespace CombatHelper.Controls
     {
         public event EventHandler OnHealthClicked;
         public static readonly BindableProperty OnHealthClickedProperty = BindableProperty.Create("OnSetConditionsClicked", typeof(EventHandler), typeof(EncounterCreatureListItem));
-
+        public event EventHandler OnSetConditionsClicked;
+        public static readonly BindableProperty OnSetConditionsClickedProperty = BindableProperty.Create("OnSetConditionsClicked", typeof(EventHandler), typeof(EncounterCreatureListItem));
         public EncounterCreatureListItem()
         {
             InitializeComponent();
@@ -23,6 +24,11 @@ namespace CombatHelper.Controls
         private void HealthButton_Clicked(object sender, EventArgs e)
         {
             OnHealthClicked.Invoke(sender, e);
+        }
+
+        private void SetConditions(object sender, EventArgs e)
+        {
+            OnSetConditionsClicked.Invoke(sender, e);
         }
     }
 }

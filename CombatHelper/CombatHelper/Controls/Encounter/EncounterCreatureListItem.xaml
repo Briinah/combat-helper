@@ -50,8 +50,13 @@
                 <controls:SpeedControl Grid.Row="2" IsVisible="{Binding ShowInfo}"/>
                 <controls:AttributeTable Grid.Row="3" IsVisible="{Binding ShowInfo}"/>
                 <Label Grid.Row="3" IsVisible="{Binding ShowInfo}" Text="{Binding Info}"/>
-                <Label Grid.Row="4" Text="{Binding ConditionString}" IsVisible="{Binding ShowConditionString}" FontAttributes="Italic"/>
-                <Button Grid.Row="5" Text="Set Conditions" IsVisible="{Binding ShowInfo}"  />
+                <StackLayout Grid.Row="4" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="{Binding ConditionString}" IsVisible="{Binding ShowConditionString}" FontAttributes="Italic" VerticalOptions="Center"/>
+                    <Button Grid.Column="2" HorizontalOptions="EndAndExpand" IsVisible="{Binding ShowInfo}"
+                        Text="Set Conditions" FontSize="Micro"
+                        TextColor="Accent" BorderColor="Accent" BackgroundColor="White" BorderWidth="1" CornerRadius="30" HeightRequest="35"
+                        Clicked="SetConditions"/>
+                </StackLayout>
             </StackLayout>
         </Grid>
         <BoxView HeightRequest="2" Color="Accent" 

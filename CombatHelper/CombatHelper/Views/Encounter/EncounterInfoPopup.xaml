@@ -14,7 +14,7 @@
                 <Button Text="Show Source" Clicked="ShowSource" IsVisible="{Binding HasSourceText}"
                         BackgroundColor="Accent" TextColor="White"
                         HorizontalOptions="End" VerticalOptions="Start"
-                        Margin="20" 
+                        Margin="20, 25" 
                         FontSize="Micro"
                         CornerRadius="40"
                         HeightRequest="35"/>
