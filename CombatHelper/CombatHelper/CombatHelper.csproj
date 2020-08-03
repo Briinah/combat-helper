@@ -53,10 +53,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Controls\AttributeTable.xaml">
+    <EmbeddedResource Update="Controls\Creatures\AttributeInput.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\EncounterCreatureListItem.xaml">
+    <EmbeddedResource Update="Controls\Creatures\AttributeTable.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Creatures\EncounterCreatureListItem.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Creatures\SpeedInput.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Header.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Campaign\CampaignEditPage.xaml">
