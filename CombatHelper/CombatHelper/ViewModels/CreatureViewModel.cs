@@ -1,6 +1,8 @@
 ﻿using CombatHelper.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -14,9 +16,10 @@ namespace CombatHelper.ViewModels
         public int EncounterId { get; set; }
         public bool IsPC { get; private set; }
 
-        public CreatureViewModel() 
+        public CreatureViewModel()
         {
             Speed = new Speed();
+            FillConditions();
         }
 
         public CreatureViewModel(Creature creature)
@@ -45,6 +48,7 @@ namespace CombatHelper.ViewModels
                 Climb = creature.Climb,
                 Swim = creature.Swim
             };
+            FillConditions();
         }
 
         public CreatureViewModel(PlayerCharacter pc)
@@ -57,6 +61,7 @@ namespace CombatHelper.ViewModels
             Friendly = true;
 
             Speed = new Speed();
+            FillConditions();
         }
 
         public Creature ToModel()
@@ -127,7 +132,6 @@ namespace CombatHelper.ViewModels
             {
                 SetValue(ref slug, value);
                 OnPropertyChanged("HasSourceText");
-                //OnPropertyChanged("ShowInfoPagePopup");
                 OnPropertyChanged("WebUrl");
             }
         }
@@ -141,11 +145,6 @@ namespace CombatHelper.ViewModels
         {
             get { return !string.IsNullOrEmpty(Slug); }
         }
-
-        //public bool ShowInfoPagePopup
-        //{
-        //    get { return string.IsNullOrEmpty(Slug); }
-        //}
 
         private int hp;
         public int HP
@@ -276,6 +275,36 @@ namespace CombatHelper.ViewModels
                 else
                     return ColorConverters.FromHex("#d96464");
             }
+        }
+
+        public ObservableCollection<string> Conditions;
+
+        public string ConditionString
+        {
+            get
+            {
+                return string.Join(", ", Conditions);
+            }
+        }
+
+        public bool ShowConditionString
+        {
+            get
+            {
+                return ConditionString.Length > 0;
+            }
+        }
+
+        private void FillConditions()
+        {
+            Conditions = new ObservableCollection<string>();
+            Conditions.CollectionChanged += Conditions_CollectionChanged;
+        }
+
+        private void Conditions_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged("ConditionString");
+            OnPropertyChanged("ShowConditionString");
         }
 
         public async Task Save()
@@ -417,4 +446,5 @@ namespace CombatHelper.ViewModels
             return Walk.Equals(other.Walk) && Fly.Equals(other.Fly) && Swim.Equals(other.Swim) && Climb.Equals(other.Climb);
         }
     }
+
 }

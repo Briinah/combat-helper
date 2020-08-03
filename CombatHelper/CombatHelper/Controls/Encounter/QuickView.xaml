@@ -7,26 +7,28 @@
              mc:Ignorable="d"
              x:Class="CombatHelper.Controls.Encounter.QuickView">
     <StackLayout>
-    <StackLayout Padding="30">
-        <Label Text="{Binding Name}" FontSize="Title" TextColor="Black"/>
-        <StackLayout Orientation="Horizontal">
-            <Image Source="ic_ac"
+        <StackLayout Padding="30">
+            <Label Text="{Binding Name}" FontSize="Title" TextColor="Black"/>
+            <StackLayout Orientation="Horizontal">
+                <Image Source="ic_ac"
                    WidthRequest="20"
                    HorizontalOptions="End"/>
-            <Button Text="{Binding AC}"
+                <Button Text="{Binding AC}"
                     Grid.Column="1"
                     BackgroundColor="Transparent"
                     WidthRequest="40"
                     HorizontalOptions="Start"/>
-            <Image Source="ic_hp"
+                <Image Source="ic_hp"
                    WidthRequest="20"/>
-            <Button Text="{Binding HP}"
+                <Button Text="{Binding HP}"
                     BackgroundColor="Transparent"
                     WidthRequest="40"/>
+            </StackLayout>
+            <controls:SpeedControl Grid.Row="2" />
+            <controls:AttributeTable Grid.Row="3"/>
+            <Label Grid.Row="4" Text="{Binding Info}"/>
+            <Label Grid.Row="5" Text="{Binding ConditionString}" IsVisible="{Binding ShowConditionString}" FontAttributes="Italic"/>
+            <Button Grid.Row="6" Text="Set Conditions" Clicked="SetConditions"/>
         </StackLayout>
-        <controls:SpeedControl Grid.Row="2" />
-        <controls:AttributeTable Grid.Row="3"/>
-        <Label Grid.Row="4" Text="{Binding Info}"/>
-    </StackLayout>
     </StackLayout>
 </ContentView>

@@ -49,8 +49,9 @@
                 </StackLayout>
                 <controls:SpeedControl Grid.Row="2" IsVisible="{Binding ShowInfo}"/>
                 <controls:AttributeTable Grid.Row="3" IsVisible="{Binding ShowInfo}"/>
-                <Label Grid.Row="3" IsVisible="{Binding ShowInfo}"
-                                               Text="{Binding Info}"/>
+                <Label Grid.Row="3" IsVisible="{Binding ShowInfo}" Text="{Binding Info}"/>
+                <Label Grid.Row="4" Text="{Binding ConditionString}" IsVisible="{Binding ShowConditionString}" FontAttributes="Italic"/>
+                <Button Grid.Row="5" Text="Set Conditions" IsVisible="{Binding ShowInfo}"  />
             </StackLayout>
         </Grid>
         <BoxView HeightRequest="2" Color="Accent" 

@@ -13,7 +13,7 @@ namespace CombatHelper.Controls
     public partial class EncounterCreatureListItem : ContentView
     {
         public event EventHandler OnHealthClicked;
-        public static readonly BindableProperty OnHealthClickedProperty = BindableProperty.Create("OnHealthClicked", typeof(EventHandler), typeof(EncounterCreatureListItem));
+        public static readonly BindableProperty OnHealthClickedProperty = BindableProperty.Create("OnSetConditionsClicked", typeof(EventHandler), typeof(EncounterCreatureListItem));
 
         public EncounterCreatureListItem()
         {
