@@ -24,6 +24,14 @@ namespace CombatHelper.Views
         private async void ClosePopup(object sender, EventArgs e)
         {
             await PopupNavigation.Instance.PopAsync();
+            sourceTextView.IsVisible = false;
+            quickView.IsVisible = true;
+        }
+
+        private void ShowSource(object sender, EventArgs e)
+        {
+            sourceTextView.IsVisible = true;
+            quickView.IsVisible = false;
         }
     }
 }

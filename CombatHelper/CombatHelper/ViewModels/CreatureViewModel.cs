@@ -126,8 +126,8 @@ namespace CombatHelper.ViewModels
             set
             {
                 SetValue(ref slug, value);
-                OnPropertyChanged("ShowWebPagePopup");
-                OnPropertyChanged("ShowInfoPagePopup");
+                OnPropertyChanged("HasSourceText");
+                //OnPropertyChanged("ShowInfoPagePopup");
                 OnPropertyChanged("WebUrl");
             }
         }
@@ -137,15 +137,15 @@ namespace CombatHelper.ViewModels
             get { return "https://open5e.com/monsters/" + Slug; }
         }
 
-        public bool ShowWebPagePopup
+        public bool HasSourceText
         {
             get { return !string.IsNullOrEmpty(Slug); }
         }
 
-        public bool ShowInfoPagePopup
-        {
-            get { return string.IsNullOrEmpty(Slug); }
-        }
+        //public bool ShowInfoPagePopup
+        //{
+        //    get { return string.IsNullOrEmpty(Slug); }
+        //}
 
         private int hp;
         public int HP

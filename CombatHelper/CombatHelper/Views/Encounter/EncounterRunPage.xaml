@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:controls="clr-namespace:CombatHelper.Controls" xmlns:helpers="clr-namespace:CombatHelper.Helpers"
+             xmlns:controls="clr-namespace:CombatHelper.Controls"
+             xmlns:encounter="clr-namespace:CombatHelper.Controls.Encounter"
              mc:Ignorable="d"
              x:Class="CombatHelper.Views.EncounterRunPage"
              Title="{Binding Round, StringFormat='Round {0}'}">
@@ -40,48 +41,6 @@
                             ImageSource="ic_play_arrow"/>
                 </Grid>
             </StackLayout>
-
-            <!-- Popup-->
-            <ContentView x:Name="infoPopup" IsVisible="false"
-                         BackgroundColor="#C0808080" 
-                         HorizontalOptions="FillAndExpand"
-                         VerticalOptions="FillAndExpand">
-                <Frame Margin="10" HorizontalOptions="Center" VerticalOptions="Center"
-                       Padding="0">
-                <StackLayout>
-                    <StackLayout IsVisible="{Binding ShowInfoPagePopup}" Padding="30">
-
-                        <Label Text="{Binding Name}" FontSize="Title" TextColor="Black"/>
-                            <StackLayout Orientation="Horizontal">
-                                <Image Source="ic_ac"
-                                                           WidthRequest="20"
-                                                           HorizontalOptions="End"/>
-                                <Button Text="{Binding AC}"
-                                                            Grid.Column="1"
-                                                            BackgroundColor="Transparent"
-                                                            WidthRequest="40"
-                                                            HorizontalOptions="Start"/>
-                                <Image Source="ic_hp"
-                                                           WidthRequest="20"/>
-                                <Button Text="{Binding HP}"
-                                                            BackgroundColor="Transparent"
-                                                            WidthRequest="40"/>
-                            </StackLayout>
-                            <controls:AttributeTable Grid.Row="2"/>
-                        <Label Grid.Row="3" Text="{Binding Info}"/>
-
-                    </StackLayout>
-                    <controls:Open5eWebView IsVisible="{Binding ShowWebPagePopup}"
-                                 Source="{Binding WebUrl}"
-                                 HeightRequest="500"/>
-                    <Button Text="Exit" HorizontalOptions="End" Clicked="HideInfoView"
-                                TextColor="Accent"
-                                BackgroundColor="Transparent"/>
-                </StackLayout>
-                </Frame>
-            </ContentView>
-            <!-- end popup -->
-
         </Grid>
     </ContentPage.Content>
 </ContentPage>

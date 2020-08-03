@@ -47,24 +47,7 @@
                                 Clicked="HealthButton_Clicked"/>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout Orientation="Horizontal" Grid.Row="2" IsVisible="{Binding ShowInfo}" Spacing="20">
-                    <StackLayout Orientation="Horizontal" IsVisible="{Binding Speed.Walk, Converter={helpers:HasValueConverter}}">
-                        <Image Source="ic_feet"/>
-                        <Label Text="{Binding Speed.Walk}" VerticalOptions="Center"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" IsVisible="{Binding Speed.Fly, Converter={helpers:HasValueConverter}}">
-                        <Image Source="ic_wing"/>
-                        <Label Text="{Binding Speed.Fly}" VerticalOptions="Center"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" IsVisible="{Binding Speed.Swim, Converter={helpers:HasValueConverter}}">
-                        <Image Source="ic_fin"/>
-                        <Label Text="{Binding Speed.Swim}" VerticalOptions="Center"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" IsVisible="{Binding Speed.Climb, Converter={helpers:HasValueConverter}}">
-                        <Image Source="ic_climb"/>
-                        <Label Text="{Binding Speed.Climb}" VerticalOptions="Center"/>
-                    </StackLayout>
-                </StackLayout>
+                <controls:SpeedControl Grid.Row="2" IsVisible="{Binding ShowInfo}"/>
                 <controls:AttributeTable Grid.Row="3" IsVisible="{Binding ShowInfo}"/>
                 <Label Grid.Row="3" IsVisible="{Binding ShowInfo}"
                                                Text="{Binding Info}"/>

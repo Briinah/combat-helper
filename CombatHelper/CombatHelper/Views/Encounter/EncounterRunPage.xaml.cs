@@ -88,11 +88,6 @@ namespace CombatHelper.Views
             IsBusy = false;
         }
 
-        private void HideInfoView(object sender, EventArgs e)
-        {
-            infoPopup.IsVisible = false;
-        }
-
         private async void ShowInfoView(object sender, ItemTappedEventArgs e)
         {
             if (IsBusy) return;
@@ -106,11 +101,6 @@ namespace CombatHelper.Views
                 });
             }
             IsBusy = false;
-        }
-
-        private void ResetEncounter(object sender, EventArgs e)
-        {
-
         }
     }
 }
