@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:helpers="clr-namespace:CombatHelper.Helpers" xmlns:controls="clr-namespace:CombatHelper.Controls"
+             xmlns:helpers="clr-namespace:CombatHelper.Helpers" 
+             xmlns:controls="clr-namespace:CombatHelper.Controls"
              mc:Ignorable="d"
              x:Class="CombatHelper.Controls.EncounterCreatureListItem">
     <StackLayout>
@@ -49,8 +50,9 @@
                 </StackLayout>
                 <controls:SpeedControl Grid.Row="2" IsVisible="{Binding ShowInfo}"/>
                 <controls:AttributeTable Grid.Row="3" IsVisible="{Binding ShowInfo}"/>
-                <Label Grid.Row="3" IsVisible="{Binding ShowInfo}" Text="{Binding Info}"/>
-                <StackLayout Grid.Row="4" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <controls:SavingthrowControl Grid.Row="3" IsVisible="{Binding ShowInfo}" />
+                <Label Grid.Row="4" IsVisible="{Binding ShowInfo}" Text="{Binding Info}"/>
+                <StackLayout Grid.Row="5" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                     <Label Text="{Binding ConditionString}" IsVisible="{Binding ShowConditionString}" FontAttributes="Italic" VerticalOptions="Center"/>
                     <Button Grid.Column="2" HorizontalOptions="EndAndExpand" IsVisible="{Binding ShowInfo}"
                         Text="Set Conditions" FontSize="Micro"

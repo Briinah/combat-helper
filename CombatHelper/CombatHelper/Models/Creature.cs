@@ -24,6 +24,12 @@ namespace CombatHelper.Models
         public int Wisdom { get; set; }
         public int Intelligence { get; set; }
         public int Charisma { get; set; }
+        public int? StrengthSave { get; set; }
+        public int? DexteritySave { get; set; }
+        public int? ConstitutionSave { get; set; }
+        public int? WisdomSave { get; set; }
+        public int? IntelligenceSave { get; set; }
+        public int? CharismaSave { get; set; }
         public string Info { get; set; }
         public int Walk { get; set; }
         public int Swim { get; set; }

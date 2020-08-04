@@ -41,6 +41,12 @@ namespace CombatHelper.ViewModels
             Intelligence = creature.Intelligence;
             Wisdom = creature.Wisdom;
             Charisma = creature.Charisma;
+            StrengthSave = creature.StrengthSave;
+            DexteritySave = creature.DexteritySave;
+            ConstitutionSave = creature.ConstitutionSave;
+            IntelligenceSave = creature.IntelligenceSave;
+            WisdomSave = creature.WisdomSave;
+            CharismaSave = creature.CharismaSave;
             Info = creature.Info;
             Friendly = creature.Friendly;
             Speed = new Speed
@@ -82,6 +88,12 @@ namespace CombatHelper.ViewModels
                 Intelligence = this.Intelligence,
                 Wisdom = this.Wisdom,
                 Charisma = this.Charisma,
+                StrengthSave = this.StrengthSave,
+                DexteritySave = this.DexteritySave,
+                ConstitutionSave = this.ConstitutionSave,
+                IntelligenceSave = this.IntelligenceSave,
+                WisdomSave = this.WisdomSave,
+                CharismaSave = this.CharismaSave,
                 Info = this.Info,
                 Friendly = this.Friendly,
                 Walk = this.Speed.Walk,
@@ -237,7 +249,82 @@ namespace CombatHelper.ViewModels
             get { return charisma; }
             set { SetValue(ref charisma, value); }
         }
+
+        private int? strengthSave;
+        public int? StrengthSave
+        {
+            get { return strengthSave; }
+            set
+            {
+                SetValue(ref strengthSave, value);
+                OnPropertyChanged("HasSaves");
+            }
+        }
+        private int? dexteritySave;
+        public int? DexteritySave
+        {
+            get { return dexteritySave; }
+            set
+            {
+                SetValue(ref dexteritySave, value);
+                OnPropertyChanged("HasSaves");
+            }
+        }
+        private int? constitutionSave;
+        public int? ConstitutionSave
+        {
+            get { return constitutionSave; }
+            set
+            {
+                SetValue(ref constitutionSave, value);
+                OnPropertyChanged("HasSaves");
+            }
+        }
+        private int? intelligenceSave;
+        public int? IntelligenceSave
+        {
+            get { return intelligenceSave; }
+            set
+            {
+                SetValue(ref intelligenceSave, value);
+                OnPropertyChanged("HasSaves");
+            }
+        }
+        private int? wisdomSave;
+        public int? WisdomSave
+        {
+            get { return wisdomSave; }
+            set
+            {
+                SetValue(ref wisdomSave, value);
+                OnPropertyChanged("HasSaves");
+            }
+        }
+        private int? charismaSave;
+        public int? CharismaSave
+        {
+            get { return charismaSave; }
+            set
+            {
+                SetValue(ref charismaSave, value);
+                OnPropertyChanged("HasSaves");
+            }
+        }
         #endregion
+
+        public bool HasSaves
+        {
+            get
+            {
+                return
+                    StrengthSave != null ||
+                    DexteritySave != null ||
+                    ConstitutionSave != null ||
+                    IntelligenceSave != null ||
+                    WisdomSave != null ||
+                    CharismaSave != null;
+            }
+        }
         private string info;
         public string Info
         {
@@ -304,6 +391,7 @@ namespace CombatHelper.ViewModels
         }
 
         private bool conditionRefRestored = false;
+
         /// <summary>
         /// Use after reloading a creature via json (resourcemanager). The references to the mechanics list are lost and cause the collectionview to not preselect the values. 
         /// This fixes that. 
@@ -410,6 +498,12 @@ namespace CombatHelper.ViewModels
                 Intelligence = vm.Intelligence,
                 Wisdom = vm.Wisdom,
                 Charisma = vm.Charisma,
+                StrengthSave = vm.StrengthSave,
+                DexteritySave = vm.DexteritySave,
+                ConstitutionSave = vm.ConstitutionSave,
+                IntelligenceSave = vm.IntelligenceSave,
+                WisdomSave = vm.WisdomSave,
+                CharismaSave = vm.CharismaSave,
                 Info = vm.Info,
                 Friendly = vm.Friendly,
                 Initiative = vm.Initiative,
@@ -437,6 +531,12 @@ namespace CombatHelper.ViewModels
             Intelligence = model.Intelligence;
             Wisdom = model.Wisdom;
             Charisma = model.Charisma;
+            StrengthSave = model.StrengthSave;
+            DexteritySave = model.DexteritySave;
+            ConstitutionSave = model.ConstitutionSave;
+            IntelligenceSave = model.IntelligenceSave;
+            WisdomSave = model.WisdomSave;
+            CharismaSave = model.CharismaSave;
             Speed = new Speed
             {
                 Fly = model.Fly,
