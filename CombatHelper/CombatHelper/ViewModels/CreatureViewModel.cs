@@ -41,6 +41,12 @@ namespace CombatHelper.ViewModels
             Intelligence = creature.Intelligence;
             Wisdom = creature.Wisdom;
             Charisma = creature.Charisma;
+            StrengthSave = creature.StrengthSave;
+            DexteritySave = creature.DexteritySave;
+            ConstitutionSave = creature.ConstitutionSave;
+            IntelligenceSave = creature.IntelligenceSave;
+            WisdomSave = creature.WisdomSave;
+            CharismaSave = creature.CharismaSave;
             Info = creature.Info;
             Friendly = creature.Friendly;
             Speed = new Speed
@@ -82,6 +88,12 @@ namespace CombatHelper.ViewModels
                 Intelligence = this.Intelligence,
                 Wisdom = this.Wisdom,
                 Charisma = this.Charisma,
+                StrengthSave = this.StrengthSave,
+                DexteritySave = this.DexteritySave,
+                ConstitutionSave = this.ConstitutionSave,
+                IntelligenceSave = this.IntelligenceSave,
+                WisdomSave = this.WisdomSave,
+                CharismaSave = this.CharismaSave,
                 Info = this.Info,
                 Friendly = this.Friendly,
                 Walk = this.Speed.Walk,
@@ -236,6 +248,43 @@ namespace CombatHelper.ViewModels
         {
             get { return charisma; }
             set { SetValue(ref charisma, value); }
+        }
+
+        private int? strengthSave;
+        public int? StrengthSave
+        {
+            get { return strengthSave; }
+            set { SetValue(ref strengthSave, value); }
+        }
+        private int? dexteritySave;
+        public int? DexteritySave
+        {
+            get { return dexteritySave; }
+            set { SetValue(ref dexteritySave, value); }
+        }
+        private int? constitutionSave;
+        public int? ConstitutionSave
+        {
+            get { return constitutionSave; }
+            set { SetValue(ref constitutionSave, value); }
+        }
+        private int? intelligenceSave;
+        public int? IntelligenceSave
+        {
+            get { return intelligenceSave; }
+            set { SetValue(ref intelligenceSave, value); }
+        }
+        private int? wisdomSave;
+        public int? WisdomSave
+        {
+            get { return wisdomSave; }
+            set { SetValue(ref wisdomSave, value); }
+        }
+        private int? charismaSave;
+        public int? CharismaSave
+        {
+            get { return charismaSave; }
+            set { SetValue(ref charismaSave, value); }
         }
         #endregion
         private string info;
@@ -411,6 +460,12 @@ namespace CombatHelper.ViewModels
                 Intelligence = vm.Intelligence,
                 Wisdom = vm.Wisdom,
                 Charisma = vm.Charisma,
+                StrengthSave = vm.StrengthSave,
+                DexteritySave = vm.DexteritySave,
+                ConstitutionSave = vm.ConstitutionSave,
+                IntelligenceSave = vm.IntelligenceSave,
+                WisdomSave = vm.WisdomSave,
+                CharismaSave = vm.CharismaSave,
                 Info = vm.Info,
                 Friendly = vm.Friendly,
                 Initiative = vm.Initiative,
