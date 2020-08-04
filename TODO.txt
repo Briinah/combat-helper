@@ -5,7 +5,8 @@
 
 # Quick view toevoegen
   - In encounter: klikken op creature geeft quick view, met optie voor uigebreide view die er nu staat (done)
-  - saving throws toevoegen
+  - saving throws toevoegen (done)
+  - spell slots voor casters
 
 # Optie om dice te rollen voor hp
 
