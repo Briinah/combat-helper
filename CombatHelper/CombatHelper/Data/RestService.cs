@@ -54,18 +54,25 @@ namespace CombatHelper.Data
                 JObject json = JObject.Parse(content);
                 var data = json.ToObject<Open5eMonster>();
 
+                // todo: check saving throw null
                 var creature = new Creature()
                 {
                     Name = data.name,
                     Slug = data.slug,
                     AC = data.armor_class,
                     HP = data.hit_points,
-                    Strength = Util.GetModifier(data.strength),
-                    Dexterity = Util.GetModifier(data.dexterity),
-                    Constitution = Util.GetModifier(data.constitution),
-                    Intelligence = Util.GetModifier(data.intelligence),
-                    Wisdom = Util.GetModifier(data.wisdom),
-                    Charisma = Util.GetModifier(data.charisma),
+                    Strength = data.strength,
+                    Dexterity = data.dexterity,
+                    Constitution = data.constitution,
+                    Intelligence = data.intelligence,
+                    Wisdom = data.wisdom,
+                    Charisma = data.charisma,
+                    StrengthSave = data.strength_save,
+                    DexteritySave = data.dexterity_save,
+                    ConstitutionSave = data.constitution_save,
+                    IntelligenceSave = data.intelligence_save,
+                    WisdomSave = data.wisdom_save,
+                    CharismaSave = data.charisma_save,
                     Fly = data.speed.fly,
                     Walk = data.speed.walk,
                     Swim = data.speed.swim,

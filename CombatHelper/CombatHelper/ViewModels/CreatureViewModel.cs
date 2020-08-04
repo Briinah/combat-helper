@@ -304,6 +304,7 @@ namespace CombatHelper.ViewModels
         }
 
         private bool conditionRefRestored = false;
+
         /// <summary>
         /// Use after reloading a creature via json (resourcemanager). The references to the mechanics list are lost and cause the collectionview to not preselect the values. 
         /// This fixes that. 
