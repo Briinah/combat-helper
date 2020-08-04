@@ -1,4 +1,4 @@
-# Conditions in encounter
+# Conditions in encounter (done)
   - multiselect box (done)
 
 # Custom Json file importeren voor creatures

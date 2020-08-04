@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:helpers="clr-namespace:CombatHelper.Helpers" xmlns:controls="clr-namespace:CombatHelper.Controls"
+             mc:Ignorable="d"
+             x:Class="CombatHelper.Controls.SavingthrowControl">
+    <StackLayout>
+        <StackLayout Orientation="Horizontal" IsVisible="{Binding HasSaves}">
+        <Label Text="Saving Trows" TextColor="Black"/>
+            <StackLayout Orientation="Horizontal" IsVisible="{Binding StrengthSave, Converter={helpers:HasValueConverter}}">
+                <Label Text="Str" />
+                <controls:SaveLabel Text="{Binding StrengthSave}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" IsVisible="{Binding DexteritySave, Converter={helpers:HasValueConverter}}">
+                <Label Text="Dex" />
+                <controls:SaveLabel Text="{Binding DexteritySave}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" IsVisible="{Binding ConstitutionSave, Converter={helpers:HasValueConverter}}">
+                <Label Text="Con" />
+                <controls:SaveLabel Text="{Binding ConstitutionSave}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" IsVisible="{Binding IntelligenceSave, Converter={helpers:HasValueConverter}}">
+                <Label Text="Int" />
+                <controls:SaveLabel Text="{Binding IntelligenceSave}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" IsVisible="{Binding WisdomSave, Converter={helpers:HasValueConverter}}">
+                <Label Text="Wis" />
+                <controls:SaveLabel Text="{Binding WisdomSave}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" IsVisible="{Binding CharismaSave, Converter={helpers:HasValueConverter}}">
+                <Label Text="Cha" />
+                <controls:SaveLabel Text="{Binding CharismaSave}"/>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ContentView>

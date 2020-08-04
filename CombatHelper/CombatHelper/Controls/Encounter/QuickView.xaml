@@ -26,6 +26,7 @@
             </StackLayout>
             <controls:SpeedControl  />
             <controls:AttributeTable />
+            <controls:SavingthrowControl />
             <Label  Text="{Binding Info}"/>
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                 <Label Text="{Binding ConditionString}" IsVisible="{Binding ShowConditionString}" FontAttributes="Italic" VerticalOptions="Center"/>

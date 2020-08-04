@@ -39,9 +39,6 @@ namespace CombatHelper.Views.Encounter
 
         private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Console.WriteLine("collection changed: " + string.Join(", ", e.CurrentSelection));
-            Console.WriteLine("selected items: " + string.Join(", ", collectionView.SelectedItems));
-            Console.WriteLine("conditions: " + string.Join(", ", creature.Conditions));
             creature.Conditions.Clear();
             foreach (var c in e.CurrentSelection)
             {
