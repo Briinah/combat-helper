@@ -19,6 +19,12 @@ namespace CombatHelper.Data
         public int intelligence { get; set; }
         public int wisdom { get; set; }
         public int charisma { get; set; }
+        public int? strength_save { get; set; }
+        public int? dexterity_save { get; set; }
+        public int? constitution_save { get; set; }
+        public int? intelligence_save { get; set; }
+        public int? wisdom_save { get; set; }
+        public int? charisma_save { get; set; }
         public Open5eSpeed speed { get; set; }
         public Open5eSkills skills { get; set; }
         public Open5eAction[] actions { get; set; }
@@ -40,10 +46,14 @@ namespace CombatHelper.Data
     [Serializable]
     public class Open5eSkills
     {
+        public int acrobatics { get; set; }
+        public int athletics { get; set; }
+        public int deception { get; set; }
         public int perception { get; set; }
         public int stealth { get; set; }
-        public int athletics { get; set; }
         public int intimidation { get; set; }
+        public int insight { get; set; }
+        public int investigation { get; set; }
     }
 
 }

@@ -7,11 +7,11 @@ using Xamarin.Forms.Xaml;
 
 namespace CombatHelper.Helpers
 {
-    class HasValueConverter : IValueConverter, IMarkupExtension
+    class IntHasValueConverter : IValueConverter, IMarkupExtension
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value != null;
+            return (int)value != 0;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

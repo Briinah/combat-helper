@@ -1,10 +1,14 @@
-﻿using CombatHelper.Models;
+﻿using CombatHelper.Helpers;
+using CombatHelper.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace CombatHelper.ViewModels
 {
@@ -12,11 +16,12 @@ namespace CombatHelper.ViewModels
     {
         public int Id { get; set; }
         public int EncounterId { get; set; }
-        public bool IsPC { get; private set; }
+        public bool IsPC { get; set; }
 
-        public CreatureViewModel() 
+        public CreatureViewModel()
         {
             Speed = new Speed();
+            FillConditions();
         }
 
         public CreatureViewModel(Creature creature)
@@ -36,6 +41,12 @@ namespace CombatHelper.ViewModels
             Intelligence = creature.Intelligence;
             Wisdom = creature.Wisdom;
             Charisma = creature.Charisma;
+            StrengthSave = creature.StrengthSave;
+            DexteritySave = creature.DexteritySave;
+            ConstitutionSave = creature.ConstitutionSave;
+            IntelligenceSave = creature.IntelligenceSave;
+            WisdomSave = creature.WisdomSave;
+            CharismaSave = creature.CharismaSave;
             Info = creature.Info;
             Friendly = creature.Friendly;
             Speed = new Speed
@@ -45,6 +56,7 @@ namespace CombatHelper.ViewModels
                 Climb = creature.Climb,
                 Swim = creature.Swim
             };
+            FillConditions();
         }
 
         public CreatureViewModel(PlayerCharacter pc)
@@ -57,6 +69,7 @@ namespace CombatHelper.ViewModels
             Friendly = true;
 
             Speed = new Speed();
+            FillConditions();
         }
 
         public Creature ToModel()
@@ -75,6 +88,12 @@ namespace CombatHelper.ViewModels
                 Intelligence = this.Intelligence,
                 Wisdom = this.Wisdom,
                 Charisma = this.Charisma,
+                StrengthSave = this.StrengthSave,
+                DexteritySave = this.DexteritySave,
+                ConstitutionSave = this.ConstitutionSave,
+                IntelligenceSave = this.IntelligenceSave,
+                WisdomSave = this.WisdomSave,
+                CharismaSave = this.CharismaSave,
                 Info = this.Info,
                 Friendly = this.Friendly,
                 Walk = this.Speed.Walk,
@@ -126,8 +145,7 @@ namespace CombatHelper.ViewModels
             set
             {
                 SetValue(ref slug, value);
-                OnPropertyChanged("ShowWebPagePopup");
-                OnPropertyChanged("ShowInfoPagePopup");
+                OnPropertyChanged("HasSourceText");
                 OnPropertyChanged("WebUrl");
             }
         }
@@ -137,14 +155,9 @@ namespace CombatHelper.ViewModels
             get { return "https://open5e.com/monsters/" + Slug; }
         }
 
-        public bool ShowWebPagePopup
+        public bool HasSourceText
         {
             get { return !string.IsNullOrEmpty(Slug); }
-        }
-
-        public bool ShowInfoPagePopup
-        {
-            get { return string.IsNullOrEmpty(Slug); }
         }
 
         private int hp;
@@ -236,7 +249,82 @@ namespace CombatHelper.ViewModels
             get { return charisma; }
             set { SetValue(ref charisma, value); }
         }
+
+        private int? strengthSave;
+        public int? StrengthSave
+        {
+            get { return strengthSave; }
+            set
+            {
+                SetValue(ref strengthSave, value);
+                OnPropertyChanged("HasSaves");
+            }
+        }
+        private int? dexteritySave;
+        public int? DexteritySave
+        {
+            get { return dexteritySave; }
+            set
+            {
+                SetValue(ref dexteritySave, value);
+                OnPropertyChanged("HasSaves");
+            }
+        }
+        private int? constitutionSave;
+        public int? ConstitutionSave
+        {
+            get { return constitutionSave; }
+            set
+            {
+                SetValue(ref constitutionSave, value);
+                OnPropertyChanged("HasSaves");
+            }
+        }
+        private int? intelligenceSave;
+        public int? IntelligenceSave
+        {
+            get { return intelligenceSave; }
+            set
+            {
+                SetValue(ref intelligenceSave, value);
+                OnPropertyChanged("HasSaves");
+            }
+        }
+        private int? wisdomSave;
+        public int? WisdomSave
+        {
+            get { return wisdomSave; }
+            set
+            {
+                SetValue(ref wisdomSave, value);
+                OnPropertyChanged("HasSaves");
+            }
+        }
+        private int? charismaSave;
+        public int? CharismaSave
+        {
+            get { return charismaSave; }
+            set
+            {
+                SetValue(ref charismaSave, value);
+                OnPropertyChanged("HasSaves");
+            }
+        }
         #endregion
+
+        public bool HasSaves
+        {
+            get
+            {
+                return
+                    StrengthSave != null ||
+                    DexteritySave != null ||
+                    ConstitutionSave != null ||
+                    IntelligenceSave != null ||
+                    WisdomSave != null ||
+                    CharismaSave != null;
+            }
+        }
         private string info;
         public string Info
         {
@@ -262,7 +350,7 @@ namespace CombatHelper.ViewModels
 
         public bool ShowInfo
         {
-            get { return HasTurn && !IsPC; }
+            get { return HasTurn; }
         }
 
         public Color ButtonColor
@@ -276,6 +364,71 @@ namespace CombatHelper.ViewModels
                 else
                     return ColorConverters.FromHex("#d96464");
             }
+        }
+
+        public ObservableCollection<object> Conditions; // required to be object by collectionview
+
+        public string ConditionString
+        {
+            get
+            {
+                return string.Join(", ", Conditions);
+            }
+        }
+
+        public bool ShowConditionString
+        {
+            get
+            {
+                return ConditionString.Length > 0;
+            }
+        }
+
+        private void FillConditions()
+        {
+            Conditions = new ObservableCollection<object>();
+            Conditions.CollectionChanged += Conditions_CollectionChanged;
+        }
+
+        private bool conditionRefRestored = false;
+
+        /// <summary>
+        /// Use after reloading a creature via json (resourcemanager). The references to the mechanics list are lost and cause the collectionview to not preselect the values. 
+        /// This fixes that. 
+        /// </summary>
+        /// <param name="valuesChanged"></param>
+        /// <returns></returns>
+        public ObservableCollection<object> GetConditionReference(out bool valuesChanged)
+        {
+            if (conditionRefRestored)
+            {
+                valuesChanged = false;
+                return Conditions;
+            }
+
+            var indices = new List<int>();
+
+            foreach (var c in Conditions)
+            {
+                indices.Add(Mechanics.Conditions.IndexOf(c));
+            }
+
+            var references = new ObservableCollection<object>();
+
+            foreach (var i in indices)
+            {
+                references.Add(Mechanics.Conditions[i]);
+            }
+
+            conditionRefRestored = true;
+            valuesChanged = true;
+            return references;
+        }
+
+        private void Conditions_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged("ConditionString");
+            OnPropertyChanged("ShowConditionString");
         }
 
         public async Task Save()
@@ -345,6 +498,12 @@ namespace CombatHelper.ViewModels
                 Intelligence = vm.Intelligence,
                 Wisdom = vm.Wisdom,
                 Charisma = vm.Charisma,
+                StrengthSave = vm.StrengthSave,
+                DexteritySave = vm.DexteritySave,
+                ConstitutionSave = vm.ConstitutionSave,
+                IntelligenceSave = vm.IntelligenceSave,
+                WisdomSave = vm.WisdomSave,
+                CharismaSave = vm.CharismaSave,
                 Info = vm.Info,
                 Friendly = vm.Friendly,
                 Initiative = vm.Initiative,
@@ -372,6 +531,12 @@ namespace CombatHelper.ViewModels
             Intelligence = model.Intelligence;
             Wisdom = model.Wisdom;
             Charisma = model.Charisma;
+            StrengthSave = model.StrengthSave;
+            DexteritySave = model.DexteritySave;
+            ConstitutionSave = model.ConstitutionSave;
+            IntelligenceSave = model.IntelligenceSave;
+            WisdomSave = model.WisdomSave;
+            CharismaSave = model.CharismaSave;
             Speed = new Speed
             {
                 Fly = model.Fly,
@@ -417,4 +582,5 @@ namespace CombatHelper.ViewModels
             return Walk.Equals(other.Walk) && Fly.Equals(other.Fly) && Swim.Equals(other.Swim) && Climb.Equals(other.Climb);
         }
     }
+
 }

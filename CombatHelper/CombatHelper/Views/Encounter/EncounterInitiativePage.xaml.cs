@@ -1,4 +1,5 @@
-﻿using CombatHelper.Models;
+﻿using CombatHelper.Helpers;
+using CombatHelper.Models;
 using CombatHelper.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -55,12 +56,12 @@ namespace CombatHelper.Views
                             c.Initiative = namedict[c.Name];
                         else
                         {
-                            c.Initiative = random.Next(20) + c.Dexterity;
+                            c.Initiative = random.Next(20) + Mechanics.GetModifier(c.Dexterity);
                             namedict.Add(c.Name, c.Initiative);
                         }
                     }
                     else
-                        c.Initiative = random.Next(20) + c.Dexterity;
+                        c.Initiative = random.Next(20) + Mechanics.GetModifier(c.Dexterity);
                 }
             }
 

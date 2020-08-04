@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CombatHelper.Controls.Header">
+  <StackLayout>
+        <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+            <Image x:Name="HeaderImage"
+                   VerticalOptions="Center"
+                   Margin="10, 0, 0, 0"/>
+            <Label x:Name="HeaderLabel"
+                   TextColor="{StaticResource Titles}"
+                   FontSize="Medium"
+                   VerticalTextAlignment="Center"/>
+        </StackLayout>
+        <BoxView BackgroundColor="{StaticResource Headers}" HeightRequest="3" HorizontalOptions="FillAndExpand"/>
+    </StackLayout>
+</ContentView>
