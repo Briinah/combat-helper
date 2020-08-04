@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:controls="clr-namespace:CombatHelper.Controls"
+             mc:Ignorable="d"
+             x:Class="CombatHelper.Controls.Encounter.QuickView">
+    <StackLayout>
+        <StackLayout Padding="30">
+            <Label Text="{Binding Name}" FontSize="Title" TextColor="Black"/>
+            <StackLayout Orientation="Horizontal">
+                <Image Source="ic_ac"
+                   WidthRequest="20"
+                   HorizontalOptions="End"/>
+                <Button Text="{Binding AC}"
+                    Grid.Column="1"
+                    BackgroundColor="Transparent"
+                    WidthRequest="40"
+                    HorizontalOptions="Start"/>
+                <Image Source="ic_hp"
+                   WidthRequest="20"/>
+                <Button Text="{Binding HP}"
+                    BackgroundColor="Transparent"
+                    WidthRequest="40"/>
+            </StackLayout>
+            <controls:SpeedControl  />
+            <controls:AttributeTable />
+            <Label  Text="{Binding Info}"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Label Text="{Binding ConditionString}" IsVisible="{Binding ShowConditionString}" FontAttributes="Italic" VerticalOptions="Center"/>
+                <Button Grid.Column="2" HorizontalOptions="EndAndExpand"
+                        Text="Set Conditions" FontSize="Micro"
+                        TextColor="Accent" BorderColor="Accent" BackgroundColor="White" BorderWidth="1" CornerRadius="30" HeightRequest="35"
+                        Clicked="SetConditions"/>
+            </StackLayout>
+            
+        </StackLayout>
+    </StackLayout>
+</ContentView>

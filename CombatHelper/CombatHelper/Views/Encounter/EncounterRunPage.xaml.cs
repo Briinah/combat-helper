@@ -1,4 +1,5 @@
 ﻿using CombatHelper.ViewModels;
+using CombatHelper.Views.Encounter;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -88,29 +89,29 @@ namespace CombatHelper.Views
             IsBusy = false;
         }
 
-        private void HideInfoView(object sender, EventArgs e)
-        {
-            infoPopup.IsVisible = false;
-        }
-
         private async void ShowInfoView(object sender, ItemTappedEventArgs e)
         {
             if (IsBusy) return;
             IsBusy = true;
             var creature = e.Item as CreatureViewModel;
-            if (!creature.IsPC)
+
+            await PopupNavigation.Instance.PushAsync(new EncounterInfoPopup
             {
-                await PopupNavigation.Instance.PushAsync(new EncounterInfoPopup
-                {
-                    BindingContext = creature
-                });
-            }
+                BindingContext = creature
+            });
             IsBusy = false;
         }
 
-        private void ResetEncounter(object sender, EventArgs e)
+        private async void OnSetConditionsClicked(object sender, EventArgs e)
         {
-
+            if (IsBusy) return;
+            IsBusy = true;
+            var creature = ((Button)sender).BindingContext as CreatureViewModel;
+            await PopupNavigation.Instance.PushAsync(new ConditionSelectPopup
+            {
+                BindingContext = creature
+            });
+            IsBusy = false;
         }
     }
 }

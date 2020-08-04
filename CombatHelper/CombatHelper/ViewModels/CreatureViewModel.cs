@@ -1,10 +1,14 @@
-﻿using CombatHelper.Models;
+﻿using CombatHelper.Helpers;
+using CombatHelper.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace CombatHelper.ViewModels
 {
@@ -12,11 +16,12 @@ namespace CombatHelper.ViewModels
     {
         public int Id { get; set; }
         public int EncounterId { get; set; }
-        public bool IsPC { get; private set; }
+        public bool IsPC { get; set; }
 
-        public CreatureViewModel() 
+        public CreatureViewModel()
         {
             Speed = new Speed();
+            FillConditions();
         }
 
         public CreatureViewModel(Creature creature)
@@ -45,6 +50,7 @@ namespace CombatHelper.ViewModels
                 Climb = creature.Climb,
                 Swim = creature.Swim
             };
+            FillConditions();
         }
 
         public CreatureViewModel(PlayerCharacter pc)
@@ -57,6 +63,7 @@ namespace CombatHelper.ViewModels
             Friendly = true;
 
             Speed = new Speed();
+            FillConditions();
         }
 
         public Creature ToModel()
@@ -126,8 +133,7 @@ namespace CombatHelper.ViewModels
             set
             {
                 SetValue(ref slug, value);
-                OnPropertyChanged("ShowWebPagePopup");
-                OnPropertyChanged("ShowInfoPagePopup");
+                OnPropertyChanged("HasSourceText");
                 OnPropertyChanged("WebUrl");
             }
         }
@@ -137,14 +143,9 @@ namespace CombatHelper.ViewModels
             get { return "https://open5e.com/monsters/" + Slug; }
         }
 
-        public bool ShowWebPagePopup
+        public bool HasSourceText
         {
             get { return !string.IsNullOrEmpty(Slug); }
-        }
-
-        public bool ShowInfoPagePopup
-        {
-            get { return string.IsNullOrEmpty(Slug); }
         }
 
         private int hp;
@@ -262,7 +263,7 @@ namespace CombatHelper.ViewModels
 
         public bool ShowInfo
         {
-            get { return HasTurn && !IsPC; }
+            get { return HasTurn; }
         }
 
         public Color ButtonColor
@@ -276,6 +277,70 @@ namespace CombatHelper.ViewModels
                 else
                     return ColorConverters.FromHex("#d96464");
             }
+        }
+
+        public ObservableCollection<object> Conditions; // required to be object by collectionview
+
+        public string ConditionString
+        {
+            get
+            {
+                return string.Join(", ", Conditions);
+            }
+        }
+
+        public bool ShowConditionString
+        {
+            get
+            {
+                return ConditionString.Length > 0;
+            }
+        }
+
+        private void FillConditions()
+        {
+            Conditions = new ObservableCollection<object>();
+            Conditions.CollectionChanged += Conditions_CollectionChanged;
+        }
+
+        private bool conditionRefRestored = false;
+        /// <summary>
+        /// Use after reloading a creature via json (resourcemanager). The references to the mechanics list are lost and cause the collectionview to not preselect the values. 
+        /// This fixes that. 
+        /// </summary>
+        /// <param name="valuesChanged"></param>
+        /// <returns></returns>
+        public ObservableCollection<object> GetConditionReference(out bool valuesChanged)
+        {
+            if (conditionRefRestored)
+            {
+                valuesChanged = false;
+                return Conditions;
+            }
+
+            var indices = new List<int>();
+
+            foreach (var c in Conditions)
+            {
+                indices.Add(Mechanics.Conditions.IndexOf(c));
+            }
+
+            var references = new ObservableCollection<object>();
+
+            foreach (var i in indices)
+            {
+                references.Add(Mechanics.Conditions[i]);
+            }
+
+            conditionRefRestored = true;
+            valuesChanged = true;
+            return references;
+        }
+
+        private void Conditions_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged("ConditionString");
+            OnPropertyChanged("ShowConditionString");
         }
 
         public async Task Save()
@@ -417,4 +482,5 @@ namespace CombatHelper.ViewModels
             return Walk.Equals(other.Walk) && Fly.Equals(other.Fly) && Swim.Equals(other.Swim) && Climb.Equals(other.Climb);
         }
     }
+
 }
