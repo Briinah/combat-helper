@@ -317,11 +317,11 @@ namespace CombatHelper.ViewModels
             get
             {
                 return
-                    StrengthSave != null &&
-                    DexteritySave != null &&
-                    ConstitutionSave != null &&
-                    IntelligenceSave != null &&
-                    WisdomSave != null &&
+                    StrengthSave != null ||
+                    DexteritySave != null ||
+                    ConstitutionSave != null ||
+                    IntelligenceSave != null ||
+                    WisdomSave != null ||
                     CharismaSave != null;
             }
         }
