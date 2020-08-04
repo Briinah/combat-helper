@@ -1,4 +1,5 @@
-﻿using CombatHelper.Models;
+﻿using CombatHelper.Helpers;
+using CombatHelper.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace CombatHelper.ViewModels
 {
@@ -277,7 +279,7 @@ namespace CombatHelper.ViewModels
             }
         }
 
-        public ObservableCollection<string> Conditions;
+        public ObservableCollection<object> Conditions; // required to be object by collectionview
 
         public string ConditionString
         {
@@ -297,8 +299,42 @@ namespace CombatHelper.ViewModels
 
         private void FillConditions()
         {
-            Conditions = new ObservableCollection<string>();
+            Conditions = new ObservableCollection<object>();
             Conditions.CollectionChanged += Conditions_CollectionChanged;
+        }
+
+        private bool conditionRefRestored = false;
+        /// <summary>
+        /// Use after reloading a creature via json (resourcemanager). The references to the mechanics list are lost and cause the collectionview to not preselect the values. 
+        /// This fixes that. 
+        /// </summary>
+        /// <param name="valuesChanged"></param>
+        /// <returns></returns>
+        public ObservableCollection<object> GetConditionReference(out bool valuesChanged)
+        {
+            if (conditionRefRestored)
+            {
+                valuesChanged = false;
+                return Conditions;
+            }
+
+            var indices = new List<int>();
+
+            foreach (var c in Conditions)
+            {
+                indices.Add(Mechanics.Conditions.IndexOf(c));
+            }
+
+            var references = new ObservableCollection<object>();
+
+            foreach (var i in indices)
+            {
+                references.Add(Mechanics.Conditions[i]);
+            }
+
+            conditionRefRestored = true;
+            valuesChanged = true;
+            return references;
         }
 
         private void Conditions_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

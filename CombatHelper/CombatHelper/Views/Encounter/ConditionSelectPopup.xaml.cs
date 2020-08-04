@@ -25,12 +25,12 @@ namespace CombatHelper.Views.Encounter
 
         protected override void OnAppearing()
         {
+            base.OnAppearing();
             creature = BindingContext as CreatureViewModel;
 
             collectionView.ItemsSource = Mechanics.Conditions;
-            collectionView.SelectedItems = creature.Conditions.ToList<object>();
-
-            base.OnAppearing();
+            collectionView.SelectedItems = creature.GetConditionReference(out bool valuesChanged);
+            if(valuesChanged) collectionView.SelectionChanged += CollectionView_SelectionChanged;
         }
         private async void ClosePopup(object sender, EventArgs e)
         {
@@ -39,6 +39,9 @@ namespace CombatHelper.Views.Encounter
 
         private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Console.WriteLine("collection changed: " + string.Join(", ", e.CurrentSelection));
+            Console.WriteLine("selected items: " + string.Join(", ", collectionView.SelectedItems));
+            Console.WriteLine("conditions: " + string.Join(", ", creature.Conditions));
             creature.Conditions.Clear();
             foreach (var c in e.CurrentSelection)
             {

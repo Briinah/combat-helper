@@ -1,10 +1,11 @@
 # Conditions in encounter
-  - multiselect box
+  - multiselect box (done)
 
 # Custom Json file importeren voor creatures
 
 # Quick view toevoegen
-  - In encounter: klikken op creature geeft quick view, met optie voor uigebreide view die er nu staat
+  - In encounter: klikken op creature geeft quick view, met optie voor uigebreide view die er nu staat (done)
+  - saving throws toevoegen
 
 # Optie om dice te rollen voor hp
 

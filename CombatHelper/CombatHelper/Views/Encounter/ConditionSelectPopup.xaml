@@ -30,7 +30,7 @@
         <StackLayout HorizontalOptions="FillAndExpand">
             <Label Text="Conditions" TextColor="Black" FontSize="Large"/>
             <BoxView BackgroundColor="Accent" HeightRequest="1"/>
-            <CollectionView x:Name="collectionView" SelectionMode="Multiple" SelectionChanged="CollectionView_SelectionChanged" >
+            <CollectionView x:Name="collectionView" SelectionMode="Multiple" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
