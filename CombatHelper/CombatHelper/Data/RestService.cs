@@ -24,7 +24,7 @@ namespace CombatHelper.Data
 
         public async Task<List<Result>> GetSearchResults(string query)
         {
-            Uri uri = new Uri(baseUrl + "monsters/?search=" + query + "&limit=5");
+            Uri uri = new Uri(baseUrl + "monsters/?search=" + query);
             var result = new List<Result>();
 
             HttpResponseMessage response = await client.GetAsync(uri);
@@ -54,7 +54,6 @@ namespace CombatHelper.Data
                 JObject json = JObject.Parse(content);
                 var data = json.ToObject<Open5eMonster>();
 
-                // todo: check saving throw null
                 var creature = new Creature()
                 {
                     Name = data.name,
