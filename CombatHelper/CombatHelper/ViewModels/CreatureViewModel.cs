@@ -254,39 +254,77 @@ namespace CombatHelper.ViewModels
         public int? StrengthSave
         {
             get { return strengthSave; }
-            set { SetValue(ref strengthSave, value); }
+            set
+            {
+                SetValue(ref strengthSave, value);
+                OnPropertyChanged("HasSaves");
+            }
         }
         private int? dexteritySave;
         public int? DexteritySave
         {
             get { return dexteritySave; }
-            set { SetValue(ref dexteritySave, value); }
+            set
+            {
+                SetValue(ref dexteritySave, value);
+                OnPropertyChanged("HasSaves");
+            }
         }
         private int? constitutionSave;
         public int? ConstitutionSave
         {
             get { return constitutionSave; }
-            set { SetValue(ref constitutionSave, value); }
+            set
+            {
+                SetValue(ref constitutionSave, value);
+                OnPropertyChanged("HasSaves");
+            }
         }
         private int? intelligenceSave;
         public int? IntelligenceSave
         {
             get { return intelligenceSave; }
-            set { SetValue(ref intelligenceSave, value); }
+            set
+            {
+                SetValue(ref intelligenceSave, value);
+                OnPropertyChanged("HasSaves");
+            }
         }
         private int? wisdomSave;
         public int? WisdomSave
         {
             get { return wisdomSave; }
-            set { SetValue(ref wisdomSave, value); }
+            set
+            {
+                SetValue(ref wisdomSave, value);
+                OnPropertyChanged("HasSaves");
+            }
         }
         private int? charismaSave;
         public int? CharismaSave
         {
             get { return charismaSave; }
-            set { SetValue(ref charismaSave, value); }
+            set
+            {
+                SetValue(ref charismaSave, value);
+                OnPropertyChanged("HasSaves");
+            }
         }
         #endregion
+
+        public bool HasSaves
+        {
+            get
+            {
+                return
+                    StrengthSave != null &&
+                    DexteritySave != null &&
+                    ConstitutionSave != null &&
+                    IntelligenceSave != null &&
+                    WisdomSave != null &&
+                    CharismaSave != null;
+            }
+        }
         private string info;
         public string Info
         {
@@ -493,6 +531,12 @@ namespace CombatHelper.ViewModels
             Intelligence = model.Intelligence;
             Wisdom = model.Wisdom;
             Charisma = model.Charisma;
+            StrengthSave = model.StrengthSave;
+            DexteritySave = model.DexteritySave;
+            ConstitutionSave = model.ConstitutionSave;
+            IntelligenceSave = model.IntelligenceSave;
+            WisdomSave = model.WisdomSave;
+            CharismaSave = model.CharismaSave;
             Speed = new Speed
             {
                 Fly = model.Fly,
