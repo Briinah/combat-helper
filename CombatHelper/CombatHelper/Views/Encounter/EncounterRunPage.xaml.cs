@@ -1,5 +1,6 @@
 ﻿using CombatHelper.ViewModels;
 using CombatHelper.Views.Encounter;
+using Microsoft.AppCenter.Analytics;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -43,12 +44,16 @@ namespace CombatHelper.Views
         private void App_OnSleeping(object sender, EventArgs e)
         {
             App.ResourceManager.SaveEncounter(encounter);
+
+            Analytics.TrackEvent("Save encounter on sleep");
         }
 
         protected override void OnDisappearing()
         {
             App.OnSleeping -= App_OnSleeping;
             App.ResourceManager.SaveEncounter(encounter);
+
+            Analytics.TrackEvent("Save encounter on dissapearing");
 
             base.OnDisappearing();
         }
