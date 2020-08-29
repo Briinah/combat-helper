@@ -1,5 +1,6 @@
 ﻿using CombatHelper.ViewModels;
 using CombatHelper.Views.Encounter;
+using Microsoft.AppCenter.Analytics;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,8 @@ namespace CombatHelper.Views
         private void App_OnSleeping(object sender, EventArgs e)
         {
             App.ResourceManager.SaveEncounter(encounter);
+
+            Analytics.TrackEvent("Save encounter on sleep");
         }
 
         protected override void OnDisappearing()
@@ -50,12 +53,16 @@ namespace CombatHelper.Views
             App.OnSleeping -= App_OnSleeping;
             App.ResourceManager.SaveEncounter(encounter);
 
+            Analytics.TrackEvent("Save encounter on dissapearing");
+
             base.OnDisappearing();
         }
 
         private void NextTurn(object sender, EventArgs e)
         {
-            encounter.Creatures[turnIndex].HasTurn = false;
+            var creature = encounter.Creatures[turnIndex];
+            
+            creature.HasTurn = false;
             if (turnIndex >= encounter.Creatures.Count - 1)
             {
                 turnIndex = 0;
@@ -63,7 +70,12 @@ namespace CombatHelper.Views
             }
             else
             {
-                turnIndex++;
+                // skip creatures of the same mob
+                while (encounter.Creatures[turnIndex].Name.Equals(creature.Name) && 
+                       encounter.Creatures[turnIndex].Initiative == creature.Initiative)
+                {
+                    turnIndex++;
+                }
             }
 
             encounter.Creatures[turnIndex].HasTurn = true;

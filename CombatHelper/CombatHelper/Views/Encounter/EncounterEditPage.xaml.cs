@@ -1,6 +1,8 @@
 ﻿using CombatHelper.Helpers;
 using CombatHelper.ViewModels;
+using Microsoft.AppCenter.Analytics;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -104,6 +106,11 @@ namespace CombatHelper.Views
 
             await encounter.Save();
 
+            Analytics.TrackEvent("Save encounter", new Dictionary<string, string>
+            {
+                { "encounterId", encounter.Id.ToString() }
+            });
+
             App.ResourceManager.RemoveEncounter(encounter);
 
             Navigation.InsertPageBefore(new EncounterDetailPage()
@@ -119,6 +126,10 @@ namespace CombatHelper.Views
         {
             if (IsBusy) return;
             IsBusy = true;
+            Analytics.TrackEvent("Delete encounter", new Dictionary<string, string>
+            {
+                { "encounterId", encounter.Id.ToString() }
+            });
             if (await OnAlertYesNoClicked(encounter.Name))
             {
                 encounter.Delete();
@@ -130,8 +141,14 @@ namespace CombatHelper.Views
 
         private void RemoveCreature(object sender, EventArgs e)
         {
+            
             var creature = (CreatureViewModel)((ImageButton)sender).BindingContext;
             encounter.Creatures.Remove(creature);
+            
+            Analytics.TrackEvent("Remove creature", new Dictionary<string, string>
+            {
+                { "creatureName", creature.Name }
+            });
         }
 
         private async Task<bool> OnAlertYesNoClicked(string encounterName)
@@ -151,16 +168,20 @@ namespace CombatHelper.Views
                 if (await SaveChangesDialog())
                 {
                     await encounter.Save();
-                    return;
                 }
                 else
+                {
+                    IsBusy = false;
                     return;
+                }
             }
 
             var creature = new CreatureViewModel()
             {
                 EncounterId = encounter.Id
             };
+
+            Analytics.TrackEvent("Add creature button clicked");
 
             await Navigation.PushAsync(new CreatureEditPage()
             {
@@ -179,13 +200,19 @@ namespace CombatHelper.Views
                 if (await SaveChangesDialog())
                 {
                     await encounter.Save();
-                    return;
                 }
                 else
+                {
+                    IsBusy = false;
                     return;
+                }
             }
 
             var creature = e.Item as CreatureViewModel;
+            Analytics.TrackEvent("Edit creature", new Dictionary<string, string>
+            {
+                { "creatureName", creature.Name }
+            });
             await Navigation.PushAsync(new CreatureEditPage()
             {
                 BindingContext = creature
@@ -203,6 +230,10 @@ namespace CombatHelper.Views
         private void CopyCreature(object sender, EventArgs e)
         {
             var creature = ((ImageButton)sender).BindingContext as CreatureViewModel;
+            Analytics.TrackEvent("Copy creature", new Dictionary<string, string>
+            {
+                { "creatureName", creature.Name }
+            });
             var copy = CreatureViewModel.Copy(creature);
             encounter.Creatures.Add(copy);
         }
