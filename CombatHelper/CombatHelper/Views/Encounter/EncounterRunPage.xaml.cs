@@ -63,6 +63,14 @@ namespace CombatHelper.Views
             var creature = encounter.Creatures[turnIndex];
             
             creature.HasTurn = false;
+
+            IncreaseTurn(creature);
+
+            encounter.Creatures[turnIndex].HasTurn = true;
+        }
+
+        private void IncreaseTurn(CreatureViewModel creature)
+        {
             if (turnIndex >= encounter.Creatures.Count - 1)
             {
                 turnIndex = 0;
@@ -70,15 +78,15 @@ namespace CombatHelper.Views
             }
             else
             {
-                // skip creatures of the same mob
-                while (turnIndex <= encounter.Creatures.Count && encounter.Creatures[turnIndex].Name.Equals(creature.Name) && 
-                       encounter.Creatures[turnIndex].Initiative == creature.Initiative)
-                {
                     turnIndex++;
-                }
             }
 
-            encounter.Creatures[turnIndex].HasTurn = true;
+            // skip creatures of the same mob
+            if (encounter.Creatures[turnIndex].Name.Equals(creature.Name) &&
+                encounter.Creatures[turnIndex].Initiative == creature.Initiative)
+            {
+                IncreaseTurn(creature);
+            }
         }
 
         private async void EditHealth(object sender, EventArgs e)
