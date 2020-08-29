@@ -151,10 +151,12 @@ namespace CombatHelper.Views
                 if (await SaveChangesDialog())
                 {
                     await encounter.Save();
-                    return;
                 }
                 else
+                {
+                    IsBusy = false;
                     return;
+                }
             }
 
             var creature = new CreatureViewModel()
@@ -179,10 +181,12 @@ namespace CombatHelper.Views
                 if (await SaveChangesDialog())
                 {
                     await encounter.Save();
-                    return;
                 }
                 else
+                {
+                    IsBusy = false;
                     return;
+                }
             }
 
             var creature = e.Item as CreatureViewModel;
