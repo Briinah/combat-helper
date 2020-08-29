@@ -1,5 +1,6 @@
 ﻿using CombatHelper.Models;
 using CombatHelper.ViewModels;
+using Microsoft.AppCenter.Analytics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,8 @@ namespace CombatHelper.Views
             if (IsBusy) return;
 
             IsBusy = true;
+
+            Analytics.TrackEvent("Edit encounter");
             Navigation.InsertPageBefore(new EncounterEditPage()
             {
                 BindingContext = encounter
@@ -57,6 +60,11 @@ namespace CombatHelper.Views
         {
             if (IsBusy) return;
             IsBusy = true;
+
+            Analytics.TrackEvent("Start encounter", new Dictionary<string, string>
+            {
+                { "Overwrite old encounter", prevEncounterExists.ToString() }
+            });
 
             if(prevEncounterExists)
             {
@@ -81,7 +89,7 @@ namespace CombatHelper.Views
             if (IsBusy) return;
 
             IsBusy = true;
-
+            Analytics.TrackEvent("Continue encounter");
             var newEncounter = App.ResourceManager.GetEncounter(encounter.Id);
 
             await Navigation.PushAsync(new EncounterRunPage()
