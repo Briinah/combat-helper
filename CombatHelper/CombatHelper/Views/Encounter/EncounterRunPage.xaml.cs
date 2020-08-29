@@ -71,7 +71,7 @@ namespace CombatHelper.Views
             else
             {
                 // skip creatures of the same mob
-                while (encounter.Creatures[turnIndex].Name.Equals(creature.Name) && 
+                while (turnIndex <= encounter.Creatures.Count && encounter.Creatures[turnIndex].Name.Equals(creature.Name) && 
                        encounter.Creatures[turnIndex].Initiative == creature.Initiative)
                 {
                     turnIndex++;
