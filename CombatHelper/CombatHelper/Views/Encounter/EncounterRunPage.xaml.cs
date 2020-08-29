@@ -55,7 +55,9 @@ namespace CombatHelper.Views
 
         private void NextTurn(object sender, EventArgs e)
         {
-            encounter.Creatures[turnIndex].HasTurn = false;
+            var creature = encounter.Creatures[turnIndex];
+            
+            creature.HasTurn = false;
             if (turnIndex >= encounter.Creatures.Count - 1)
             {
                 turnIndex = 0;
@@ -63,7 +65,12 @@ namespace CombatHelper.Views
             }
             else
             {
-                turnIndex++;
+                // skip creatures of the same mob
+                while (encounter.Creatures[turnIndex].Name.Equals(creature.Name) && 
+                       encounter.Creatures[turnIndex].Initiative == creature.Initiative)
+                {
+                    turnIndex++;
+                }
             }
 
             encounter.Creatures[turnIndex].HasTurn = true;
