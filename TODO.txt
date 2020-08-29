@@ -17,3 +17,4 @@
   - ability veld
   - stats in de vorm 18 (+4)
 
+# Voor mobs bij next turn skip alle mobs met dezelfde naam/initiative
