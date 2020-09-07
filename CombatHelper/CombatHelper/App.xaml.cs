@@ -59,8 +59,8 @@ namespace CombatHelper
 
             Distribute.UpdateTrack = UpdateTrack.Private;
             Distribute.ReleaseAvailable = OnReleaseAvailable;
-            AppCenter.Start(Helpers.Secrets.android, typeof(Analytics), typeof(Crashes));
-            AppCenter.Start(Helpers.Secrets.android, typeof(Distribute));
+            Distribute.SetEnabledAsync(true);
+            AppCenter.Start(Helpers.Secrets.android, typeof(Analytics), typeof(Crashes), typeof(Distribute));
         }
 
         private bool OnReleaseAvailable(ReleaseDetails releaseDetails)
