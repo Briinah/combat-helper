@@ -1,6 +1,3 @@
-# Conditions in encounter (done)
-  - multiselect box (done)
-
 # Custom Json file importeren voor creatures
 
 # Quick view toevoegen
@@ -15,6 +12,7 @@
 # Meer info voor creatures
   - attack veld
   - ability veld
-  - stats in de vorm 18 (+4)
+  - stats in de vorm 18 (+4) (done)
 
-# Voor mobs bij next turn skip alle mobs met dezelfde naam/initiative
+# crashes
+  - memory leak?

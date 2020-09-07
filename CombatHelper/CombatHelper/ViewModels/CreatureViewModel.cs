@@ -57,6 +57,7 @@ namespace CombatHelper.ViewModels
                 Swim = creature.Swim
             };
             FillConditions();
+            SpellSlots = new SpellSlots(creature.SpellSlots);
         }
 
         public CreatureViewModel(PlayerCharacter pc)
@@ -69,6 +70,7 @@ namespace CombatHelper.ViewModels
             Friendly = true;
 
             Speed = new Speed();
+            SpellSlots = new SpellSlots();
             FillConditions();
         }
 
@@ -99,7 +101,8 @@ namespace CombatHelper.ViewModels
                 Walk = this.Speed.Walk,
                 Fly = this.Speed.Fly,
                 Climb = this.Speed.Climb,
-                Swim = this.Speed.Swim
+                Swim = this.Speed.Swim,
+                SpellSlots = this.SpellSlots.SlotNumber
             };
 
             return c;
@@ -312,6 +315,13 @@ namespace CombatHelper.ViewModels
         }
         #endregion
 
+        private SpellSlots spellSlots;
+        public SpellSlots SpellSlots
+        {
+            get { return spellSlots; }
+            set { SetValue(ref spellSlots, value); }
+        }
+
         public bool HasSaves
         {
             get
@@ -472,6 +482,8 @@ namespace CombatHelper.ViewModels
                    Wisdom == other.Wisdom &&
                    Charisma == other.Charisma;
 
+            // todo: check spellslots
+
         }
 
         public static int CompareInitiative(CreatureViewModel a, CreatureViewModel b)
@@ -513,7 +525,8 @@ namespace CombatHelper.ViewModels
                     Fly = vm.Speed.Fly,
                     Climb = vm.Speed.Climb,
                     Swim = vm.Speed.Swim
-                }
+                },
+                SpellSlots = new SpellSlots(vm.SpellSlots.SlotNumber)
             };
 
             return copy;
@@ -544,6 +557,7 @@ namespace CombatHelper.ViewModels
                 Swim = model.Swim,
                 Climb = model.Climb
             };
+            SpellSlots = new SpellSlots();
         }
     }
 
