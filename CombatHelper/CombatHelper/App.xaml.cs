@@ -99,7 +99,7 @@ namespace CombatHelper
                 }
             });
 
-            // Return true if you are using your own dialog, false otherwise
+            // Return true if you are using your own dialog, false otherwise 
             return true;
         }
 
