@@ -22,6 +22,7 @@ namespace CombatHelper.ViewModels
         {
             Speed = new Speed();
             FillConditions();
+            SpellSlots = new SpellSlots();
         }
 
         public CreatureViewModel(Creature creature)

@@ -19,7 +19,7 @@ namespace CombatHelper.Droid
 
             base.OnCreate(savedInstanceState);
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
-            Xamarin.Forms.Forms.SetFlags("RadioButton_Experimental");
+            Xamarin.Forms.Forms.SetFlags("RadioButton_Experimental", "Shapes_Experimental");
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());

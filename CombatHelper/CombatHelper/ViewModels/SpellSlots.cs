@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
-namespace CombatHelper.Models
+namespace CombatHelper.ViewModels
 {
     public class SpellSlots
     {
