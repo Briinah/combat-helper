@@ -35,7 +35,7 @@ namespace CombatHelper.Models
         public int Swim { get; set; }
         public int Fly { get; set; }
         public int Climb { get; set; }
-        public int[] SpellSlots { get; set; }
+        public string SpellSlots { get; set; }
     }
 
 }

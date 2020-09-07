@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace CombatHelper.Controls.Creatures
+namespace CombatHelper.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SpellSlotInput : ContentView

@@ -102,7 +102,7 @@ namespace CombatHelper.ViewModels
                 Fly = this.Speed.Fly,
                 Climb = this.Speed.Climb,
                 Swim = this.Speed.Swim,
-                SpellSlots = this.SpellSlots.SlotNumber
+                SpellSlots = this.SpellSlots.GetSlotNumberAsString()
             };
 
             return c;
