@@ -75,7 +75,7 @@
                         <local:Header IconSource="ic_feet_black" LabelText="Speed" />
                         <local:SpeedInput Padding="10" />
                         <local:Header IconSource="ic_magic" LabelText="Spell Slots" />
-                        <local:SpellSlotInput SpellSlots="{Binding SpellSlots.SlotNumber}"/>
+                        <local:SpellSlotInput SpellSlotNumber="{Binding SpellSlots.SlotNumber}"/>
                         <local:Header IconSource="ic_info" LabelText="Info" />
                         <local:XEditor Text="{Binding Info}"
                            Placeholder="Anything you want to add..."

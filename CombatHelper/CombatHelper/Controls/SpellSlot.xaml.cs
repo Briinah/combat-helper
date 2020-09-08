@@ -29,7 +29,7 @@ namespace CombatHelper.Controls
             control.fill.IsVisible = (bool)newValue;
 
             if(oldValue != newValue)
-                control.OnIsUsedChanged.Invoke(control, (bool)newValue);
+                control.OnIsUsedChanged?.Invoke(control, (bool)newValue);
         }
 
         public SpellSlot()

@@ -4,55 +4,57 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:CombatHelper.Controls"
              mc:Ignorable="d"
-             x:Class="CombatHelper.Views.EncounterEditPage">
+             x:Class="CombatHelper.Views.EncounterEditPage"
+             x:Name="page">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Cancel" 
                      Clicked="OnCancel" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout Spacing="0">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="8*" />
-                </Grid.ColumnDefinitions>
-                <Label Text="Name"
+        <Grid>
+            <StackLayout Spacing="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="8*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Name"
                        VerticalOptions="Center"
                        HorizontalOptions="Start"
                        Padding="10"
                        TextColor="{StaticResource Titles}"/>
-                <Entry Placeholder="Enter encounter name"
+                    <Entry Placeholder="Enter encounter name"
                                Grid.Column="1"
                                Text="{Binding Name}"
                        Margin="0,0,20,0"/>
-            </Grid>
-            <local:Header IconSource="ic_dragon_black" LabelText="Creatures"/>
-            <local:XListView x:Name="creatureList"
+                </Grid>
+                <local:Header IconSource="ic_dragon_black" LabelText="Creatures"/>
+                <local:XListView x:Name="creatureList"
                       HeightRequest="300"
                       RowHeight="60"
                       ItemTapped="EditCreature">
-                <ListView.ItemTemplate >
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid>
-                                <Grid.ColumnDefinitions >
-                                    <ColumnDefinition Width="6*" />
-                                    <ColumnDefinition Width="2*" />
-                                </Grid.ColumnDefinitions>
-                                <StackLayout Margin="10">
-                                    <Label Text="{Binding DisplayName}"
+                    <ListView.ItemTemplate >
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions >
+                                        <ColumnDefinition Width="6*" />
+                                        <ColumnDefinition Width="2*" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Margin="10">
+                                        <Label Text="{Binding DisplayName}"
                                        VerticalTextAlignment="Center"
                                        FontSize="Body"/>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding HP, StringFormat='HP: {0}'}"
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding HP, StringFormat='HP: {0}'}"
                                                    FontSize="Micro"/>
-                                        <Label Text="{Binding AC, StringFormat='AC: {0}'}"
+                                            <Label Text="{Binding AC, StringFormat='AC: {0}'}"
                                                    FontSize="Micro"/>
+                                        </StackLayout>
                                     </StackLayout>
-                                </StackLayout>
-                                <StackLayout Grid.Column ="1" 
+                                    <StackLayout Grid.Column ="1" 
                                              Orientation="Horizontal">
-                                    <ImageButton 
+                                        <ImageButton 
                                              HorizontalOptions="End"
                                              VerticalOptions="Center"
                                              BackgroundColor="Accent"
@@ -61,7 +63,7 @@
                                              Source="ic_content_copy.png"
                                              Clicked="CopyCreature"
                                              Margin="0, 0, 10, 0"/>
-                                <ImageButton HorizontalOptions="End"
+                                        <ImageButton HorizontalOptions="End"
                                              VerticalOptions="Center"
                                              BackgroundColor="Accent"
                                              CornerRadius="40"
@@ -69,15 +71,15 @@
                                              Source="ic_delete.png"
                                              Clicked="RemoveCreature"
                                              Margin="0, 0, 10, 0"/>
-                                </StackLayout>
-                                
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </local:XListView>
-            <BoxView BackgroundColor="Accent" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
-            <Button Text="Add Creature"
+                                    </StackLayout>
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </local:XListView>
+                <BoxView BackgroundColor="Accent" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
+                <Button Text="Add Creature"
                     Clicked="AddCreature"
                     ImageSource="ic_monster_add"
                     BackgroundColor="Accent"
@@ -85,25 +87,29 @@
                     CornerRadius="30"
                     Margin="10"
                     HorizontalOptions="Center"/>
-            <BoxView BackgroundColor="LightGray" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
-            <Grid Margin="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Button Text="Delete"
+                <BoxView BackgroundColor="LightGray" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Text="Delete"
                         Clicked="OnDeleteButtonClicked"
                         BackgroundColor="White"
                         TextColor="Accent"
                         CornerRadius="30"
                         BorderColor="Accent"
                         BorderWidth="1"/>
-                <Button Grid.Column="1" Text="Save"
+                    <Button Grid.Column="1" Text="Save"
                         Clicked="OnSaveButtonClicked" 
                         BackgroundColor="Accent"
                         TextColor="White"
                         CornerRadius="30"/>
-            </Grid>
-        </StackLayout>
+                </Grid>
+            </StackLayout>
+            <ActivityIndicator IsRunning="{Binding Path=IsBusy, Source={x:Reference page}}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
