@@ -4,10 +4,9 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="CombatHelper.Controls.Creatures.SpellSlotControl">
-  <ContentView.Content>
-      <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
-      </StackLayout>
-  </ContentView.Content>
+             x:Class="CombatHelper.Controls.SpellSlotControl">
+    <StackLayout>
+        <Label Text="Spell slots"/>
+        <StackLayout Orientation="Horizontal" Padding="15, 10" x:Name="slotContainer"/>
+    </StackLayout>
 </ContentView>

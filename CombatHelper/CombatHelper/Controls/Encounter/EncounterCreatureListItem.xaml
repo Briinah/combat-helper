@@ -59,6 +59,7 @@
                         TextColor="Accent" BorderColor="Accent" BackgroundColor="White" BorderWidth="1" CornerRadius="30" HeightRequest="35"
                         Clicked="SetConditions"/>
                 </StackLayout>
+                <controls:SpellSlotControl IsVisible="{Binding ShowInfo}" UsedSlots="{Binding SpellSlots.UsedSlots}" TotalSlots="{Binding SpellSlots.SlotNumber}"/>
             </StackLayout>
         </Grid>
         <BoxView HeightRequest="2" Color="Accent" 

@@ -35,7 +35,7 @@
                         TextColor="Accent" BorderColor="Accent" BackgroundColor="White" BorderWidth="1" CornerRadius="30" HeightRequest="35"
                         Clicked="SetConditions"/>
             </StackLayout>
-            
+            <controls:SpellSlotControl UsedSlots="{Binding SpellSlots.UsedSlots}" TotalSlots="{Binding SpellSlots.SlotNumber}"/>
         </StackLayout>
     </StackLayout>
 </ContentView>

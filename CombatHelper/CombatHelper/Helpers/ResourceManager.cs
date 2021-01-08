@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace CombatHelper.Helpers
 {
@@ -37,7 +36,6 @@ namespace CombatHelper.Helpers
                 using (StreamReader reader = new StreamReader(filePath))
                 {
                     var json = reader.ReadToEnd();
-
                     var encounter = JsonConvert.DeserializeObject<EncounterViewModel>(json);
 
                     return encounter;

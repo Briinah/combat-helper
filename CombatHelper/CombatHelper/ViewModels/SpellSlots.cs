@@ -11,11 +11,10 @@ namespace CombatHelper.ViewModels
     {
         public int[] SlotNumber { get; private set; }
 
-        public ObservableCollection<bool>[] UsedSlots { get; private set; }
+        public ObservableCollection<int> UsedSlots { get; private set; }
 
         public SpellSlots(string slots) : this(ParseFromString(slots))
-        {
-        }
+        { }
 
         public SpellSlots(int[] slots = null)
         {
@@ -24,14 +23,9 @@ namespace CombatHelper.ViewModels
             else
                 SlotNumber = new int[9];
 
-            UsedSlots = new ObservableCollection<bool>[SlotNumber.Length];
-            for (int i = 0; i < UsedSlots.Length; i++)
-            {
-                UsedSlots[i] = new ObservableCollection<bool>();
-
-                for (int j = 0; j < SlotNumber[i]; j++)
-                    UsedSlots[i].Add(false);
-            }
+            UsedSlots = new ObservableCollection<int>();
+            for (int i = 0; i < SlotNumber.Length; i++)
+                UsedSlots.Add(0);
         }
 
         private static int[] ParseFromString(string slots)
@@ -42,7 +36,7 @@ namespace CombatHelper.ViewModels
                 int[] numbers = separate.Select(s => int.Parse(s)).ToArray();
                 return numbers;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine("slot string has incorrect format " + slots);
                 Crashes.TrackError(e);

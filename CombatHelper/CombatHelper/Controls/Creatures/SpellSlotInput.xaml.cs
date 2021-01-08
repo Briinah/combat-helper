@@ -21,7 +21,7 @@ namespace CombatHelper.Controls
             set { SetValue(SpellSlotNumberProperty, value); }
         }
 
-        public static readonly BindableProperty SpellSlotNumberProperty = BindableProperty.Create("SpellSlots", typeof(int[]), typeof(SpellSlot), propertyChanged: OnSpellSlotsChanged);
+        public static readonly BindableProperty SpellSlotNumberProperty = BindableProperty.Create("SpellSlotNumber", typeof(int[]), typeof(SpellSlotInput), propertyChanged: OnSpellSlotsChanged);
 
         private static void OnSpellSlotsChanged(BindableObject bindable, object oldValue, object newValue)
         {
@@ -31,7 +31,6 @@ namespace CombatHelper.Controls
             {
                 control.PopulateSlots();
             }
-
         }
 
         public void PopulateSlots()
@@ -59,7 +58,7 @@ namespace CombatHelper.Controls
                     if (SpellSlotNumber[i] > j)
                         spellslot.IsUsed = true;
 
-                    spellslot.OnIsUsedChanged += SetSpelslot;
+                    spellslot.OnIsUsedChanged += SetSpellSlot;
 
                     stack.Children.Add(spellslot);
                 }
@@ -68,7 +67,7 @@ namespace CombatHelper.Controls
             }
         }
 
-        private void SetSpelslot(object source, bool value)
+        private void SetSpellSlot(object source, bool value)
         {
             var spellslot = source as SpellSlot;
 
@@ -85,6 +84,22 @@ namespace CombatHelper.Controls
             InitializeComponent();
         }
 
+        //public void RemoveEvents()
+        //{
+        //    foreach (var child in slotContainer.Children)
+        //    {
+        //        if (child is StackLayout stack)
+        //        {
+        //            foreach (var slot in stack.Children)
+        //            {
+        //                if(slot is SpellSlot slot1)
+        //                {
+        //                    slot1.OnIsUsedChanged -= SetSpellSlot;
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
     }
 }
