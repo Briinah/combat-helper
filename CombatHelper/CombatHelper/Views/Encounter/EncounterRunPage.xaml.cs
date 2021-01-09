@@ -67,6 +67,8 @@ namespace CombatHelper.Views
             IncreaseTurn(creature);
 
             encounter.Creatures[turnIndex].HasTurn = true;
+
+            creatureList.ScrollTo(encounter.Creatures[turnIndex], ScrollToPosition.MakeVisible, true);
         }
 
         private void IncreaseTurn(CreatureViewModel creature)
