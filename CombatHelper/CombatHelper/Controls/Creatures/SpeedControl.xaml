@@ -3,25 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:helpers="clr-namespace:CombatHelper.Helpers"
+             xmlns:helpers="clr-namespace:CombatHelper.Helpers" 
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d"
              x:Class="CombatHelper.Controls.SpeedControl">
     <StackLayout>
         <StackLayout Orientation="Horizontal" Spacing="20">
             <StackLayout Orientation="Horizontal" IsVisible="{Binding Speed.Walk, Converter={helpers:IntHasValueConverter}}">
-                <Image Source="ic_feet"/>
+                <ffimageloading:CachedImage Source="ic_feet"/>
                 <Label Text="{Binding Speed.Walk}" VerticalOptions="Center"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" IsVisible="{Binding Speed.Fly, Converter={helpers:IntHasValueConverter}}">
-                <Image Source="ic_wing"/>
+                <ffimageloading:CachedImage Source="ic_wing"/>
                 <Label Text="{Binding Speed.Fly}" VerticalOptions="Center"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" IsVisible="{Binding Speed.Swim, Converter={helpers:IntHasValueConverter}}">
-                <Image Source="ic_fin"/>
+                <ffimageloading:CachedImage Source="ic_fin"/>
                 <Label Text="{Binding Speed.Swim}" VerticalOptions="Center"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" IsVisible="{Binding Speed.Climb, Converter={helpers:IntHasValueConverter}}">
-                <Image Source="ic_climb"/>
+                <ffimageloading:CachedImage Source="ic_climb"/>
                 <Label Text="{Binding Speed.Climb}" VerticalOptions="Center"/>
             </StackLayout>
         </StackLayout>

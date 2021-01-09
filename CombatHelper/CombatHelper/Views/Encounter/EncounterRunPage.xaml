@@ -4,7 +4,6 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:controls="clr-namespace:CombatHelper.Controls"
-             xmlns:encounter="clr-namespace:CombatHelper.Controls.Encounter"
              mc:Ignorable="d"
              x:Class="CombatHelper.Views.EncounterRunPage"
              Title="{Binding Round, StringFormat='Round {0}'}">
